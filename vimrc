@@ -32,7 +32,7 @@ source $VIMRUNTIME/mswin.vim            " Always behave Windows-like, because
 " it for my own personal scripts and utilities.
 nmap ss .
 nmap sh :call ToggleFlag("guioptions", "b")<CR>
-nmap sV :call Vimrc()<CR>
+nmap sV :edit $MYVIMRC<CR>
 nmap sC :call SynStack()<CR>
 nmap <F5> :w<CR>:!%<CR>
 nmap <S-Return> i<Return><Esc>
@@ -129,14 +129,6 @@ autocmd FileType ruby map <F5> <Esc><Esc>:call RubyDebug(expand("%"))<CR>
 
 
 " ### UTILITY FUNCTIONS ###
-function Vimrc()
-    if has("win32")
-        edit $HOME/_vimrc
-    else
-        edit $HOME/.vimrc
-    endif
-endfunction
-
 function FindInPath(filename)
     let paths = split($PATH, has("win32") ? ';' : ':')
     for path in paths
