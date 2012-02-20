@@ -3,10 +3,6 @@
 " http://slackwi.se
 
 
-" win32: copy vimrc %HOMEPATH%/_vimrc
-" unix: cp vimrc ~/.vimrc
-
-
 " ### VUNDLE CONFIGURATION ###
 set nocompatible
 filetype off " Apparently required for Vundle to function...?
