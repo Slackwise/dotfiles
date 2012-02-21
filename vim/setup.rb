@@ -10,7 +10,7 @@ CURL = <<CURLEND
 @rem Get the abolute path to the parent directory, which is assumed to be the
 @rem Git installation root.
 @for /F "delims=" %%I in ("%~dp0..") do @set git_install_root=%%~fI
-@set PATH=%git_install_root%\\bin;%git_install_root%\mingw\\bin;%PATH%
+@set PATH=%git_install_root%\\bin;%git_install_root%\\mingw\\bin;%PATH%
 
 @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
 @if not exist "%HOME%" @set HOME=%USERPROFILE%
@@ -19,8 +19,46 @@ CURL = <<CURLEND
 CURLEND
 
 def windows_setup
+  # Locate Git install in registry.
+  dir64 = ENV['PROGRAMFILES'] + "/Git/cmd"
+  dir32 = ENV['PROGRAMFILES(X86)'] + "Git/cmd"
+  if Dir.exists? dir64
+    dir = dir64
+  elsif Dir.exists? dir32
+    dir = dir32
+  else
+    raise "Cannot locate Git installation!"
+    exit 1
+  end
+
   # Write curl.cmd to Git/cmd directory.
+  begin
+    curl = dir + "/curl.cmd"
+    if !File.exists? curl
+      File.open(curl, 'w') do |f|
+        f.puts CURL
+      end
+    else
+      puts "Curl command file has already been created."
+    end
+  rescue
+    puts $!
+  end
+
   # Add Git/cmd directory to system $PATH.
+  if !ENV['PATH'].match(/Git\\cmd/)
+    if system(%|SETX PATH "%PATH%;#{dir}" /M|)
+      puts 'Git has been added to the system $PATH'
+    else
+      raise "Couldn't add Git to the system $PATH!"
+      exit 1
+    end
+  else
+    puts 'Git is already in the $PATH.'
+  end
+
+  puts 'Closing automatically in 5 seconds...'
+  sleep 5
 end
 
 def nixie_setup
@@ -46,7 +84,6 @@ case RUBY_PLATFORM
 when /linux/, /darwin/
   nixie_setup
 when /mswin/, /mingw32/
-  puts ENV['USERNAME']
   if is_admin?
     windows_setup
   else
