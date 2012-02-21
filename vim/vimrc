@@ -8,7 +8,7 @@ set nocompatible
 let $VIMDIR="~/src/dotfiles/vim/"
 let $MYVIMRC=$VIMDIR . "vimrc"
 set rtp+=~/src/dotfiles/vim/
-set rtp+=~/src/dotfiles/vim/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'

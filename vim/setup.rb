@@ -4,7 +4,8 @@
 # should ideally only be run once, with only needing Git pulls to maintain.
 
 HOME = ENV['HOME']
-VIMRC = HOME + "/src/dotfiles/vim/vimrc"
+VIMRC = HOME + "src/dotfiles/vim/vimrc"
+VUNDLE = 'https://github.com/gmarik/vundle.git'
 
 WIN_VIMRC = <<WIN_VIMRC_END
 let $MYVIMRC="~/src/dotfiles/vim/vimrc"
@@ -29,7 +30,7 @@ CURLEND
 def windows_setup
   # Install a redirecting vimrc file in $HOME.
   begin # FIXME: Getting a permission error.
-    File.open(HOME + '/_vimrc', 'w+') do |f|
+    File.open(HOME + '_vimrc', 'w+') do |f|
       f.puts WIN_VIMRC
     end
     puts "Created _vimrc."
@@ -46,6 +47,7 @@ def windows_setup
     dir = dir32
   else
     raise "Cannot locate Git installation!"
+    sleep 30
     exit 1
   end
 
@@ -56,11 +58,14 @@ def windows_setup
       File.open(curl, 'w') do |f|
         f.puts CURL
       end
+      puts "Curl command added to Git files."
     else
       puts "Curl command file has already been created."
     end
   rescue
-    puts $!
+    puts "Failed to create curl.cmd:\n#$!"
+    sleep 30
+    exit 1
   end
 
   # Add Git/cmd directory to system $PATH.
@@ -69,19 +74,33 @@ def windows_setup
       puts 'Git has been added to the system $PATH'
     else
       raise "Couldn't add Git to the system $PATH!"
+      sleep 30
       exit 1
     end
   else
     puts 'Git is already in the $PATH.'
   end
 
-  puts 'Closing automatically in 5 seconds...'
-  sleep 5
+  # Do initial Vundle repo clone.
+  if !Dir.exists? "#{HOME}.vim/bundle/vundle/.git/"
+    if system(%|git clone #{VUNDLE} "#{HOME}.vim/bundle/vundle"|)
+      puts "Succesfully cloned Vundle repo."
+    else
+      puts "Failed to clone Vundle repo!"
+      sleep 30
+      exit 1
+    end
+  else
+    puts "Vundle appears to already be installed."
+  end
+
+  puts 'Closing automatically in 10 seconds...'
+  sleep 10
 end
 
 def nixie_setup
   # Symlink vimrc, nothing more!
-  if File::symlink(VIMRC, HOME + "/.vimrc")
+  if File::symlink(VIMRC, HOME + ".vimrc")
     puts 'Symlinked vimrc file.'
   else
     puts 'Failed to symlink vimrc file!'
