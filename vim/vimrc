@@ -6,7 +6,6 @@
 " ### VUNDLE CONFIGURATION ###
 set nocompatible
 filetype off " Apparently required for Vundle to function...?
-let $MYVIMRC="~/src/dotfiles/vimrc"
 set rtp+=~/.vim/
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
