@@ -3,6 +3,14 @@
 # This script is supposed to bootstrap my Vim config on a new machine. It
 # should ideally only be run once, with only needing Git pulls to maintain.
 
+HOME = ENV['HOME']
+VIMRC = HOME + "/src/dotfiles/vim/vimrc"
+
+WIN_VIMRC = <<WIN_VIMRC_END
+let $MYVIMRC="~/src/dotfiles/vim/vimrc"
+source $MYVIMRC
+WIN_VIMRC_END
+
 CURL = <<CURLEND
 @rem Do not use "echo off" to not affect any child calls.
 @setlocal
@@ -19,6 +27,16 @@ CURL = <<CURLEND
 CURLEND
 
 def windows_setup
+  # Install a redirecting vimrc file in $HOME.
+  begin
+    File.open(HOME + "/_vimrc", 'w+') do |f|
+      f.puts WIN_VIMRC
+    end
+    puts "Created _vimrc."
+  rescue
+    puts "Failed to create _vimrc:\n#$!"
+  end
+
   # Locate Git install in registry.
   dir64 = ENV['PROGRAMFILES'] + "/Git/cmd"
   dir32 = ENV['PROGRAMFILES(X86)'] + "Git/cmd"
@@ -63,6 +81,11 @@ end
 
 def nixie_setup
   # Symlink vimrc, nothing more!
+  if File::symlink(VIMRC, HOME + "/.vimrc")
+    puts 'Symlinked vimrc file.'
+  else
+    puts 'Failed to symlink vimrc file!'
+  end
 end
 
 def is_admin?
