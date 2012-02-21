@@ -28,8 +28,8 @@ CURLEND
 
 def windows_setup
   # Install a redirecting vimrc file in $HOME.
-  begin
-    File.open(HOME + "/_vimrc", 'w+') do |f|
+  begin # FIXME: Getting a permission error.
+    File.open(HOME + '/_vimrc', 'w+') do |f|
       f.puts WIN_VIMRC
     end
     puts "Created _vimrc."
@@ -37,9 +37,9 @@ def windows_setup
     puts "Failed to create _vimrc:\n#$!"
   end
 
-  # Locate Git install in registry.
-  dir64 = ENV['PROGRAMFILES'] + "/Git/cmd"
-  dir32 = ENV['PROGRAMFILES(X86)'] + "Git/cmd"
+  # Locate Git install in Program Files.
+  dir64 = ENV['PROGRAMFILES'] + '/Git/cmd'
+  dir32 = ENV['PROGRAMFILES(X86)'] + '/Git/cmd'
   if Dir.exists? dir64
     dir = dir64
   elsif Dir.exists? dir32
@@ -51,7 +51,7 @@ def windows_setup
 
   # Write curl.cmd to Git/cmd directory.
   begin
-    curl = dir + "/curl.cmd"
+    curl = dir + '/curl.cmd'
     if !File.exists? curl
       File.open(curl, 'w') do |f|
         f.puts CURL
@@ -89,7 +89,7 @@ def nixie_setup
 end
 
 def is_admin?
-  if ARGV.include? "-a"
+  if ARGV.include? "--admin"
     true
   else
     false
@@ -99,7 +99,7 @@ end
 def restart_as_admin
   require 'win32ole'
   WIN32OLE.new('Shell.Application')
-    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + " -a",
+    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + " --admin",
                   nil, 'runas', 1)
 end
 
