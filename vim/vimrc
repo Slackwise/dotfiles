@@ -8,16 +8,18 @@ set nocompatible
 let $VIMDIR="~/src/dotfiles/vim/"
 let $MYVIMRC=$VIMDIR . "vimrc"
 set rtp+=~/src/dotfiles/vim/
+set rtp+=~/src/dotfiles/vim/vundle/
+call vundle#rc()
 
-" Bundle 'gmarik/vundle'
-" Bundle 'repeat.vim'
-" Bundle 'surround.vim'
-" Bundle 'tpope/vim-commentary'
-" Bundle 'tpope/vim-fugitive'
-" Bundle 'tpope/vim-markdown'
-" Bundle 'yurifury/hexHighlight'
-" Bundle 'shawncplus/Vim-toCterm'
-" Bundle 'astashov/vim-ruby-debugger'
+Bundle 'gmarik/vundle'
+Bundle 'repeat.vim'
+Bundle 'surround.vim'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'yurifury/hexHighlight'
+Bundle 'shawncplus/Vim-toCterm'
+Bundle 'astashov/vim-ruby-debugger'
 
 
 " ### SOURCE OTHER SCRIPTS FIRST ###
