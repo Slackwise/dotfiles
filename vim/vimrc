@@ -5,20 +5,19 @@
 
 " ### VUNDLE CONFIGURATION ###
 set nocompatible
-filetype off " Apparently required for Vundle to function...?
-set rtp+=~/.vim/
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+let $VIMDIR="~/src/dotfiles/vim/"
+let $MYVIMRC=$VIMDIR . "vimrc"
+set rtp+=~/src/dotfiles/vim/
 
-Bundle 'gmarik/vundle'
-Bundle 'repeat.vim'
-Bundle 'surround.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'yurifury/hexHighlight'
-Bundle 'shawncplus/Vim-toCterm'
-Bundle 'astashov/vim-ruby-debugger'
+" Bundle 'gmarik/vundle'
+" Bundle 'repeat.vim'
+" Bundle 'surround.vim'
+" Bundle 'tpope/vim-commentary'
+" Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-markdown'
+" Bundle 'yurifury/hexHighlight'
+" Bundle 'shawncplus/Vim-toCterm'
+" Bundle 'astashov/vim-ruby-debugger'
 
 
 " ### SOURCE OTHER SCRIPTS FIRST ###
@@ -41,15 +40,16 @@ nmap N Nzz
 
 
 " ### SOME BASE SETTINGS ###
-set guioptions-=T       " Diable toolbar in gVim
+set guioptions-=T       " Disable toolbar in gVim
 "if $USERDOMAIN == "MILLNET" | set guioptions+=b | endif
 set shortmess+=I        " Disable :intro
 set nowrap              " Do not wrap lines
 set backup
-let &backupdir=finddir("backup", &rtp)
 let &dir=finddir("swap", &rtp)
-set background=dark
+let &backupdir=finddir("backup", &rtp)
+let &viminfo=$VIMDIR . "viminfo"
 try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
+set background=dark
 
 
 " ### DEFAULT TAB/INDENTATION SETTINGS ###
