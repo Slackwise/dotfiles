@@ -67,20 +67,28 @@ def windows_setup
     sleep 30
     exit 1
   end
-
-  # Add Git/cmd directory to system $PATH.
+  
+ # Add Git/cmd directory to system $PATH.
   if !ENV['PATH'].match(/Git\\cmd/)
     if system(%|SETX PATH "%PATH%;#{dir}" /M|)
       puts 'Git has been added to the system $PATH'
     else
       raise "Couldn't add Git to the system $PATH!"
-      sleep 30
+      sleep 30 if calling_method == :windows_setup
       exit 1
     end
   else
     puts 'Git is already in the $PATH.'
   end
 
+  git_vundle
+
+  puts 'Setup complete'
+  puts 'Closing automatically in 10 seconds...'
+  sleep 10
+end
+
+def git_vundle
   # Do initial Vundle repo clone.
   if !Dir.exists? "#{HOME}.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}.vim/bundle/vundle"|)
@@ -93,18 +101,18 @@ def windows_setup
   else
     puts "Vundle appears to already be installed."
   end
-
-  puts 'Closing automatically in 10 seconds...'
-  sleep 10
 end
 
 def nixie_setup
-  # Symlink vimrc, nothing more!
   if File::symlink(VIMRC, HOME + ".vimrc")
     puts 'Symlinked vimrc file.'
   else
     puts 'Failed to symlink vimrc file!'
   end
+
+  git_vundle
+
+  puts 'Setup complete.'
 end
 
 def is_admin?
@@ -113,6 +121,10 @@ def is_admin?
   else
     false
   end
+end
+
+def calling_method
+  caller[-2].match(/`(\w+)'$/)[1]
 end
 
 def restart_as_admin
