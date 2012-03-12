@@ -64,15 +64,17 @@ let &backupdir=finddir("backup", &rtp)
 let &viminfo=$VIMDIR . "viminfo"
 try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
-set tabstop=4           " How many columns <Tab> counts for
-" set softtabstop=4     " Causes backspace to delete X spaces
-set shiftwidth=4        " Number of spaces to use for each step of (auto)indent
-set smarttab            " Uses shiftwidth instead of tabstop at start of lines 
-set expandtab           " Expand tabs into spaces of tabstop size
-syntax on               " Enable syntax highlighting
-filetype on             " Enable filetype detection
-filetype indent on      " Enable filetype-specific indenting
-filetype plugin on      " Enable filetype-specific plugins
+set tabstop=4                " How many columns <Tab> counts for
+" set softtabstop=4          " Causes backspace to delete X spaces
+set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
+set smarttab                 " Uses shiftwidth instead of tabstop at start of lines 
+set expandtab                " Expand tabs into spaces of tabstop size
+set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on syntax to 80 for code)
+syntax on                    " Enable syntax highlighting
+filetype on                  " Enable filetype detection
+filetype indent on           " Enable filetype-specific indenting
+filetype plugin on           " Enable filetype-specific plugins
+au Syntax * set textwidth=80 " Set tw for code files, versus plain text
 " }}}---------------------------------
 
 
