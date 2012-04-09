@@ -1,4 +1,4 @@
- vim: fdm=marker
+" vim: fdm=marker
 " Author:       Adam Flanczewski <http://slackwi.se>
 " Description:  My personal vimrc file.
 "               I do not recommend using it as-is. Just grab any lines you
@@ -69,7 +69,7 @@ set tabstop=4                " How many columns <Tab> counts for
 set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
 set smarttab                 " Uses shiftwidth instead of tabstop at start of lines 
 set expandtab                " Expand tabs into spaces of tabstop size
-"set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on syntax to 80 for code)
+" set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on zRntax to 80 for code)
 syntax on                    " Enable syntax highlighting
 filetype on                  " Enable filetype detection
 filetype indent on           " Enable filetype-specific indenting
