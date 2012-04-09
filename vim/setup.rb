@@ -30,7 +30,7 @@ CURLEND
 def windows_setup
   # Install a redirecting vimrc file in $HOME.
   begin # FIXME: Getting a permission error.
-    File.open(HOME + '_vimrc', 'w+') do |f|
+    File.open(HOME + '/_vimrc', 'w+') do |f|
       f.puts WIN_VIMRC
     end
     puts "Created _vimrc."
@@ -90,8 +90,8 @@ end
 
 def git_vundle
   # Do initial Vundle repo clone.
-  if !Dir.exists? "#{HOME}.vim/bundle/vundle/.git/"
-    if system(%|git clone #{VUNDLE} "#{HOME}.vim/bundle/vundle"|)
+  if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
+    if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
       puts "Succesfully cloned Vundle repo."
     else
       puts "Failed to clone Vundle repo!"
