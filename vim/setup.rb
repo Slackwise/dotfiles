@@ -4,7 +4,8 @@
 # should ideally only be run once, with only needing Git pulls to maintain.
 
 HOME = ENV['HOME']
-VIMRC = HOME + '/src/dotfiles/vim/vimrc'
+VIM_HOME = HOME + '/src/dotfiles/vim/'
+VIMRC = VIM_HOME + 'vimrc'
 VUNDLE = 'https://github.com/gmarik/vundle.git'
 
 WIN_VIMRC = <<WIN_VIMRC_END
@@ -104,11 +105,14 @@ def git_vundle
 end
 
 def nixie_setup
-  if File::symlink(VIMRC, HOME + "/.vimrc")
+  begin
+    File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
-  else
+  rescue
     puts 'Failed to symlink vimrc file!'
   end
+
+  #TODO: I really need to move my VIM_HOME to outside the repo.
 
   git_vundle
 
