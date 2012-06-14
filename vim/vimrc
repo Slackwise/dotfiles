@@ -17,9 +17,14 @@ source $VIMRUNTIME/vimrc_example.vim    " Has some good defaults that I am now
                                         " used to.
 source $VIMRUNTIME/mswin.vim            " Always behave Windows-like, because
                                         " I like my Ctrl-X/C/V/S bindings.
-let $VIMDIR="~/src/dotfiles/vim/"
-let $MYVIMRC=$VIMDIR . "vimrc"
+let $VIMDIR = "~/.vim/"
+let $VIMGIT = "~/src/dotfiles/vim/"
+let $MYVIMRC = $VIMGIT . "vimrc"
+set rtp+=$VIMDIR
 set rtp+=~/src/dotfiles/vim/
+let &dir = finddir("swap", &rtp)
+let &backupdir = finddir("backup", &rtp)
+let &viminfo = $VIMDIR . "viminfo"
 " }}}---------------------------------
 
 
@@ -59,9 +64,6 @@ nmap N Nzz
 set shortmess+=I        " Disable :intro
 set nowrap              " Do not wrap lines
 set backup
-let &dir=finddir("swap", &rtp)
-let &backupdir=finddir("backup", &rtp)
-let &viminfo=$VIMDIR . "viminfo"
 try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
 set tabstop=4                " How many columns <Tab> counts for

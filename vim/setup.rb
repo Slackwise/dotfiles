@@ -6,6 +6,7 @@
 HOME = ENV['HOME']
 VIM_HOME = HOME + '/src/dotfiles/vim/'
 VIMRC = VIM_HOME + 'vimrc'
+VIMDIR = HOME + '/.vim/'
 VUNDLE = 'https://github.com/gmarik/vundle.git'
 
 WIN_VIMRC = <<WIN_VIMRC_END
@@ -109,10 +110,18 @@ def nixie_setup
     File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
   rescue
-    puts 'Failed to symlink vimrc file!'
+    puts 'vimrc symlink failed: #$!'
   end
 
-  #TODO: I really need to move my VIM_HOME to outside the repo.
+  begin # Make various directories.
+    puts 'Creating ~/.vim and required sub-directories.'
+    Dir.mkdir(VIMDIR)
+    Dir.mkdir(VIMDIR + 'swap')
+    Dir.mkdir(VIMDIR + 'backup')
+  rescue
+    puts "Couldn't create directory: #$!"
+
+  end
 
   git_vundle
 
