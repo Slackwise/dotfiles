@@ -40,48 +40,7 @@ def windows_setup
     puts "Failed to create _vimrc:\n#$!"
   end
 
-  # Locate Git install in Program Files.
-  dir64 = ENV['PROGRAMFILES'] + '/Git/cmd'
-  dir32 = ENV['PROGRAMFILES(X86)'] + '/Git/cmd'
-  if Dir.exists? dir64
-    dir = dir64
-  elsif Dir.exists? dir32
-    dir = dir32
-  else
-    raise "Cannot locate Git installation!"
-    sleep 30
-    exit 1
-  end
-
-  # Write curl.cmd to Git/cmd directory.
-  begin
-    curl = dir + '/curl.cmd'
-    if !File.exists? curl
-      File.open(curl, 'w') do |f|
-        f.puts CURL
-      end
-      puts "Curl command added to Git files."
-    else
-      puts "Curl command file has already been created."
-    end
-  rescue
-    puts "Failed to create curl.cmd:\n#$!"
-    sleep 30
-    exit 1
-  end
-  
- # Add Git/cmd directory to system $PATH.
-  if !ENV['PATH'].match(/Git\\cmd/)
-    if system(%|SETX PATH "%PATH%;#{dir}" /M|)
-      puts 'Git has been added to the system $PATH'
-    else
-      raise "Couldn't add Git to the system $PATH!"
-      sleep 30 if calling_method == :windows_setup
-      exit 1
-    end
-  else
-    puts 'Git is already in the $PATH.'
-  end
+  make_dirs
 
   git_vundle
 
@@ -91,6 +50,7 @@ def windows_setup
 end
 
 def git_vundle
+  # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
   if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
@@ -113,19 +73,20 @@ def nixie_setup
     puts 'vimrc symlink failed: #$!'
   end
 
-  begin # Make various directories.
-    puts 'Creating ~/.vim and required sub-directories.'
-    Dir.mkdir(VIMDIR)
-    Dir.mkdir(VIMDIR + 'swap')
-    Dir.mkdir(VIMDIR + 'backup')
-  rescue
-    puts "Couldn't create directory: #$!"
-
-  end
+  make_dirs
 
   git_vundle
 
   puts 'Setup complete.'
+end
+
+def make_dirs
+    puts 'Creating ~/.vim and required sub-directories.'
+    Dir.mkdir(VIMDIR)
+    Dir.mkdir(VIMDIR + 'swap')
+    Dir.mkdir(VIMDIR + 'backup')
+rescue
+    puts "Couldn't create directory: #$!"
 end
 
 def is_admin?
