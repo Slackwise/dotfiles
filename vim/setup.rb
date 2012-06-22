@@ -112,9 +112,10 @@ case RUBY_PLATFORM
 when /linux/, /darwin/
   nixie_setup
 when /mswin/, /mingw32/
-  if is_admin?
-    windows_setup
-  else
-    restart_as_admin
-  end
+  windows_setup
+  # if is_admin?
+  #   windows_setup
+  # else
+  #   restart_as_admin
+  # end
 end
