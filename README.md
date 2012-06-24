@@ -20,21 +20,15 @@ lib
 Various minor libraries I use for customization. These aren't _real_ libraries.
 
 
-vim
----
-My vim config and setup scripts, so I can just hit the ground running on any
-machine.
-
-
-zsh
----
-My zsh config and other scripts that customize zsh.
-
-
-tmux
-----
-My tmux config, and anything else related.
+other dirs
+----------
+All other directories are named after applications and contain setup and config
+scripts for said applications. If they're actual dotfiles, then they're written
+sans the dot and symlinked to `$HOME` via setup scripts.
 
 
 
-<!-- vim: tw=80 :-->
+
+<!--
+ vim: tw=80
+-->
