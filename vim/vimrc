@@ -134,6 +134,7 @@ augroup END
 
 " GUI SETTINGS -------------------------------------------------------------{{{
 if has("gui_running")
+    set lines=45            " Increase default height of window
     set guioptions-=T       " Disable toolbar in gVim
     try
         set guifont=DejaVu_Sans_Mono:h9:cANSI
