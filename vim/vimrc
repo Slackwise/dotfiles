@@ -48,6 +48,7 @@ Bundle 'yurifury/hexHighlight'
 " I never use 's' for anything I'd rather us 'c' for, so I've decided to use
 " it for my own personal scripts and utilities.
 nmap ss .
+nmap sw :w<CR>
 nmap sh :call ToggleFlag("guioptions", "b")<CR>
 nmap sV :edit $MYVIMRC<CR>
 nmap sC :call SynStack()<CR>
