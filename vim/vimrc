@@ -49,7 +49,7 @@ Bundle 'yurifury/hexHighlight'
 " it for my own personal scripts and utilities.
 nmap ss .
 nmap sw :w<CR>
-nmap sh :call ToggleFlag("guioptions", "b")<CR>
+nmap sh :call ScrollbindHorizontal()<CR>
 nmap sV :edit $MYVIMRC<CR>
 nmap sC :call SynStack()<CR>
 nmap <F5> :w<CR>:!%<CR>
@@ -105,6 +105,12 @@ function SynStack()
         return
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
+
+function ScrollbindHorizontal()
+    windo set scrollopt=hor
+    windo set scrollbind
+    set guioptions+=b
 endfunction
 " }}}---------------------------------
 
