@@ -29,18 +29,20 @@ let &viminfo = $VIMDIR . "viminfo"
 
 
 " PLUGIN CONFIGURATION -----------------------------------------------------{{{
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if exists("*vundle#rc")
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'repeat.vim'
-Bundle 'surround.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'colornames'
-Bundle 'yurifury/hexHighlight'
-" Bundle 'astashov/vim-ruby-debugger'
+    Bundle 'gmarik/vundle'
+    Bundle 'repeat.vim'
+    Bundle 'surround.vim'
+    Bundle 'tpope/vim-commentary'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'tpope/vim-markdown'
+    Bundle 'colornames'
+    " Bundle 'yurifury/hexHighlight'
+    " Bundle 'astashov/vim-ruby-debugger'
+endif
 " }}}---------------------------------
 
 
