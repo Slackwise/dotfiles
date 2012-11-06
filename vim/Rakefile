@@ -29,15 +29,8 @@ CURL = <<CURLEND
 @curl.exe %*
 CURLEND
 
-desc "Make required directories."
-task :make_dirs do
-  mkdir Dir.mkdir(VIMDIR)
-  mkdir Dir.mkdir(VIMDIR + 'swap')
-  mkdir Dir.mkdir(VIMDIR + 'backup')
-end
 
-desc "Setup Vim for Windows."
-task :windows_setup => [:make_dirs] do
+def windows_setup
   # Install a redirecting vimrc file in $HOME.
   begin # FIXME: Getting a permission error.
     File.open(HOME + '/_vimrc', 'w+') do |f|
@@ -53,25 +46,7 @@ task :windows_setup => [:make_dirs] do
   sleep 10
 end
 
-desc "Install Vundle and vundled plugins."
-task :git_vundle
-  # FIXME: Find or setup Git for Windows. I don't know. :(
-  # Do initial Vundle repo clone.
-  if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
-    if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
-      puts "Succesfully cloned Vundle repo."
-    else
-      puts "Failed to clone Vundle repo!"
-      sleep 30
-      exit 1
-    end
-  else
-    puts "Vundle appears to already be installed."
-  end
-end
-
-desc "Install Vim config on Linux/OSX."
-task :nixie_setup => [:make_dirs] do
+def nixie_setup
   begin
     File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
@@ -102,8 +77,36 @@ def restart_as_admin
                   nil, 'runas', 1)
 end
 
+desc "Make required directories."
+task :make_dirs do
+  begin
+    mkdir Dir.mkdir(VIMDIR)
+    mkdir Dir.mkdir(VIMDIR + 'swap')
+    mkdir Dir.mkdir(VIMDIR + 'backup')
+  rescue
+    puts $!
+  end
+end
+
+desc "Install Vundle and Vundle'd plugins."
+task :vundle do
+  # FIXME: Find or setup Git for Windows. I don't know. :(
+  # Do initial Vundle repo clone.
+  if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
+    if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
+      puts "Succesfully cloned Vundle repo."
+    else
+      puts "Failed to clone Vundle repo!"
+      sleep 30
+      exit 1
+    end
+  else
+    puts "Vundle appears to already be installed."
+  end
+end
+
 desc "Install Vim config."
-task :default do
+task :default => [:make_dirs] do
   case RUBY_PLATFORM
   when /linux/, /darwin/
     nixie_setup
