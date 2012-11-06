@@ -29,7 +29,15 @@ CURL = <<CURLEND
 @curl.exe %*
 CURLEND
 
-def windows_setup
+desc "Make required directories."
+task :make_dirs do
+  mkdir Dir.mkdir(VIMDIR)
+  mkdir Dir.mkdir(VIMDIR + 'swap')
+  mkdir Dir.mkdir(VIMDIR + 'backup')
+end
+
+desc "Setup Vim for Windows."
+task :windows_setup => [:make_dirs] do
   # Install a redirecting vimrc file in $HOME.
   begin # FIXME: Getting a permission error.
     File.open(HOME + '/_vimrc', 'w+') do |f|
@@ -40,16 +48,13 @@ def windows_setup
     puts "Failed to create _vimrc:\n#$!"
   end
 
-  make_dirs
-
-  git_vundle
-
   puts 'Setup complete'
   puts 'Closing automatically in 10 seconds...'
   sleep 10
 end
 
-def git_vundle
+desc "Install Vundle and vundled plugins."
+task :git_vundle
   # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
   if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
@@ -65,7 +70,8 @@ def git_vundle
   end
 end
 
-def nixie_setup
+desc "Install Vim config on Linux/OSX."
+task :nixie_setup => [:make_dirs] do
   begin
     File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
@@ -73,21 +79,9 @@ def nixie_setup
     puts 'vimrc symlink failed: #$!'
   end
 
-  make_dirs
-
-  git_vundle
-
   puts 'Setup complete.'
 end
 
-def make_dirs
-    puts 'Creating ~/.vim and required sub-directories.'
-    Dir.mkdir(VIMDIR)
-    Dir.mkdir(VIMDIR + 'swap')
-    Dir.mkdir(VIMDIR + 'backup')
-rescue
-    puts "Couldn't create directory: #$!"
-end
 
 def is_admin?
   if ARGV.include? "--admin"
@@ -108,14 +102,17 @@ def restart_as_admin
                   nil, 'runas', 1)
 end
 
-case RUBY_PLATFORM
-when /linux/, /darwin/
-  nixie_setup
-when /mswin/, /mingw32/
-  windows_setup
-  # if is_admin?
-  #   windows_setup
-  # else
-  #   restart_as_admin
-  # end
+desc "Install Vim config."
+task :default do
+  case RUBY_PLATFORM
+  when /linux/, /darwin/
+    nixie_setup
+  when /mswin/, /mingw32/
+    windows_setup
+    # if is_admin?
+    #   windows_setup
+    # else
+    #   restart_as_admin
+    # end
+  end
 end
