@@ -20,7 +20,7 @@ task :binw do
   end
 end
 
-desc "Setup Vim configuration for corrent user account."
+desc "Setup Vim configuration for current user account."
 task :vim do
   require 'vim/Rakefile'
   # Run the default task from that file?
