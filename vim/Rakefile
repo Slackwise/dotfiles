@@ -88,7 +88,7 @@ task :make_dirs do
   end
 end
 
-desc 'Install Vundle and Vundle'd plugins.'
+desc "Install Vundle and Vundle'd plugins."
 task :vundle do
   # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
