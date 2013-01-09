@@ -68,6 +68,7 @@ nmap N Nzz
 
 " BASE SETTINGS ------------------------------------------------------------{{{
 "if $USERDOMAIN == "MILLNET" | set guioptions+=b | endif
+set cc=81               " Highlight column 81
 set shortmess+=I        " Disable :intro
 set nowrap              " Do not wrap lines
 set backup
