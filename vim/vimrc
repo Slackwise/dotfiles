@@ -29,10 +29,14 @@ let &viminfo = $VIMDIR . "viminfo"
 
 
 " PLUGIN CONFIGURATION -----------------------------------------------------{{{
-if exists("*vundle#rc")
+try
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
+catch
+	    " Do nothing!
+endtry
 
+if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     Bundle 'repeat.vim'
     Bundle 'surround.vim'

@@ -36,7 +36,7 @@ def windows_setup
     File.open(HOME + '/_vimrc', 'w+') do |f|
       f.puts WIN_VIMRC
     end
-    puts "Created _vimrc."
+    puts 'Created _vimrc.'
   rescue
     puts "Failed to create _vimrc:\n#$!"
   end
@@ -59,7 +59,7 @@ end
 
 
 def is_admin?
-  if ARGV.include? "--admin"
+  if ARGV.include? '--admin'
     true
   else
     false
@@ -73,11 +73,11 @@ end
 def restart_as_admin
   require 'win32ole'
   WIN32OLE.new('Shell.Application')
-    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + " --admin",
+    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + ' --admin',
                   nil, 'runas', 1)
 end
 
-desc "Make required directories."
+desc 'Make required directories.'
 task :make_dirs do
   begin
     mkdir Dir.mkdir(VIMDIR)
@@ -88,24 +88,24 @@ task :make_dirs do
   end
 end
 
-desc "Install Vundle and Vundle'd plugins."
+desc 'Install Vundle and Vundle'd plugins.'
 task :vundle do
   # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
-  if !Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
+  unless Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
-      puts "Succesfully cloned Vundle repo."
+      puts 'Succesfully cloned Vundle repo.'
     else
-      puts "Failed to clone Vundle repo!"
+      puts 'Failed to clone Vundle repo!'
       sleep 30
       exit 1
     end
   else
-    puts "Vundle appears to already be installed."
+    puts 'Vundle appears to already be installed.'
   end
 end
 
-desc "Install Vim config."
+desc 'Install Vim config.'
 task :default => [:make_dirs] do
   case RUBY_PLATFORM
   when /linux/, /darwin/
