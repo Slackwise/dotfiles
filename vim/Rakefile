@@ -93,7 +93,7 @@ desc "Install Vundle and Vundle'd plugins."
 task :vundle do
   # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
-  unless Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
+  unless File.exists? "#{HOME}/.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
       puts 'Succesfully cloned Vundle repo.'
     else
