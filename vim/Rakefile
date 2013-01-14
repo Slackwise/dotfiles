@@ -80,11 +80,12 @@ end
 desc 'Make required directories.'
 task :make_dirs do
   begin
-    mkdir Dir.mkdir(VIMDIR)
-    mkdir Dir.mkdir(VIMDIR + 'swap')
-    mkdir Dir.mkdir(VIMDIR + 'backup')
+    Dir.mkdir(VIMDIR)
+    Dir.mkdir(VIMDIR + 'swap')
+    Dir.mkdir(VIMDIR + 'backup')
+    puts 'Created Vim directories.'
   rescue
-    puts $!
+    puts "Failed to create directories: #$!"
   end
 end
 
