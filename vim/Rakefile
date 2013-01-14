@@ -51,7 +51,7 @@ def nixie_setup
     File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
   rescue
-    puts 'vimrc symlink failed: #$!'
+    puts "vimrc symlink failed: #$!"
   end
 
   puts 'Setup complete.'
@@ -72,9 +72,9 @@ end
 
 def restart_as_admin
   require 'win32ole'
-  WIN32OLE.new('Shell.Application')
-    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + ' --admin',
-                  nil, 'runas', 1)
+  WIN32OLE.new('Shell.Application').ShellExecute(
+	'ruby.exe', File::expand_path(__FILE__) + ' --admin',
+	nil, 'runas', 1)
 end
 
 desc 'Make required directories.'
