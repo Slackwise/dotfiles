@@ -51,7 +51,7 @@ def nixie_setup
     File.symlink(VIMRC, HOME + '/.vimrc')
     puts 'Symlinked vimrc file.'
   rescue
-    puts 'vimrc symlink failed: #$!'
+    puts "vimrc symlink failed: #$!"
   end
 
   puts 'Setup complete.'
@@ -72,19 +72,20 @@ end
 
 def restart_as_admin
   require 'win32ole'
-  WIN32OLE.new('Shell.Application')
-    .ShellExecute('ruby.exe', File::expand_path(__FILE__) + ' --admin',
-                  nil, 'runas', 1)
+  WIN32OLE.new('Shell.Application').ShellExecute(
+	'ruby.exe', File::expand_path(__FILE__) + ' --admin',
+	nil, 'runas', 1)
 end
 
 desc 'Make required directories.'
 task :make_dirs do
   begin
-    mkdir Dir.mkdir(VIMDIR)
-    mkdir Dir.mkdir(VIMDIR + 'swap')
-    mkdir Dir.mkdir(VIMDIR + 'backup')
+    Dir.mkdir(VIMDIR)
+    Dir.mkdir(VIMDIR + 'swap')
+    Dir.mkdir(VIMDIR + 'backup')
+    puts 'Created Vim directories.'
   rescue
-    puts $!
+    puts "Failed to create directories: #$!"
   end
 end
 
@@ -92,7 +93,7 @@ desc "Install Vundle and Vundle'd plugins."
 task :vundle do
   # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
-  unless Dir.exists? "#{HOME}/.vim/bundle/vundle/.git/"
+  unless File.exists? "#{HOME}/.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
       puts 'Succesfully cloned Vundle repo.'
     else
