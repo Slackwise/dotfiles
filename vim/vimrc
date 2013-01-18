@@ -132,10 +132,10 @@ if has("gui_running")
     set lines=45            " Increase default height of window
     set guioptions-=T       " Disable toolbar in gVim
     try
-        set guifont=DejaVu_Sans_Mono:h9:cANSI
+	    set guifont=Consolas:h9:cANSI
     catch
         try
-            set guifont=Consolas:h9:cANSI
+		set guifont=DejaVu_Sans_Mono:h9:cANSI
         catch
             call confirm("Could not set desired fonts. :(")
         endtry
@@ -148,9 +148,9 @@ endif
 if has("win32")
     if &term == "win32" " Check if in CMD.COM, which colors suck.
         colorscheme slate
-    end
+    endif
 
-    let g:netrw_scp_cmd="\c:\\bin\\pscp.exe"
+    let g:netrw_scp_cmd="/bin/pscp.exe"
     
     set diffexpr=MyDiff()
     function MyDiff()
