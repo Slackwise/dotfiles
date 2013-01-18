@@ -66,26 +66,7 @@ nmap N Nzz
 " }}}---------------------------------
 
 
-" BASE SETTINGS ------------------------------------------------------------{{{
-"if $USERDOMAIN == "MILLNET" | set guioptions+=b | endif
-if v:version > 702 && has("syntax") | set colorcolumn=81 | endif " Highlight column 81
-set shortmess+=I        " Disable :intro
-set nowrap              " Do not wrap lines
-set backup
-try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
-set background=dark
-set tabstop=4                " How many columns <Tab> counts for
-" set softtabstop=4          " Causes backspace to delete X spaces
-set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
-set smarttab                 " Uses shiftwidth instead of tabstop at start of lines 
-set expandtab                " Expand tabs into spaces of tabstop size
-" set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on zRntax to 80 for code)
-syntax on                    " Enable syntax highlighting
-filetype on                  " Enable filetype detection
-filetype indent on           " Enable filetype-specific indenting
-filetype plugin on           " Enable filetype-specific plugins
-au Syntax * set textwidth=80 " Set tw for code files, versus plain text
-" }}}---------------------------------
+
 
 
 " UTILITY FUNCTIONS --------------------------------------------------------{{{
@@ -165,6 +146,10 @@ endif
 
 " WINDOWS SPECIFIC SETTINGS ------------------------------------------------{{{
 if has("win32")
+    if &term == "win32" " Check if in CMD.COM, which colors suck.
+        colorscheme slate
+    end
+
     let g:netrw_scp_cmd="\c:\\bin\\pscp.exe"
     
     set diffexpr=MyDiff()
