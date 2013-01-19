@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+HOME=ENV['HOME']
+USERNAME=ENV['USERNAME']
+
+BASHRC = <<BASHRC
+#!/bin/sh
+export LOL_WINDOWS=true
+#export HOME=/cygdrive/c/Users/$USERNAME
+source ~/.bashrc
+BASHRC
+
+def create_redir_bashrc(dir_path)
+  File.open(dir_path +'/.bashrc', 'w+') do |f|
+    f.puts BASHRC
+  end
+rescue
+  puts "Failed to create bashrc in #{dir_path}: #$!"
+end
+
+def windows_setup
+  # Create general bashrc
+  create_redir_bashrc(HOME)
+
+  # Create Cygwin bashrc
+  create_redir_bashrc("/cygwin/home/#{USERNAME}"
+end
+
+task :default do
+  # Make redirecting ~/.bashrc
+
+  case RUBY_PLATFORM
+  when /linux/, /darwin/
+    nixie_setup
+  when /mswin/, /mingw32/
+    windows_setup
+  end
+
+end
