@@ -1,18 +1,20 @@
 #!/usr/bin/env ruby
 
-HOME=ENV['HOME']
-USERNAME=ENV['USERNAME']
-
-BASHRC = <<BASHRC
+HOME        = ENV['HOME']
+USERNAME    = ENV['USERNAME']
+BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
+BASHRC_WIN  = <<BASHRC
 #!/bin/sh
 export LOL_WINDOWS=true
-#export HOME=/cygdrive/c/Users/$USERNAME
+if [[ -n "$GITHUB_SHELL" ]]
+    export HOME=/cygdrive/c/Users/$USERNAME
+fi
 source ~/.bashrc
 BASHRC
 
 def create_redir_bashrc(dir_path)
   File.open(dir_path +'/.bashrc', 'w+') do |f|
-    f.puts BASHRC
+    f.puts BASHRC_WIN
   end
 rescue
   puts "Failed to create bashrc in #{dir_path}: #$!"
@@ -23,7 +25,14 @@ def windows_setup
   create_redir_bashrc(HOME)
 
   # Create Cygwin bashrc
-  create_redir_bashrc("/cygwin/home/#{USERNAME}"
+  create_redir_bashrc("/cygwin/home/#{USERNAME}")
+end
+
+def nixie_setup
+  File.symlink(BASHRC_PATH, '~/.bashrc')
+  puts 'Symlinked bashrc.'
+rescue
+  puts "Failed to symlink bashrc: #$!"
 end
 
 task :default do

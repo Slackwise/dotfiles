@@ -3,11 +3,11 @@
 # This script is supposed to bootstrap my Vim config on a new machine. It
 # should ideally only be run once, with only needing Git pulls to maintain.
 
-HOME = ENV['HOME']
-VIM_HOME = HOME + '/src/dotfiles/vim/'
-VIMRC = VIM_HOME + 'vimrc'
-VIMDIR = HOME + '/.vim/'
-VUNDLE = 'https://github.com/gmarik/vundle.git'
+HOME      = ENV['HOME']
+VIM_HOME  = HOME + '/src/dotfiles/vim/'
+VIMRC     = VIM_HOME + 'vimrc'
+VIMDIR    = HOME + '/.vim/'
+VUNDLE    = 'https://github.com/gmarik/vundle.git'
 
 WIN_VIMRC = <<WIN_VIMRC_END
 let $MYVIMRC="~/src/dotfiles/vim/vimrc"
@@ -31,12 +31,11 @@ def windows_setup
 end
 
 def nixie_setup
-  begin
-    File.symlink(VIMRC, HOME + '/.vimrc')
-    puts 'Symlinked vimrc file.'
-  rescue
-    puts "vimrc symlink failed: #$!"
-  end
+  File.symlink(VIMRC, HOME + '/.vimrc')
+  puts 'Symlinked vimrc file.'
+rescue
+  puts "vimrc symlink failed: #$!"
+end
 
   puts 'Setup complete.'
 end
