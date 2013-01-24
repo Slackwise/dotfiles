@@ -5,9 +5,12 @@ USERNAME    = ENV['USERNAME']
 BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
 BASHRC_WIN  = <<BASHRC
 #!/bin/sh
-export LOL_WINDOWS=true
+export SwFLAGS="windows"
 if [[ -n "$GITHUB_SHELL" ]]
+    export SwFLAGS="cygwin"
     export HOME=/cygdrive/c/Users/$USERNAME
+elsif 
+    export SwFLAGS="github"
 fi
 source ~/.bashrc
 BASHRC

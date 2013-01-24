@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Check if we're on Windows/Cygwin.
-if $LOL_WINDOWS
+if $LOL_WINDOWS && [$WIN_SHELL -eq "cygwin"]
 	export PATH=/cygdrive/c/bin:$HOME/src/dotfiles/binw:$PATH
 else
 	export PATH=$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
