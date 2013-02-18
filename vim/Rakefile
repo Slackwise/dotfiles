@@ -37,10 +37,6 @@ rescue
   puts "vimrc symlink failed: #$!"
 end
 
-  puts 'Setup complete.'
-end
-
-
 def is_admin?
   if ARGV.include? '--admin'
     true
