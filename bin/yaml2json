@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+#
+# I just need a quick command to convert YAML files to JSON on my webserver. Ugh.
+
+require 'yaml'
+
+yaml_file = ARGV[0]
+
+unless yaml_file
+    puts "usage: #{File.basename(__FILE__)} <yaml_file>"
+    exit 1
+end
+
+YAML::load(yaml_file)
+# TODO: Finish the damn script. Got stuck because Dreamhost only has 1.8.7.
+# Need RVM.
