@@ -13,7 +13,7 @@ end
 
 task :install do
   if distro == :ubuntu
-    `sudo apt-get install curl`
+    `sudo apt-get install build-essential curl`
   elsif distro == :gentoo
     `sudo emerge curl`
   else
