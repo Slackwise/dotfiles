@@ -1,7 +1,15 @@
 #!/bin/sh
 
+if [ -e "~/.profile" ]; then
+    source ~/.profile
+fi
+
+if [ -e "~/.bash_profile" ]; then
+    source ~/.bash_profile
+fi
+
 if [ -d "~/.rvm" ]; then
-    source "~/.rvm/scripts/rvm"
+    source ~/.rvm/scripts/rvm
 fi
 
 # If connected to a machine via SSH, show the hostname:
