@@ -1,5 +1,13 @@
 #!/bin/sh
 
+command_exists() {
+    if command -v $1 >/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # If connected to a machine via SSH, show the hostname:
