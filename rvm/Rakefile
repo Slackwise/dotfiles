@@ -12,14 +12,22 @@ def distro
 end
 
 task :install do
-  if distro == :ubuntu
-    `sudo apt-get install build-essential curl`
-  elsif distro == :gentoo
-    `sudo emerge curl`
-  else
-    puts 'Hope curl is installed...'
+  if `which curl`.strip == ''
+    if distro == :ubuntu
+      `sudo apt-get install build-essential curl`
+    elsif distro == :gentoo
+      `sudo emerge curl`
+    else
+      puts 'Hope curl is installed...'
+    else
+      raise 'curl not installed.'
   end
+  if
   ` curl -L https://get.rvm.io | bash -s stable --ruby && source ~/.rvm/scripts/rvm`
+  rescue
+    puts "RVM failed to install: #$!"
+    exit 1
+  end
 end
 
 task :default => [:install]
