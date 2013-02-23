@@ -3,17 +3,6 @@
 HOME        = ENV['HOME']
 USERNAME    = ENV['USERNAME']
 BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
-BASHRC_WIN  = <<BASHRC
-#!/bin/sh
-export SwFLAGS="windows"
-if [[ -n "$GITHUB_SHELL" ]]
-    export SwFLAGS="cygwin"
-    export HOME=/cygdrive/c/Users/$USERNAME
-elsif 
-    export SwFLAGS="github"
-fi
-source ~/.bashrc
-BASHRC
 
 def create_redir_bashrc(dir_path)
   File.open(dir_path +'/.bashrc', 'w+') do |f|
@@ -24,15 +13,11 @@ rescue
 end
 
 def windows_setup
-  # Create general bashrc
-  create_redir_bashrc(HOME)
-
-  # Create Cygwin bashrc
-  create_redir_bashrc("/cygwin/home/#{USERNAME}")
+  #TODO
 end
 
 def nixie_setup
-  File.symlink(BASHRC_PATH, '~/.bashrc')
+  File.symlink(BASHRC_PATH, HOME + '/.bashrc')
   puts 'Symlinked bashrc.'
 rescue
   puts "Failed to symlink bashrc: #$!"

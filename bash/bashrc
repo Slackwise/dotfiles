@@ -1,17 +1,16 @@
 #!/bin/sh
 
-# Check if we're on Windows/Cygwin.
-if $LOL_WINDOWS && [$WIN_SHELL -eq "cygwin"]
-	export PATH=/cygdrive/c/bin:$HOME/src/dotfiles/binw:$PATH
-else
-	export PATH=$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
+if [ -d "~/.rvm" ]; then
+    source "~/.rvm/scripts/rvm"
 fi
 
 # If connected to a machine via SSH, show the hostname:
-if [[ -n "$SSH_CONNECTION" ]]
+if [[ -n "$SSH_CONNECTION" ]]; then
 	# Local
-	export PS1='\w\$ '
+	export PS1="\w\$ "
 else
 	# Remote
-	export PS1='[\H]\w\$ '
+	export PS1="[\H]\w\$ "
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

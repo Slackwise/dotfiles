@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+desc 'Install RVM.'
+
+def distro
+  case `uname -a`
+  when /ubuntu/i
+    return :ubuntu
+  when /gentoo/i
+    return :gentoo
+  end
+end
+
+task :install do
+  if distro == :ubuntu
+    `sudo apt-get install curl`
+  elsif distro == :gentoo
+    `sudo emerge curl`
+  else
+    puts 'Hope curl is installed...'
+  end
+  `curl -L https://get.rvm.io | bash -s stable --ruby`
+end
+
+task :default => [:install]
