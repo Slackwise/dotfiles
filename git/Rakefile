@@ -1,6 +1,7 @@
 
 task :default => [:config]
 
+# I use 'git config' because I can't symlink ~/.gitconfig on Windows. :(
 desc 'Configure git for current user.'
 task :config do
   puts 'Configuring git.'
@@ -12,4 +13,5 @@ task :config do
   `git config --global color.ui always`
   `git config --global diff.tool vimdiff`
   `git config --global difftool.prompt false`
+  `git config --global alias.c "commit -am"`
 end
