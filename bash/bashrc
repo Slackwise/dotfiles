@@ -1,5 +1,10 @@
 #!/bin/sh
 
+AM_ROOT=false
+if [ $UID == 0 ]; then
+    AM_ROOT=true
+fi
+
 command_exists() {
     if command -v $1 >/dev/null; then
         return 0

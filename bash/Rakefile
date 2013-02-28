@@ -4,13 +4,6 @@ HOME        = ENV['HOME']
 USERNAME    = ENV['USERNAME']
 BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
 
-def create_redir_bashrc(dir_path)
-  File.open(dir_path +'/.bashrc', 'w+') do |f|
-    f.puts BASHRC_WIN
-  end
-rescue
-  puts "Failed to create bashrc in #{dir_path}: #$!"
-end
 
 def windows_setup
   #TODO
