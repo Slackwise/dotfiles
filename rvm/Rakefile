@@ -29,6 +29,8 @@ def install_curl
       else
         raise 'Not sure which distro. Install curl manually.'
       end
+    else
+      raise 'Without sudo, cannot install curl.'
     end
 rescue
   puts "curl failed to install: #$!"
