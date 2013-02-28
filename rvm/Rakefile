@@ -14,7 +14,7 @@ def distro
 end
 
 def curl_installed?
-  `which curl`.strip == ''
+  `which curl`.strip != ''
 end
 
 def install_curl
