@@ -8,22 +8,42 @@ def distro
     return :ubuntu
   when /gentoo/i
     return :gentoo
+  else
+    raise 'Cannot detect distro.'
   end
 end
 
+def curl_installed?
+  `which curl`.strip == ''
+end
+
+def install_curl
+    print 'Can you sudo [y/n]? '
+    input = gets.chomp
+    if input =~ /y/i
+      case distro
+      when :gentoo
+        `sudo emerge curl`
+      when :ubuntu
+        `sudo apt-get install build-essential curl`
+      else
+        raise 'Not sure which distro. Install curl manually.'
+      end
+    end
+rescue
+  puts "curl failed to install: #$!"
+  exit 1
+end
+
+def install_rvm
+  `curl -L https://get.rvm.io | bash -s stable --ruby && source ~/.rvm/scripts/rvm`
+end
+
+desc 'Install RVM (and curl if necessary.)'
 task :install do
-  if `which curl`.strip == ''
-    if distro == :ubuntu
-      `sudo apt-get install build-essential curl`
-    elsif distro == :gentoo
-      `sudo emerge curl`
-    else
-      puts 'Hope curl is installed...'
-    else
-      raise 'curl not installed.'
-  end
-  if
-  ` curl -L https://get.rvm.io | bash -s stable --ruby && source ~/.rvm/scripts/rvm`
+  begin
+    install_curl if !curl_installed?
+    install_rvm
   rescue
     puts "RVM failed to install: #$!"
     exit 1
