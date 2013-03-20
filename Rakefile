@@ -3,6 +3,7 @@ desc "Add binw to user %PATH%."
 task :binw do
   # Find absolute path of binw.
   binw = File.absolute_path('binw')
+  binw.gsub!(?/, ?\\)
 
   # Get user path and parse into array.
   user_path = `REG QUERY HKCU\\Environment /v Path`
