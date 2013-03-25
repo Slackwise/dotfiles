@@ -134,7 +134,13 @@ endfunction
 " }}}---------------------------------
 
 
-" MARKDOWN SPECIFIC SETTINGS -----=-----------------------------------------{{{
+" YAML SPECIFIC SETTINGS ---------------------------------------------------{{{
+autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt,set filetype=yaml
+autocmd FileType yaml set textwidth=64 | set colorcolumn=65
+" }}}---------------------------------
+
+
+" MARKDOWN SPECIFIC SETTINGS -----------------------------------------------{{{
 autocmd BufRead,BufNewFile *.md,*.mkd,*.mdown,*.markdown,*.markdown.txt set filetype=markdown
 autocmd FileType markdown set textwidth=64 | set colorcolumn=65
 " }}}---------------------------------
