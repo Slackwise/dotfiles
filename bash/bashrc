@@ -5,13 +5,21 @@ if [ $UID == 0 ]; then
     AM_ROOT=true
 fi
 
-command_exists() {
+function command_exists
+{
     if command -v $1 >/dev/null; then
         return 0
     else
         return 1
     fi
 }
+
+if [ $HOSTNAME = "zwerbach" ]; then
+    function http_errors
+    {
+        tail -n 50 -f "$HOME/logs/$1/http/error.log"
+    }
+fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
