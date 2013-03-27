@@ -1,5 +1,5 @@
 " vim: fdm=marker
-" Author:       Adam Flanczewski <http://slackwi.se>
+" Author:       Adam Flanczewski <//slackwi.se>
 " Description:  My personal vimrc file.
 "               I do not recommend using it as-is. Just grab any lines you
 "               may find useful out of it.
@@ -10,6 +10,17 @@
 "       ### Lost? Press zR ####
 "       #######################
 
+
+" NOTES
+" --------------------------------------------------------------------------{{{
+" RFC2822 'Internet Message Format' requires no more than 78 character long
+" lines, but RFC1855 'Netiquette Guidelines' says you should limit line
+" length to fewer than 65 to handle various clients as well as '> ' style
+" quotation in email.
+"
+"
+" gq - Wraps selection to &textwidth setting.
+" }}}---------------------------------
 
 
 " INITALIZATION ------------------------------------------------------------{{{
@@ -43,7 +54,8 @@ if exists("*vundle#rc")
     Bundle 'tpope/vim-commentary'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
-    Bundle 'colornames'
+    Bundle 'VimClojure'
+    " Bundle 'colornames'
     " Bundle 'yurifury/hexHighlight'
     " Bundle 'astashov/vim-ruby-debugger'
 endif
@@ -79,12 +91,12 @@ set tabstop=4                " How many columns <Tab> counts for
 set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
 set smarttab                 " Uses shiftwidth instead of tabstop at start of lines 
 set expandtab                " Expand tabs into spaces of tabstop size
-" set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on zRntax to 80 for code)
+" set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on syntax to 80 for code)
 syntax on                    " Enable syntax highlighting
 filetype on                  " Enable filetype detection
 filetype indent on           " Enable filetype-specific indenting
 filetype plugin on           " Enable filetype-specific plugins
-au Syntax * set textwidth=80 " Set tw for code files, versus plain text
+" au Syntax * set textwidth=80 " Set tw for code files, versus plain text
 " }}}---------------------------------
 
 
@@ -122,6 +134,18 @@ endfunction
 " }}}---------------------------------
 
 
+" YAML SPECIFIC SETTINGS ---------------------------------------------------{{{
+autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt,set filetype=yaml
+autocmd FileType yaml set textwidth=64 | set colorcolumn=65
+" }}}---------------------------------
+
+
+" MARKDOWN SPECIFIC SETTINGS -----------------------------------------------{{{
+autocmd BufRead,BufNewFile *.md,*.mkd,*.mdown,*.markdown,*.markdown.txt set filetype=markdown
+autocmd FileType markdown set textwidth=64 | set colorcolumn=65
+" }}}---------------------------------
+
+
 " RUBY SPECIFIC SETTINGS ---------------------------------------------------{{{
 autocmd FileType ruby,eruby set tabstop=2 | set shiftwidth=2 | set expandtab
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -129,7 +153,13 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}---------------------------------
-"
+
+
+" CLOJURE SPECIFIC SETTINGS ------------------------------------------------{{{
+autocmd BufRead,BufNewFile *.clj set filetype=clojure
+autocmd FileType clojure set tabstop=2 | set shiftwidth=2 | set expandtab
+" }}}---------------------------------
+
 
 " HEX EDITING --------------------------------------------------------------{{{
 " vim -b : edit binary using xxd-format!
@@ -145,6 +175,7 @@ augroup Binary
 augroup END
 " }}}---------------------------------
 
+
 " XTERM SETTINGS -----------------------------------------------------------{{{
 if &term=='xterm'
   colorscheme slate
@@ -159,6 +190,7 @@ if has("gui_running")
 endif
 " }}}---------------------------------
 
+
 " GTK SETTINGS -------------------------------------------------------------{{{
 if has("gui_gtk")
     try
@@ -166,6 +198,7 @@ if has("gui_gtk")
     endtry
 endif
 " }}}---------------------------------
+
 
 " WINDOWS SPECIFIC SETTINGS ------------------------------------------------{{{
 if has("win32")
