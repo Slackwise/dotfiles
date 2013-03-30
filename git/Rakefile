@@ -15,4 +15,5 @@ task :config do
   `git config --global difftool.prompt false`
   `git config --global alias.c "commit -am"`
   `git config --global alias.p "push"`
+  `git config --global push.default simple`
 end
