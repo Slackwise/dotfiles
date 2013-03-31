@@ -11,3 +11,6 @@
 
 # Required to recompile freetype with the infinality patch set.
 media-libs/freetype infinality
+# required by app-arch/p7zip-9.13[-kde,wxwidgets]
+# required by p7zip (argument)
+>=x11-libs/wxGTK-2.8.12.1:2.8 -odbc
