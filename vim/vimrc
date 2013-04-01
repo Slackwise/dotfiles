@@ -135,7 +135,7 @@ endfunction
 
 
 " YAML SPECIFIC SETTINGS ---------------------------------------------------{{{
-autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt,set filetype=yaml
+autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt set filetype=yaml
 autocmd FileType yaml set textwidth=64 | set colorcolumn=65
 " }}}---------------------------------
 
