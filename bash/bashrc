@@ -35,6 +35,8 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+export PATH=$HOME/src/dotfiles/bin:$PATH
+
 set -o vi
 # TODO: If a VT, run the next line:
 # setterm -powersave off -blank 0

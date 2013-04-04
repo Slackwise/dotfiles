@@ -14,6 +14,10 @@ let $MYVIMRC="~/src/dotfiles/vim/vimrc"
 source $MYVIMRC
 WIN_VIMRC_END
 
+def is_windows?
+  RUBY_PLATFORM.match(/mswin/) || RUBY_PLATFORM.match(/mingw32/)
+end
+
 def windows_setup
   # Install a redirecting vimrc file in $HOME.
   begin # FIXME: Getting a permission error.
@@ -85,17 +89,23 @@ task :vundle do
   end
 end
 
+desc 'Clean up all Vim configuration files.'
+task :clean do
+  if is_windows?
+    prefix = ?_
+  else
+    prefix = ?.
+  end
+  FileUtils.rm_rf(VIMDIR)
+  FileUtils.rm("#{HOME}/#{prefix}vimrc")
+  FileUtils.rm("#{HOME}/#{prefix}viminfo")
+end
+
 desc 'Install Vim config.'
 task :default => [:make_dirs] do
-  case RUBY_PLATFORM
-  when /linux/, /darwin/
-    nixie_setup
-  when /mswin/, /mingw32/
+  if is_windows?
     windows_setup
-    # if is_admin?
-    #   windows_setup
-    # else
-    #   restart_as_admin
-    # end
+  else
+    nixie_setup
   end
 end

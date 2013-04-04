@@ -6,10 +6,8 @@ task :binw do
   binw.gsub!(?/, ?\\)
 
   # Get user path and parse into array.
-  user_path = `REG QUERY HKCU\\Environment /v Path`
-    .sub('    Path    REG_SZ    ', '')
-    .split($/)[2]
-    .split(?;)
+  user_path = `REG QUERY HKCU\\Environment /v Path`.sub(
+    '    Path    REG_SZ    ', '').split($/)[2].split(?;)
           
   # Check if binw already exists in the user path.
   if user_path.include? binw
