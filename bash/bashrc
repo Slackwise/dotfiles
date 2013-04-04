@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 AM_ROOT=false
 if [ $UID == 0 ]; then
     AM_ROOT=true
@@ -33,3 +34,7 @@ else
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+set -o vi
+# TODO: If a VT, run the next line:
+# setterm -powersave off -blank 0

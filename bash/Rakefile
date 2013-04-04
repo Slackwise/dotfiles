@@ -3,17 +3,35 @@
 HOME        = ENV['HOME']
 USERNAME    = ENV['USERNAME']
 BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
+PROFILE_CONTENTS = "[ -f $HOME/.bashrc ] && source $HOME/.bashrc"
 
 
 def windows_setup
   #TODO
 end
 
-def nixie_setup
+def create_profile
+  bash_profile = "#{HOME}/.bash_profile" 
+  if File.exists? bash_profile
+    raise '~/.bash_profile already exists.'
+  else
+    File.open(bash_profile, 'w') do |profile|
+      profile.puts PROFILE_CONTENTS
+    end
+    puts 'Created ~/.bash_profile.'
+  end
+end
+
+def symlink_bashrc
   File.symlink(BASHRC_PATH, HOME + '/.bashrc')
-  puts 'Symlinked bashrc.'
+  puts 'Symlinked ~/.bashrc.'
+end
+
+def nixie_setup
+  create_profile
+  symlink_bashrc
 rescue
-  puts "Failed to symlink bashrc: #$!"
+  puts "Failed to setup bash: #$!"
 end
 
 task :default do
