@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+HOME          = ENV['HOME']
+USERNAME      = ENV['USERNAME']
+SCREENRC_PATH = HOME + '/src/dotfiles/screen/screenrc'
+
+
+def symlink_screenrc
+  File.symlink(SCREENRC_PATH, HOME + '/.screenrc')
+  puts 'Symlinked ~/.screenrc.'
+rescue
+  puts "Failed to symlink ~/.screenrc: #$!"
+end
+
+task :default do
+  symlink_screenrc
+end

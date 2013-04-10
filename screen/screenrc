@@ -1,0 +1,6 @@
+# shell -${SHELL}
+
+startup_message off
+
+# Rebind screen's escape key (C-a) to C-space.
+escape ^ ^ 
