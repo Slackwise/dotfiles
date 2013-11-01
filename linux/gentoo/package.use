@@ -1,3 +1,12 @@
+##### PERSONAL USE FLAGS #####
+dev-java/oracle-jdk-bin -nsplugin
+net-fs/cifs-utils ads
+net-fs/samba winbind
+net-irc/znc daemon python ssl
+net-p2p/transmission -qt4 -systemd -xfs
+media-video/vlc libass matroska
+##############################
+##############################
 #required by x11-drivers/xf86-video-vmware-12.0.2-r1, required by x11-base/xorg-drivers-1.13[video_cards_vmware], required by x11-base/xorg-server-1.13.1[xorg], required by x11-drivers/xf86-video-glint-1.2.8
 =x11-libs/libdrm-2.4.40 libkms
 #required by x11-drivers/xf86-video-vmware-12.0.2-r1, required by x11-base/xorg-drivers-1.13[video_cards_vmware], required by x11-base/xorg-server-1.13.1[xorg], required by x11-drivers/xf86-video-glint-1.2.8
@@ -10,7 +19,7 @@
 =net-dns/avahi-0.6.30-r3 mdnsresponder-compat
 
 # Required to recompile freetype with the infinality patch set.
-media-libs/freetype infinality
+#media-libs/freetype infinality
 # required by app-arch/p7zip-9.13[-kde,wxwidgets]
 # required by p7zip (argument)
 >=x11-libs/wxGTK-2.8.12.1:2.8 -odbc
@@ -28,7 +37,6 @@ media-libs/freetype infinality
 # required by @selected
 # required by @world (argument)
 >=x11-libs/libdrm-2.4.45 libkms
-www-client/google-chrome ~amd64
 # required by net-misc/ntp-4.2.6_p5-r1[zeroconf]
 # required by @selected
 # required by @world (argument)
@@ -39,3 +47,8 @@ www-client/google-chrome ~amd64
 # required by @selected
 # required by @world (argument)
 =sys-libs/talloc-2.0.8 python
+# required by x11-drivers/xf86-video-vmware-13.0.1
+# required by x11-base/xorg-drivers-1.14[video_cards_vmware]
+# required by x11-base/xorg-server-1.13.4[xorg]
+# required by x11-drivers/xf86-video-glint-1.2.8-r1
+=media-libs/mesa-9.1.6 xa
