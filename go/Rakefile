@@ -4,7 +4,7 @@
 # TODO: Check if $GOPATH is in $PATH?
 
 HOME   = ENV['HOME']
-GOHOME = HOME << '/src/go'
+GOHOME = HOME + '/src/go'
 
 desc 'Make required directories.'
 task :make_dirs do
