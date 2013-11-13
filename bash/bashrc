@@ -22,7 +22,6 @@ if [ $HOSTNAME = "zwerbach" ]; then
     }
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # If connected to a machine via SSH, show the hostname:
 if [[ -n "$SSH_CONNECTION" ]]; then
@@ -33,9 +32,12 @@ else
 	export PS1="[\H]\w\$ "
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export GOPATH="$HOME/src/go"
 
-export PATH=$HOME/src/dotfiles/bin:$PATH
+PATH=$HOME/src/dotfiles/bin:$PATH
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH
 
 # TODO: If a VT, run the next line:
 # setterm -powersave off -blank 0
