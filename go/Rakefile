@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+# Right now, just creates my $GOHOME directory.
+# TODO: Check if $GOPATH is in $PATH?
+
+HOME   = ENV['HOME']
+GOHOME = HOME << '/src/go'
+
+desc 'Make required directories.'
+task :make_dirs do
+  begin
+    Dir.mkdir(GOHOME)
+    puts 'Created $GOHOME directory.'
+  rescue
+    puts "Failed to create directories: #$!"
+  end
+end
+
+desc 'Setup Go workspace.'
+task :default => [:make_dirs] do
+  puts 'Need to make sure $GOPATH is on your $PATH.'
+end
