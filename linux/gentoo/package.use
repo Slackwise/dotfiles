@@ -3,6 +3,7 @@ dev-java/oracle-jdk-bin -nsplugin
 net-fs/cifs-utils ads
 net-fs/samba winbind
 net-irc/znc daemon python ssl
+net-irc/weechat ssl -guile -lua -perl -python ruby
 net-p2p/transmission -qt4 -systemd -xfs
 media-video/vlc libass matroska
 ##############################
