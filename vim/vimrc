@@ -135,29 +135,32 @@ endfunction
 
 
 " YAML SPECIFIC SETTINGS ---------------------------------------------------{{{
-autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt set filetype=yaml
-autocmd FileType yaml set textwidth=64 | set colorcolumn=65
+autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt setlocal filetype=yaml
+autocmd FileType yaml setlocal textwidth=64 colorcolumn=65
 " }}}---------------------------------
 
 
 " MARKDOWN SPECIFIC SETTINGS -----------------------------------------------{{{
-autocmd BufRead,BufNewFile *.md,*.mkd,*.mdown,*.markdown,*.markdown.txt set filetype=markdown
-autocmd FileType markdown set textwidth=64 | set colorcolumn=65
+autocmd BufRead,BufNewFile *.md,*.mmd,*.mkd,*.mdown,*.markdown,*.markdown.txt setlocal filetype=markdown
+autocmd FileType markdown setlocal textwidth=64 colorcolumn=65
 " }}}---------------------------------
 
 
 " RUBY SPECIFIC SETTINGS ---------------------------------------------------{{{
-autocmd FileType ruby,eruby set tabstop=2 | set shiftwidth=2 | set expandtab
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}---------------------------------
 
+" GO SPECIFIC SETTINGS -----------------------------------------------------{{{
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+" }}}---------------------------------
 
 " CLOJURE SPECIFIC SETTINGS ------------------------------------------------{{{
-autocmd BufRead,BufNewFile *.clj set filetype=clojure
-autocmd FileType clojure set tabstop=2 | set shiftwidth=2 | set expandtab
+autocmd BufRead,BufNewFile *.clj setlocal filetype=clojure
+autocmd FileType clojure setlocal tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
 
@@ -167,11 +170,11 @@ augroup Binary
     au!
     au BufReadPre  *.bin,*.exe let &bin=1
     au BufReadPost *.bin,*.exe if &bin | %!xxd
-    au BufReadPost *.bin,*.exe set ft=xxd | endif
+    au BufReadPost *.bin,*.exe setlocal ft=xxd | endif
     au BufWritePre *.bin,*.exe if &bin | %!xxd -r
     au BufWritePre *.bin,*.exe endif
     au BufWritePost *.bin,*.exe if &bin | %!xxd
-    au BufWritePost *.bin,*.exe set nomod | endif
+    au BufWritePost *.bin,*.exe setlocal nomod | endif
 augroup END
 " }}}---------------------------------
 
@@ -194,7 +197,7 @@ endif
 " GTK SETTINGS -------------------------------------------------------------{{{
 if has("gui_gtk")
     try
-        set guifont="DejaVu Sans Mono 10"
+        set guifont=Source\ Code\ Pro\ Semi-Bold\ 10
     endtry
 endif
 " }}}---------------------------------
@@ -207,7 +210,7 @@ if has("win32")
             set guifont=Consolas:h9:cANSI
         catch
             try
-                set guifont=DejaVu_Sans_Mono:h9:cANSI
+                set guifont=Source_Code_Pro:h9:cANSI
             endtry
         endtry
     endif
