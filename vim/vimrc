@@ -154,9 +154,11 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}---------------------------------
 
+
 " GO SPECIFIC SETTINGS -----------------------------------------------------{{{
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 " }}}---------------------------------
+
 
 " CLOJURE SPECIFIC SETTINGS ------------------------------------------------{{{
 autocmd BufRead,BufNewFile *.clj setlocal filetype=clojure
