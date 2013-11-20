@@ -182,7 +182,7 @@ augroup END
 
 
 " XTERM SETTINGS -----------------------------------------------------------{{{
-if &term=='xterm'
+if &term=='xterm' || &term=='screen'
   colorscheme slate
 endif
 " }}}---------------------------------
