@@ -42,11 +42,7 @@ rescue
 end
 
 def is_admin?
-  if ARGV.include? '--admin'
-    true
-  else
-    false
-  end
+  ARGV.include? '--admin'
 end
 
 def calling_method
