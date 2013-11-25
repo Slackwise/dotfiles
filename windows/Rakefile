@@ -1,46 +1,40 @@
 $WINDIR = ENV['WINDIR']
 $HOME   = ENV['HOME']
-WINDOWS_DOTFILES = "#$HOME\\src\\dotfiles\\windows"
+WINDOWS_DOTFILES                = "#$HOME\\src\\dotfiles\\windows"
+USER_TWEAK_REG_FILE             = "#{WINDOWS_DOTFILES}\\Win7_User_Tweaks.reg"
+SYSTEM_TWEAK_REG_FILE           = "#{WINDOWS_DOTFILES}\\Win7_System_Tweaks.reg"
 CUSTOM_LOGIN_WALLPAPER_FILENAME = "#$WINDIR\\system32\\oobe\\info\\backgrounds\\backgroundDefault.jpg"
-USER_TWEAK_REG_FILE = "#{WINDOWS_DOTFILES}\\Win7_Tweaks.reg"
-USER_TWEAK_REG_FILE = "#$HOME\\src\\dotfiles\\windows\\Win7_Tweaks.reg"
 
-def is_admin?
-  ARGV.include? '--admin'
-end
-
-#TODO: Check which tasks were selected from the command line!
-def restart_as_admin
+desc "Elevate to admin rights."
+task :get_admin do
   require 'win32ole'
   WIN32OLE.new('Shell.Application').ShellExecute(
-	'ruby.exe', File::expand_path(__FILE__) + ' --admin',
+	'ruby.exe', File::expand_path(__FILE__) << ' --admin',
 	nil, 'runas', 1)
 end
-
+  
 desc "Import registry tweaks."
-task :tweak_reg do
-  if !is_admin?
-    puts "Importing user registry tweaks..."
-    if system(%|regedit /s "#{TWEAK_REG_FILE}"|)
-      puts "Imported user successfully!"
-    else
-      puts 'Failed to import user registry tweaks file.'
-    end
-    restart_as_admin
-  else
-    if system(%|regedit /s "#{TWEAK_REG_FILE}"|)
-      puts "Imported user successfully!"
-    else
-      puts 'Failed to import user registry tweaks file.'
-    end
+task :tweak_reg => [:get_admin] do
+  puts "Importing registry tweaks..."
+  puts "Importing user registry tweaks..."
+  sh %|REG IMPORT "#{USER_TWEAK_REG_FILE}"| do |ok, res|
+    puts "Failed to import user tweaks! Exit Status: #{res.exitstatus}" if !ok
+  end
+  puts "Importing system registry tweaks..."
+  sh %|REG IMPORT "#{SYSTEM_TWEAK_REG_FILE}"| do |ok, res|
+    puts "Failed to import system tweaks! Exit Status: #{res.exitstatus}" if !ok
+  end
 end
 
-desc "Install custom desktop background."
-task :install_login_wallpaper => [:tweak_reg] do
-  FileUtils.cp(file, CUSTOM_LOGIN_WALLPAPER_FILENAME)
-rescue
-    "Failed to copy wallpaper file to Windows directory: #$!"
-end
+# desc "Install custom desktop background."
+# task :install_login_wallpaper => [:get_admin], :file do |t, args|
+#   puts "Installing custom wallpaper #{args.file}..."
+#   begin
+#     cp args.file, CUSTOM_LOGIN_WALLPAPER_FILENAME
+#   rescue
+#     "Failed to copy wallpaper file to Windows directory: #$!"
+#   end
+# end
 
 desc "Run the Win7 tweak file and nothing else."
 task :default => [:tweak_reg]
