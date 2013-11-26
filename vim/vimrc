@@ -210,10 +210,10 @@ endif
 if has("win32")
     if has("gui_win32")
         try
-            set guifont=Consolas:h9:cANSI
+            set guifont=Source_Code_Pro:h9:cANSI
         catch
             try
-                set guifont=Source_Code_Pro:h9:cANSI
+                set guifont=Consolas:h9:cANSI
             endtry
         endtry
     endif

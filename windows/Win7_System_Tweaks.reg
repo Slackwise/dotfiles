@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00
+
+; Enable custom login wallpaper: %WINDIR\system32\oobe\info\backgrounds\backgroundDefault.jpg
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background]
+"OEMBackground"=dword:00000001
