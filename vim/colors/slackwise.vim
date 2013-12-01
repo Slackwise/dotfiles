@@ -43,6 +43,31 @@ endfunction
 
 
 " COLOR DEFINITIONS --------------------------------------------------------{{{
+"                   RR
+"                  RRRR
+"                 RRRRRR
+"                RRRRRRRR
+"               RRRRRRRRRR
+"              RRRRRRRRRRRR
+"             RRRRRRRRRRRRRR
+"            RRRRRRRRRRRRRRRR
+"           RRRRRRRRRRRRRRRRRR          
+"          B                  G
+"         BBB                GGG
+"        BBBBB              GGGGG
+"       BBBBBBB            GGGGGGG
+"      BBBBBBBBB          GGGGGGGGG
+"     BBBBBBBBBBB        GGGGGGGGGGG
+"    BBBBBBBBBBBBB      GGGGGGGGGGGGG
+"   BBBBBBBBBBBBBBB    GGGGGGGGGGGGGGG
+"  BBBBBBBBBBBBBBBBB  GGGGGGGGGGGGGGGGG
+" BBBBBBBBBBBBBBBBBBBGGGGGGGGGGGGGGGGGGG
+" 
+" Red           Power           Scalars
+" Green         Courage         Functions
+" Blue          Wisdom          Keywords
+"
+"       {{ WORK IN PROGRESS }}
 " }}}----------------------------------
 
  

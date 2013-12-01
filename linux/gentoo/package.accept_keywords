@@ -1,6 +1,0 @@
-games-util/steam-meta ~amd64
-media-fonts/source-pro ~amd64
-net-p2p/transmission-remote-cli ~amd64
-www-client/google-chrome ~amd64
-www-plugins/google-talkplugin ~amd64
-x11-drivers/nvidia-drivers ~amd64
