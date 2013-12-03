@@ -21,28 +21,34 @@ set background=dark
 
 
 " UTILITY FUNCTIONS --------------------------------------------------------{{{
-command! -nargs=+ DefHi call s:defhighlight(<f-args>)
-function! s:defhighlight(...)
-    
-endfunction
-
-command! -nargs=+ Hi call s:usehighlight(<f-args>)
-function! s:usehighlight(name, ...)
-    let colour_order = ['guifg', 'guibg']
-    let command = 'hi ' . a:name
-    if (len(a:000) < 1) || (len(a:000) > (len(colour_order)))
-        echoerr "No colour or too many colours specified"
-    else
-        for i in range(0,len(a:000)-1)
-            let command . ' ' . colour_order[i] . '=' . a:000[i]
-        endfor
-        exe command
-    endif
+command! -nargs=+ Hi call s:highlight(<f-args>)
+function! s:highlight(highlight, style)
+    let command = 'hi ' . a:highlight . ' guifg=' . s:style[0] . ' ctermfg=' . s:style[1]
+    exe command
 endfunction
 " }}}----------------------------------
 
 
 " COLOR DEFINITIONS --------------------------------------------------------{{{
+"
+" Focusing on the RGB Additive color system allows me to differentiate tokens
+" faster than if I use aesthetically pleasing colors that are too similar.
+"
+" First and foremost: Syntax Highlighting is for function, not aesthetics.
+"
+let s:colors = {
+    \ 'black':          ['#000000', '#000000'],
+    \ 'white':          ['#FFFFFF', '#FFFFFF'],
+    \ 'red':            ['#FF0000', '#FF0000'],
+    \ 'green':          ['#00FF00', '#00FF00'],
+    \ 'blue':           ['#0000FF', '#0000FF'],
+    \ 'cyan':           ['#00FFFF', '#00FFFF'],
+    \ 'magenta':        ['#FF00FF', '#FF00FF'],
+    \ 'yellow':         ['#FFFF00', '#FFFF00'],
+\}
+" }}}----------------------------------
+
+" STYLE DEFINITIONS --------------------------------------------------------{{{
 "                   RR
 "                  RRRR
 "                 RRRRRR
@@ -67,7 +73,15 @@ endfunction
 " Green         Courage         Functions
 " Blue          Wisdom          Keywords
 "
+"     (Yes, I'm a huge Zelda nerd.)
+"
 "       {{ WORK IN PROGRESS }}
+"
+let s:styles = {
+    \ 'power':      s:colors.red,
+    \ 'courage':    s:colors.green,
+    \ 'wisdom':     s:colors.blue,
+\}
 " }}}----------------------------------
 
  

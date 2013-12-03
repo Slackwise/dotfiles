@@ -83,7 +83,7 @@ nmap N Nzz
 if v:version > 702 && has("syntax") | set colorcolumn=81 | endif " Highlight column 81
 set shortmess+=I        " Disable :intro
 set nowrap              " Do not wrap lines
-set linebreak           " Wrap on words when 'wrap' is set.
+"set linebreak           " Wrap on words when 'wrap' is set.
 set backup
 try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
@@ -92,7 +92,8 @@ set tabstop=4                " How many columns <Tab> counts for
 set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
 set smarttab                 " Uses shiftwidth instead of tabstop at start of lines 
 set expandtab                " Expand tabs into spaces of tabstop size
-" set textwidth=72             " Let 'gq' format text to within 72 columns (AutoCmd on syntax to 80 for code)
+set spelllang=en_us          " When spellchecking, default to English.   
+" set textwidth=72           " Let 'gq' format text to within 72 columns (AutoCmd on syntax to 80 for code)
 syntax on                    " Enable syntax highlighting
 filetype on                  " Enable filetype detection
 filetype indent on           " Enable filetype-specific indenting
@@ -143,7 +144,7 @@ autocmd FileType yaml setlocal textwidth=64 colorcolumn=65
 
 " MARKDOWN SPECIFIC SETTINGS -----------------------------------------------{{{
 autocmd BufRead,BufNewFile *.md,*.mmd,*.mkd,*.mdown,*.markdown,*.markdown.txt setlocal filetype=markdown
-autocmd FileType markdown setlocal textwidth=64 colorcolumn=65
+autocmd FileType markdown setlocal textwidth=64 colorcolumn=65 spell
 " }}}---------------------------------
 
 
