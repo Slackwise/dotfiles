@@ -43,10 +43,12 @@ endfunction
 "
 " First and foremost: Syntax Highlighting is for function, not aesthetics.
 "
+" TODO: Add backgrounds? Optionals?
 "                                   FIXME: cterm uses 8-bit integers!
 let s:colors = {
     \ 'black':          ['#000000', '#000000'],
     \ 'white':          ['#FFFFFF', '#FFFFFF'],
+    \ 'gray':           ['#333333', '#333333'],
     \ 'red':            ['#FF0000', '#FF0000'],
     \ 'green':          ['#00FF00', '#00FF00'],
     \ 'blue':           ['#0000FF', '#0000FF'],
@@ -90,6 +92,7 @@ let s:styles = {
     \ 'power':      s:colors.red,
     \ 'courage':    s:colors.green,
     \ 'wisdom':     s:colors.blue,
+    \ 'comments':   s:colors.gray,
 \}
 " }}}----------------------------------
 
@@ -99,8 +102,15 @@ let s:styles = {
 
 
 " GENERAL ------------------------------------------------------------------{{{
+hi! Normal guifg=#FFFFFF guibg=#000000
 call s:sethighlights({
+    \ 'Comment':        s:styles.comments,
     \ 'String':         s:styles.power,
+    \ 'Float':          s:styles.power,
+    \ 'Boolean':        s:styles.power,
+    \ 'Character':      s:styles.power,
+    \ 'Function':       s:styles.courage,
+    \ 'Keyword':        s:styles.wisdom,
 \})
 " }}}----------------------------------
  
