@@ -21,10 +21,17 @@ set background=dark
 
 
 " UTILITY FUNCTIONS --------------------------------------------------------{{{
-command! -nargs=+ Hi call s:highlight(<f-args>)
 function! s:highlight(highlight, style)
-    let command = 'hi ' . a:highlight . ' guifg=' . s:style[0] . ' ctermfg=' . s:style[1]
-    exe command
+    let command = 'hi ' . 
+        \ a:highlight . 
+        \ ' guifg=' . a:style[0]
+    execute command
+endfunction
+
+function! s:sethighlights(highlights)
+    for key in keys(a:highlights)
+        call s:highlight(key, a:highlights[key])
+    endfor
 endfunction
 " }}}----------------------------------
 
@@ -36,6 +43,7 @@ endfunction
 "
 " First and foremost: Syntax Highlighting is for function, not aesthetics.
 "
+"                                   FIXME: cterm uses 8-bit integers!
 let s:colors = {
     \ 'black':          ['#000000', '#000000'],
     \ 'white':          ['#FFFFFF', '#FFFFFF'],
@@ -47,6 +55,7 @@ let s:colors = {
     \ 'yellow':         ['#FFFF00', '#FFFF00'],
 \}
 " }}}----------------------------------
+
 
 " STYLE DEFINITIONS --------------------------------------------------------{{{
 "                   RR
@@ -90,6 +99,9 @@ let s:styles = {
 
 
 " GENERAL ------------------------------------------------------------------{{{
+call s:sethighlights({
+    \ 'String':         s:styles.power,
+\})
 " }}}----------------------------------
  
  
