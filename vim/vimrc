@@ -160,8 +160,8 @@ autocmd FileType ruby,eruby setlocal
 
 " PYTHON SPECIFIC SETTINGS -------------------------------------------------{{{
 autocmd FileType python setlocal 
-    \ tabstop=4 shiftwidth=4 expandtab |
-    \ textwidth=79 | " http://python.org/dev/peps/pep-0008/#maximum-line-length
+    \ tabstop=4 shiftwidth=4 expandtab
+    \ textwidth=79 " http://python.org/dev/peps/pep-0008/#maximum-line-length
     \ fileencodings=utf-8 " http://python.org/dev/peps/pep-0008/#source-file-encoding
 " }}}---------------------------------
 
