@@ -4,6 +4,9 @@
 export BASHRC_READ=true
 export DF=$HOME/src/dotfiles
 
+# Common global variables
+export EDITOR=/usr/bin/vim
+
 AM_ROOT=false
 if [ $UID == 0 ]; then
     AM_ROOT=true
