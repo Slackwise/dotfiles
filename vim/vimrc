@@ -166,6 +166,11 @@ autocmd FileType python setlocal
 " }}}---------------------------------
 
 
+" LUA SPECIFIC SETTINGS ----------------------------------------------------{{{
+autocmd FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
+" }}}---------------------------------
+
+
 " GO SPECIFIC SETTINGS -----------------------------------------------------{{{
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 " }}}---------------------------------
