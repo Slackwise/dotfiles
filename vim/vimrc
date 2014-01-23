@@ -51,6 +51,7 @@ if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     Bundle 'repeat.vim'
     Bundle 'surround.vim'
+    Bundle 'scrooloose/nerdtree'
     Bundle 'tpope/vim-commentary'
     Bundle 'tpope/vim-markdown'               
     Bundle 'VimClojure'
@@ -225,7 +226,7 @@ endif
 if has("win32")
     if has("gui_win32")
         try
-            set guifont=Source_Code_Pro:h9:cANSI
+            set guifont=Source_Code_Pro_Semibold:h9:cANSI
         catch
             try
                 set guifont=Consolas:h9:cANSI
