@@ -1,23 +1,38 @@
+BIN   = "C:\\bin"
+BINW  = File.absolute_path('binw').gsub(?/, ?\\)
+
+def dir_in_path?(dir)
+  `REG QUERY HKCU\\Environment /v Path`.sub(
+    '    Path    REG_SZ    ', '').split($/)[2].split(?;).include? dir
+end
+
+
+desc "Add #{BIN} to user %PATH%."
+task :bin do
+  # Check if binw already exists in the user path.
+  if dir_in_path? BIN
+    puts "#{BIN} already in user path."
+  else
+    # Add to user path with setx command.
+    system("setx path \"#{BIN};%PATH%\"")
+    puts "#{BIN} added to user path."
+  end
+end
 
 desc "Add binw to user %PATH%."
 task :binw do
-  # Find absolute path of binw.
-  binw = File.absolute_path('binw')
-  binw.gsub!(?/, ?\\)
-
-  # Get user path and parse into array.
-  user_path = `REG QUERY HKCU\\Environment /v Path`.sub(
-    '    Path    REG_SZ    ', '').split($/)[2].split(?;)
-          
   # Check if binw already exists in the user path.
-  if user_path.include? binw
+  if dir_in_path? BINW
     puts "binw already in user path."
   else
     # Add to user path with setx command.
-    system("setx path \"#{binw};%PATH%\"")
+    system("setx path \"#{BINW};%PATH%\"")
     puts "binw added to user path."
   end
 end
+
+desc "Setup %PATH% for Windows."
+task :setup_path => [:bin, :binw]
 
 desc "Setup Vim configuration for current user account."
 task :vim do
