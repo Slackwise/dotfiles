@@ -4,13 +4,16 @@
 export BASHRC_READ=true
 export DF=$HOME/src/dotfiles
 
+
 # Common global variables
 export EDITOR=/usr/bin/vim
+
 
 AM_ROOT=false
 if [ $UID == 0 ]; then
     AM_ROOT=true
 fi
+
 
 function command_exists
 {
@@ -21,14 +24,6 @@ function command_exists
     fi
 }
 
-# function dict
-# {
-#     if [[ $1 == (d|m) ]]; then #TODO: replace zsh match with bash
-#         curl dict://dict.org/$1:$2 | $PAGER
-#     else
-#         echo 'Unknown command. Use (d)efine or (m)atch.'
-#     fi
-# }
 
 if [ $HOSTNAME = "zwerbach" ]; then
     function http_errors
@@ -47,12 +42,15 @@ else
 	export PS1="[\H]\w\$ "
 fi
 
+
 export GOPATH="$HOME/src/go"
+
 
 PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH
+
 
 # TODO: If a VT, run the next line:
 # setterm -powersave off -blank 0
