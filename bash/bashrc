@@ -21,6 +21,15 @@ function command_exists
     fi
 }
 
+# function dict
+# {
+#     if [[ $1 == (d|m) ]]; then #TODO: replace zsh match with bash
+#         curl dict://dict.org/$1:$2 | $PAGER
+#     else
+#         echo 'Unknown command. Use (d)efine or (m)atch.'
+#     fi
+# }
+
 if [ $HOSTNAME = "zwerbach" ]; then
     function http_errors
     {
