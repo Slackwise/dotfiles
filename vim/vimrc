@@ -207,7 +207,7 @@ endif
 
 " GUI SETTINGS -------------------------------------------------------------{{{
 if has("gui_running")
-    set lines=45            " Increase default height of window
+    set lines=40            " Increase default height of window
     set guioptions-=T       " Disable toolbar in gVim
 endif
 " }}}---------------------------------
@@ -216,7 +216,7 @@ endif
 " GTK SETTINGS -------------------------------------------------------------{{{
 if has("gui_gtk")
     try
-        set guifont=Source\ Code\ Pro\ Semi-Bold\ 10
+        set guifont=M+\ 1mn\ Medium\ 9
     endtry
 endif
 " }}}---------------------------------
