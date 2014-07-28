@@ -208,7 +208,7 @@ endif
 
 " GUI SETTINGS -------------------------------------------------------------{{{
 if has("gui_running")
-    set columns=83          " Required for &relativenumber
+    set columns=84          " Required for &relativenumber
     set lines=40            " Increase default height of window
     set guioptions-=T       " Disable toolbar in gVim
 endif
