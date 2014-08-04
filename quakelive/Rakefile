@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+HOME      = ENV['HOME']
+QL_DIR    = "#{HOME}/AppData/LocalLow/id Software/quakelive"
+BASEQ3    = "{QL_DIR}/home/baseq3"
+CFGS_DIR  = "#{HOME}/src/dotfiles/quakelive"
+AUTOEXEC  = "exec slackwise/slackwise.quakelive.cfg"
+
+
+task :default do
+  `mklink /J "#{BASEQ3}/slackwise" "#{CFGS_DIR}"`
+  puts "Symlinked script directory."
+  File.open("#{BASEQ3}/autoexec.cfg", 'w+') { |f| f.puts AUTOEXEC }
+  puts "Created autoexec.cfg file."
+end
