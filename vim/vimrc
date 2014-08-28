@@ -75,6 +75,8 @@ nmap sC :call SynStack()<CR>
 nmap <F5> :w<CR>:!%<CR>
 nmap <S-Return> i<Return><Esc>
 nmap <Return> o<Esc>
+nmap <Space> i<Space><Esc>
+nmap <S-Space> a<Space><Esc>
 nmap n nzz
 nmap N Nzz
 " }}}---------------------------------
@@ -89,7 +91,7 @@ set nowrap              " Do not wrap lines
 "set linebreak           " Wrap on words when 'wrap' is set.
 set relativenumber          " Turns on relative-to-current-line numbering.
 set backup
-try | colorscheme hemisu | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
+try | colorscheme slackwise | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
 set tabstop=4                " How many columns <Tab> counts for
 " set softtabstop=4          " Causes backspace to delete X spaces

@@ -24,7 +24,8 @@ set background=dark
 function! s:highlight(highlight, style)
     let command = 'hi ' . 
         \ a:highlight . 
-        \ ' guifg=' . a:style[0]
+        \ ' guifg=' . a:style[0] .
+        \ ' gui=NONE'
     execute command
 endfunction
 
@@ -37,62 +38,46 @@ endfunction
 
 
 " COLOR DEFINITIONS --------------------------------------------------------{{{
-"
-" Focusing on the RGB Additive color system allows me to differentiate tokens
-" faster than if I use aesthetically pleasing colors that are too similar.
-"
-" First and foremost: Syntax Highlighting is for function, not aesthetics.
+" 
+" Colors adapted from Google's Material specs:
+"   http://www.google.com/design/spec/style/color.html
 "
 " TODO: Add backgrounds? Optionals?
 "                                   FIXME: cterm uses 8-bit integers!
 let s:colors = {
-    \ 'black':          ['#000000', '#000000'],
-    \ 'white':          ['#FFFFFF', '#FFFFFF'],
-    \ 'gray':           ['#333333', '#333333'],
-    \ 'red':            ['#FF0000', '#FF0000'],
-    \ 'green':          ['#00FF00', '#00FF00'],
-    \ 'blue':           ['#0000FF', '#0000FF'],
-    \ 'cyan':           ['#00FFFF', '#00FFFF'],
-    \ 'magenta':        ['#FF00FF', '#FF00FF'],
-    \ 'yellow':         ['#FFFF00', '#FFFF00'],
+    \ 'black':          ['#050505'],
+    \ 'white':          ['#FFFBFF'],
+    \ 'grey':           ['#9e9e9e'],
+    \ 'red':            ['#e51c23'],
+    \ 'green':          ['#259b24'],
+    \ 'blue':           ['#5677fc'],
+    \ 'pink':           ['#e91e63'],
+    \ 'purple':         ['#9c27b0'],
+    \ 'deeppurple':     ['#673ab7'],
+    \ 'indigo':         ['#3f51b5'],
+    \ 'lightblue':      ['#03a9f4'],
+    \ 'lightgreen':     ['#8bc34a'],
+    \ 'lime':           ['#cddc39'],
+    \ 'cyan':           ['#00bcd4'],
+    \ 'teal':           ['#009688'],
+    \ 'yellow':         ['#ffeb3b'],
+    \ 'amber':          ['#ffc107'],
+    \ 'orange':         ['#ff9800'],
+    \ 'deeporange':     ['#ff5722'],
+    \ 'brown':          ['#795548'],
+    \ 'bluegrey':       ['#607d8b']
 \}
 " }}}----------------------------------
 
 
 " STYLE DEFINITIONS --------------------------------------------------------{{{
-"                   RR
-"                  RRRR
-"                 RRRRRR
-"                RRRRRRRR
-"               RRRRRRRRRR
-"              RRRRRRRRRRRR
-"             RRRRRRRRRRRRRR
-"            RRRRRRRRRRRRRRRR
-"           RRRRRRRRRRRRRRRRRR          
-"          B                  G
-"         BBB                GGG
-"        BBBBB              GGGGG
-"       BBBBBBB            GGGGGGG
-"      BBBBBBBBB          GGGGGGGGG
-"     BBBBBBBBBBB        GGGGGGGGGGG
-"    BBBBBBBBBBBBB      GGGGGGGGGGGGG
-"   BBBBBBBBBBBBBBB    GGGGGGGGGGGGGGG
-"  BBBBBBBBBBBBBBBBB  GGGGGGGGGGGGGGGGG
-" BBBBBBBBBBBBBBBBBBBGGGGGGGGGGGGGGGGGGG
-" 
-" Red           Power           Scalars
-" Green         Courage         Functions
-" Blue          Wisdom          Keywords
-"
-"     (Yes, I'm a huge Zelda nerd.)
-"
-"       {{ WORK IN PROGRESS }}
-"
 let s:styles = {
-    \ 'power':      s:colors.red,
-    \ 'courage':    s:colors.green,
-    \ 'wisdom':     s:colors.blue,
-    \ 'comments':   s:colors.gray,
+    \ 'whiteish':     s:colors.white,
+    \ 'greyish':      s:colors.grey,
+    \ 'cautionish':   s:colors.red,
+    \ 'execish':      s:colors.green,
+    \ 'constantish':  s:colors.blue,
+    \ 'commentish':   s:colors.grey,
 \}
 " }}}----------------------------------
 
@@ -102,15 +87,27 @@ let s:styles = {
 
 
 " GENERAL ------------------------------------------------------------------{{{
-hi! Normal guifg=#FFFFFF guibg=#000000
+let s:fgbg = 'hi Normal guifg=' . s:colors.white[0] . ' guibg=' . s:colors.black[0]
+exec s:fgbg
 call s:sethighlights({
-    \ 'Comment':        s:styles.comments,
-    \ 'String':         s:styles.power,
-    \ 'Float':          s:styles.power,
-    \ 'Boolean':        s:styles.power,
-    \ 'Character':      s:styles.power,
-    \ 'Function':       s:styles.courage,
-    \ 'Keyword':        s:styles.wisdom,
+    \ 'Comment':        s:styles.commentish,
+    \ 'String':         s:styles.cautionish,
+    \ 'Float':          s:styles.cautionish,
+    \ 'Number':         s:styles.cautionish,
+    \ 'Boolean':        s:styles.constantish,
+    \ 'Character':      s:styles.cautionish,
+    \ 'Function':       s:styles.execish,
+    \ 'Keyword':        s:styles.constantish,
+    \ 'PreProc':        s:styles.whiteish,
+    \ 'Identifier':     s:styles.whiteish,
+    \ 'Delimiter':      s:styles.whiteish,
+    \ 'Statement':      s:styles.whiteish,
+    \ 'Constant':       s:styles.constantish,
+    \ 'Special':        s:styles.constantish,
+    \ 'Type':           s:styles.constantish,
+    \ 'FoldColumn':     s:styles.greyish,
+    \ 'SignColumn':     s:styles.greyish,
+    \ 'LineNr':         s:styles.greyish,
 \})
 " }}}----------------------------------
  
