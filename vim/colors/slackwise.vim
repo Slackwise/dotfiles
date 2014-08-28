@@ -98,7 +98,7 @@ call s:sethighlights({
     \ 'Character':      s:styles.cautionish,
     \ 'Function':       s:styles.execish,
     \ 'Keyword':        s:styles.constantish,
-    \ 'PreProc':        s:styles.whiteish,
+    \ 'PreProc':        s:styles.constantish,
     \ 'Identifier':     s:styles.whiteish,
     \ 'Delimiter':      s:styles.whiteish,
     \ 'Statement':      s:styles.whiteish,
