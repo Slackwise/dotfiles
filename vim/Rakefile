@@ -7,7 +7,7 @@ HOME      = ENV['HOME']
 VIM_HOME  = HOME + '/src/dotfiles/vim/'
 VIMRC     = VIM_HOME + 'vimrc'
 VIMDIR    = HOME + '/.vim/'
-VUNDLE    = 'https://github.com/gmarik/vundle.git'
+VUNDLE    = "https://github.com/gmarik/vundle.git"
 
 WIN_VIMRC = <<WIN_VIMRC_END
 let $MYVIMRC="~/src/dotfiles/vim/vimrc"
@@ -20,49 +20,34 @@ end
 
 def windows_setup
   # Install a redirecting vimrc file in $HOME.
-  begin # FIXME: Getting a permission error.
+  begin
     File.open(HOME + '/_vimrc', 'w+') do |f|
       f.puts WIN_VIMRC
     end
-    puts 'Created _vimrc.'
+    puts "Created _vimrc."
   rescue
     puts "Failed to create _vimrc:\n#$!"
   end
 
-  puts 'Setup complete'
-  puts 'Closing automatically in 10 seconds...'
+  puts "Setup complete"
+  puts "Closing automatically in 10 seconds..."
   sleep 10
 end
 
-def nixie_setup
+def nix_setup
   File.symlink(VIMRC, HOME + '/.vimrc')
-  puts 'Symlinked vimrc file.'
+  puts "Symlinked vimrc file."
 rescue
   puts "vimrc symlink failed: #$!"
 end
 
-def is_admin?
-  ARGV.include? '--admin'
-end
-
-def calling_method
-  caller[-2].match(/`(\w+)'$/)[1]
-end
-
-def restart_as_admin
-  require 'win32ole'
-  WIN32OLE.new('Shell.Application').ShellExecute(
-	'ruby.exe', File::expand_path(__FILE__) + ' --admin',
-	nil, 'runas', 1)
-end
-
-desc 'Make required directories.'
+desc "Make required directories."
 task :make_dirs do
   begin
     Dir.mkdir(VIMDIR)
     Dir.mkdir(VIMDIR + 'swap')
     Dir.mkdir(VIMDIR + 'backup')
-    puts 'Created Vim directories.'
+    puts "Created Vim directories."
   rescue
     puts "Failed to create directories: #$!"
   end
@@ -70,22 +55,21 @@ end
 
 desc "Install Vundle and Vundle'd plugins."
 task :vundle do
-  # FIXME: Find or setup Git for Windows. I don't know. :(
   # Do initial Vundle repo clone.
   unless File.exists? "#{HOME}/.vim/bundle/vundle/.git/"
     if system(%|git clone #{VUNDLE} "#{HOME}/.vim/bundle/vundle"|)
-      puts 'Succesfully cloned Vundle repo.'
+      puts "Succesfully cloned Vundle repo."
     else
-      puts 'Failed to clone Vundle repo!'
+      puts "Failed to clone Vundle repo!"
       sleep 30
       exit 1
     end
   else
-    puts 'Vundle appears to already be installed.'
+    puts "Vundle appears to already be installed."
   end
 end
 
-desc 'Clean up all Vim configuration files.'
+desc "Clean up all Vim configuration files."
 task :clean do
   if is_windows?
     prefix = ?_
@@ -97,11 +81,11 @@ task :clean do
   FileUtils.rm("#{HOME}/#{prefix}viminfo")
 end
 
-desc 'Install Vim config.'
+desc "Install Vim config."
 task :default => [:make_dirs] do
   if is_windows?
     windows_setup
   else
-    nixie_setup
+    nix_setup
   end
 end
