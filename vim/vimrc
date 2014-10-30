@@ -54,7 +54,7 @@ if exists("*vundle#rc")
     Bundle 'splitjoin.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'tpope/vim-commentary'
-    Bundle 'tpope/vim-markdown'               
+    Bundle 'tpope/vim-markdown'
     Bundle 'VimClojure'
     " Bundle 'tpope/fugitive'
     " Bundle 'colornames'
@@ -93,7 +93,7 @@ set relativenumber          " Turns on relative-to-current-line numbering.
 set backup
 try | colorscheme slackwise | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
-set list lcs=trail:·,tab:»·  " Added visibility for unwanted whitespace chars.
+" set list lcs=trail:·,tab:»·  " Added visibility for unwanted whitespace chars.
 set tabstop=4                " How many columns <Tab> counts for
 " set softtabstop=4          " Causes backspace to delete X spaces
 set shiftwidth=4             " Number of spaces to use for each step of (auto)indent
