@@ -11,8 +11,7 @@
 "       #######################
 
 
-" NOTES
-" --------------------------------------------------------------------------{{{
+" NOTES ---------------------------------------------------------------------{{{
 " RFC2822 'Internet Message Format' requires no more than 78 character long
 " lines, but RFC1855 'Netiquette Guidelines' says you should limit line
 " length to fewer than 65 to handle various clients as well as '> ' style
