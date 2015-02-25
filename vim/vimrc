@@ -51,6 +51,7 @@ if exists("*vundle#rc")
     Bundle 'repeat.vim'
     Bundle 'surround.vim'
     Bundle 'splitjoin.vim'
+    Bundle 'guns/vim-sexp'
     Bundle 'scrooloose/nerdtree'
     Bundle 'tpope/vim-commentary'
     Bundle 'tpope/vim-markdown'
