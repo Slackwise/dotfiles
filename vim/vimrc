@@ -56,6 +56,7 @@ if exists("*vundle#rc")
     Bundle 'tpope/vim-sexp-mappings-for-regular-people'
     Bundle 'guns/vim-sexp'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'godlygeek/tabular'
     " Bundle 'tpope/fugitive'
     " Bundle 'colornames'
     " Bundle 'yurifury/hexHighlight'
