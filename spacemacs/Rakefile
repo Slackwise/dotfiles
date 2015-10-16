@@ -3,12 +3,13 @@
 require 'pathname'
 
 HOME = Pathname(ENV['HOME'])
-SPACEMACS_LOCAL_DIR = HOME + '.spacemacs'
-SPACEMACS_LOCAL_WIN_TEMP_DIR = HOME + '__.spacemacs'
+SPACEMACS_LOCAL_DIR = HOME + '.spacemacs.d'
 SPACEMACS_DOTFILES_DIR = Pathname(__dir__)
-GIT_CLONE_CMD = %|git clone --recursive https://github.com/syl20bnr/spacemacs "#{HOME + 'emacs.d'}"|
+SPACEMACS_GIT_DIR = HOME + '.emacs.d'
+GIT_CLONE_CMD = %|git clone --recursive https://github.com/syl20bnr/spacemacs "#{SPACEMACS_GIT_DIR}"|
+MKLINK_CMD = %|CMD /C MKLINK /D "#{SPACEMACS_LOCAL_DIR.expand_path}" "#{SPACEMACS_DOTFILES_DIR.expand_path}"|
 
-def is_windows?
+def windows?
   RUBY_PLATFORM.match(/mswin/) || RUBY_PLATFORM.match(/mingw32/)
 end
 
@@ -19,21 +20,21 @@ task :git_clone do
   else
     puts "Failed to git-clone Spacemacs!"
     exit 1
+  end
 end
 
 desc "Fix Windows folder owner permissions."
-task :fix_win_perms do
-  if is_windows?
-  #TODO: Change owner of ~/emacs.d and children to self.
+task :fix_win_perms => [:git_clone] do
+  if windows?
+    #TODO: Change owner of ~/emacs.d and children to self.
   end
 end
 
 desc "Link Spacemacs directory."
 task :link_dirs do
   begin
-    if is_windows?
-      raise "Windows MKLINK failed" unless system(%|MKLINK /D "#{SPACEMACS_LOCAL_WIN_TEMP_DIR.expand_path}" "#{SPACEMACS_DOTFILES_DIR.expand_path}"|)
-      File.mv(SPACEMACS_LOCAL_WIN_TEMP_DIR.expand_path, SPACEMACS_LOCAL_DIR.expand_path)
+    if windows?
+      raise "Windows MKLINK failed" unless system(MKLINK_CMD)
     else
       File.symlink(SPACEMACS_DOTFILES_DIR.expand_path, SPACEMACS_LOCAL_DIR.expand_path)
     end
@@ -44,6 +45,6 @@ task :link_dirs do
 end
 
 desc "Install Spacemacs."
-task :default => [:git_clone, :fix_win_perms, :link_dirs] do
+task :default => [:fix_win_perms, :link_dirs] do
   puts "Spacemacs successfully installed."
 end

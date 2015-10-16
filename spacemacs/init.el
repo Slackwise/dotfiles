@@ -63,7 +63,7 @@ values."
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
    ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -188,9 +188,9 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-    (setq custom-file "~/.spacemacs-custom.el")
-    (load custom-file)
-  )
+   (setq-default custom-file "~/.spacemacs-custom.el")
+   (when (file-exists-p custom-file) (load custom-file))
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
