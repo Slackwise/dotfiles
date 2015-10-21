@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+HOME = Pathname(ENV['HOME'])
+EMACS_LOCAL_DIR = HOME + '.emacs.d'
+EMACS_DOTFILES_DIR = Pathname(__dir__)
+MKLINK_CMD = %|CMD /C MKLINK /D "#{EMACS_LOCAL_DIR.expand_path}" "#{EMACS_DOTFILES_DIR.expand_path}"|
+
+def windows?
+  RUBY_PLATFORM.match(/mswin/) || RUBY_PLATFORM.match(/mingw32/)
+end
+
+desc "Install Emacs."
+task :install_emacs do
+  #TODO
+  if windows?
+    raise NotImplementedError.new("Not done coding the Windows install.")
+  else
+    # Check for various Linux distros, and later, OSX.
+    raise NotImplementedError.new("Not done coding the nix package install commands.")
+  end
+end
+
+desc "Symlink Emacs directory."
+task :link_dirs do
+  begin
+    if windows?
+      raise "Windows MKLINK failed" unless system(MKLINK_CMD)
+    else
+      File.symlink(EMACS_DOTFILES_DIR.expand_path, EMACS_LOCAL_DIR.expand_path)
+    end
+  rescue
+    puts "Failed to symlink ~/.emacs.d: #$!"
+    exit 1
+  end
+end
+
+desc "Install and configure Emacs."
+task :default => [:install_emacs, :link_dirs] do
+  puts "Emacs successfully installed."
+end
