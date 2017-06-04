@@ -4,3 +4,6 @@ slashdot.org##.deals-wrapper
 slashdot.org##iframe[id^=bz-lf]
 slashdot.org##article:has(div.ntv-sponsored-disclaimer)
 slashdot.org###announcement:has(strong):has-text(/DEAL:/)
+
+! Hide the awful "Please log into Facebook" overlay
+www.facebook.com###headerArea > div
