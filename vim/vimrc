@@ -154,6 +154,10 @@ autocmd BufRead,BufNewFile *.md,*.mmd,*.mkd,*.mdown,*.markdown,*.markdown.txt se
 autocmd FileType markdown setlocal textwidth=64 colorcolumn=65 spell
 " }}}---------------------------------
 
+" SHELL SPECIFIC SETTINGS --------------------------------------------------{{{
+autocmd FileType sh,bash setlocal 
+    \ tabstop=2 shiftwidth=2 expandtab
+" }}}---------------------------------
 
 " RUBY SPECIFIC SETTINGS ---------------------------------------------------{{{
 autocmd FileType ruby,eruby setlocal
@@ -223,7 +227,7 @@ endif
 " GTK SETTINGS -------------------------------------------------------------{{{
 if has("gui_gtk")
     try
-        set guifont=M+\ 1mn\ Medium\ 9
+        set guifont=Inconsolata\ Medium\ 16
     endtry
 endif
 " }}}---------------------------------
@@ -233,11 +237,7 @@ endif
 if has("win32")
     if has("gui_win32")
         try
-            set guifont=@M+_1mn_medium:h9:cANSI
-        catch
-            try
-                set guifont=Consolas:h9:cANSI
-            endtry
+            set guifont=Consolas:h14:cANSI
         endtry
     endif
 

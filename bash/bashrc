@@ -1,56 +1,117 @@
 #!/bin/sh
+# vim: fdm=marker
+#set -euo pipefail # For actual scripts, refuse failure!
 
-# Some utility variables
-export BASHRC_READ=true
-export DF=$HOME/src/dotfiles
+# use [[ over test or [. Rationale: https://google.github.io/styleguide/shell.xml?showone=Test,_%5B_and_%5B%5B#Test,_%5B_and_%5B%5B
 
 
-# Common global variables
+# SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
+debug_mode=true
+function debug
+{
+  $debug_mode && echo "[DEBUG] $1"
+}
+debug "DEBUG MODE ON"
+#----------------------------------------------------------------------------}}}
+
+# GLOBAL UTILITY VARIABLES --------------------------------------------------{{{
+export LAMBDA=$'\u03BB'
 export EDITOR=/usr/bin/vim
+export DOTFILES=$HOME/src/dotfiles
+debug "Global variables read."
+#----------------------------------------------------------------------------}}}
 
-
-AM_ROOT=false
-if [ $UID == 0 ]; then
-    AM_ROOT=true
-fi
-
-
+# GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
 function command_exists
 {
-    if command -v $1 >/dev/null; then
-        return 0
-    else
-        return 1
-    fi
+  if command -v $1 >/dev/null; then
+    return 0
+  else
+    return 1
+  fi
 }
 
+dreamhost_shared_hostname="elmonica"
+if [[ $HOSTNAME == $dreamhost_shared_hostname ]]; then
+  function http_errors
+  {
+    tail -n 50 -f "$HOME/logs/$1/http/error.log"
+  }
+fi
+debug "Global functions read."
+#----------------------------------------------------------------------------}}}
 
-if [ $HOSTNAME = "zwerbach" ]; then
-    function http_errors
-    {
-        tail -n 50 -f "$HOME/logs/$1/http/error.log"
-    }
+
+# LOCAL UTILITY VARIABLES ---------------------------------------------------{{{
+if [[ $UID == 0 ]]; then
+  is_root_user=true
 fi
 
-
-# If connected to a machine via SSH, show the hostname:
 if [[ -n "$SSH_CONNECTION" ]]; then
-	# Local
-	export PS1="\w\$ "
-else
-	# Remote
-	export PS1="[\H]\w\$ "
+  is_ssh_connection=true
 fi
 
+if [[ $LANG == "en_US.UTF-8" ]]; then
+  is_unicode_term=true
+fi
+white_on_red="\[\e[41m\]"
+green="\[\e[32m\]"
+color_end="\[\e[m\]"
+debug "Local variables read."
+#----------------------------------------------------------------------------}}}
 
-export GOPATH="$HOME/src/go"
+
+# BUILD UP A CUSTOM PROMPT --------------------------------------------------{{{
+export PS1=""
+function P
+{
+  export PS1=$PS1$1
+}
+# If root, highlight in bright red:
+if [[ $is_root_user ]]; then P $white_on_red; fi
+# If connected to a machine via SSH, show the hostname:
+if [[ $is_ssh_connection ]]; then
+  P "[\H]"
+fi
+P "\w" # Add full working directory
+
+if [[ $is_unicode_term ]]; then
+  P $green$LAMBDA$color_end
+else
+  P "$green\$$color_end"
+fi
+P " "
+if [[ $is_root_user ]]; then P $color_end; fi
+unset -f P # Remove our temporary utility function
+debug "Prompt created."
+#----------------------------------------------------------------------------}}}
 
 
-PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export PATH
-
-
+# CONSOLE CONFIG ------------------------------------------------------------{{{
 # TODO: If a VT, run the next line:
 # setterm -powersave off -blank 0
+debug "Console config loaded."
+#----------------------------------------------------------------------------}}}
+
+
+# GUIX CONFIG ---------------------------------------------------------------{{{
+export GUIX_PROFILE=$HOME/.guix-profile
+export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
+export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
+source $GUIX_PROFILE/etc/profile
+debug "Guix config loaded."
+#----------------------------------------------------------------------------}}}
+
+
+# RVM CONFIG ----------------------------------------------------------------{{{
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+debug "RVM config loaded."
+#----------------------------------------------------------------------------}}}
+
+
+# My personal PATH additions, which must precede all others:
+export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
+
+export Sw_BASHRC_READ=true # To know that my personal bashrc was read fully!
+debug "bashrc finished processing."
