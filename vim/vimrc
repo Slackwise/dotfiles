@@ -239,6 +239,13 @@ if has("win32")
         try
             set guifont=Consolas:h14:cANSI
         endtry
+        " try
+        "     set guifont=@M+_1mn_medium:h9:cANSI
+        " catch
+            " try
+                set guifont=Consolas:h10:cANSI
+            " endtry
+        " endtry
     endif
 
     if &term == "win32" " Check if in CMD.COM, which colors suck.

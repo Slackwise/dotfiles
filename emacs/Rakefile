@@ -29,6 +29,7 @@ task :link_dirs do
       raise "Windows MKLINK failed" unless system(MKLINK_CMD)
     else
       File.symlink(EMACS_DOTFILES_DIR.expand_path, EMACS_LOCAL_DIR.expand_path)
+      puts "Symlinked emacs directories!"
     end
   rescue
     puts "Failed to symlink ~/.emacs.d: #$!"

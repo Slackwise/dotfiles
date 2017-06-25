@@ -6,6 +6,6 @@ slashdot.org##iframe[id^=bz-lf]
 slashdot.org##article:has(div.ntv-sponsored-disclaimer)
 slashdot.org###announcement:has(strong):has-text(/DEAL:/)
 
-! Facebook - Login overlay
-www.facebook.com###u_0_0
-www.facebook.com###u_0_3
+! Hide the awful "Please log into Facebook" overlay
+! Hide Facebook login overlay
+www.facebook.com###headerArea > div
