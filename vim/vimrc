@@ -159,6 +159,11 @@ autocmd FileType sh,bash setlocal
     \ tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
+" SHELL SPECIFIC SETTINGS --------------------------------------------------{{{
+autocmd FileType html setlocal 
+    \ tabstop=2 shiftwidth=2 expandtab
+" }}}---------------------------------
+
 " RUBY SPECIFIC SETTINGS ---------------------------------------------------{{{
 autocmd FileType ruby,eruby setlocal
     \ tabstop=2 shiftwidth=2 expandtab fileencodings=utf-8 " http://github.com/bbatsov/ruby-style-guide#source-code-layout
