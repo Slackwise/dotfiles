@@ -6,7 +6,7 @@
 
 
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
-debug_mode=true
+debug_mode=false
 function debug
 {
   $debug_mode && echo "[DEBUG] $1"

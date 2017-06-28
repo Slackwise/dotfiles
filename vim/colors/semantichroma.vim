@@ -1,9 +1,10 @@
 " vim: fdm=marker
 "  Author:      Adam Flanczewski <http://slackwi.se>
-"  Description: IANADesigner, so this is just a colorscheme I will be adding
-"               to as I continue to work on it.
-
-
+"  Description: This is a colorscheme based on Western color semantics,
+"               such as red symbolizing 'bad', yellow symbolizing 'warning',
+"               and green symbolizing 'good'.
+"
+"
 "       #######################
 "       ### Lost? Press zR ####
 "       #######################
@@ -15,7 +16,7 @@ hi clear
 if exists("syntax_on")
 	syntax reset
 endif
-let g:colors_name = "slackwise"
+let g:colors_name = "semantichroma"
 set background=dark
 " }}}----------------------------------
 
