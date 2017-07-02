@@ -91,7 +91,7 @@ set nowrap              " Do not wrap lines
 "set linebreak           " Wrap on words when 'wrap' is set.
 set relativenumber          " Turns on relative-to-current-line numbering.
 set backup
-try | colorscheme slackwise | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
+try | colorscheme semantichroma | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
 " set list lcs=trail:·,tab:»·  " Added visibility for unwanted whitespace chars.
 set tabstop=4                " How many columns <Tab> counts for
