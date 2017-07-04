@@ -54,9 +54,13 @@ fi
 if [[ $LANG == "en_US.UTF-8" ]]; then
   is_unicode_term=true
 fi
+
+# Color Escapes
 white_on_red="\[\e[41m\]"
 green="\[\e[32m\]"
-color_end="\[\e[m\]"
+blue="\[\e[34m\]"
+neutre="\[\e[m\]" # Reset to neutral color
+
 debug "Local variables read."
 #----------------------------------------------------------------------------}}}
 
@@ -67,21 +71,30 @@ function P
 {
   export PS1=$PS1$1
 }
+
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then P $white_on_red; fi
+
+if [[ "$USER" != "slackwise" ]]; then P "$blue\u$neutre"; fi
+
+
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
-  P "[\H]"
+  P "$blue@\H$neutre"
 fi
+
 P "\w" # Add full working directory
 
 if [[ $is_unicode_term ]]; then
-  P $green$LAMBDA$color_end
+  P $green$LAMBDA$neutre
 else
-  P "$green\$$color_end"
+  P "$green\$$neutre"
 fi
+
 P " "
-if [[ $is_root_user ]]; then P $color_end; fi
+
+if [[ $is_root_user ]]; then P $neutre; fi
+
 unset -f P # Remove our temporary utility function
 debug "Prompt created."
 #----------------------------------------------------------------------------}}}
