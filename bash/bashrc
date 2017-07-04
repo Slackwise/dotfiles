@@ -11,7 +11,7 @@ function debug
 {
   $debug_mode && echo "[DEBUG] $1"
 }
-debug "DEBUG MODE ON"
+debug "[BASHRC DEBUG MODE ON]"
 #----------------------------------------------------------------------------}}}
 
 # GLOBAL UTILITY VARIABLES --------------------------------------------------{{{
@@ -91,7 +91,7 @@ else
   P "$green\$$neutre"
 fi
 
-P " "
+P " " # Add a trailing blank to give space for commands
 
 if [[ $is_root_user ]]; then P $neutre; fi
 
@@ -108,10 +108,13 @@ debug "Console config loaded."
 
 
 # GUIX CONFIG ---------------------------------------------------------------{{{
-export GUIX_PROFILE=$HOME/.guix-profile
-export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
-export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
-source $GUIX_PROFILE/etc/profile
+GUIX_PROFILE=$HOME/.guix-profile
+if [[ -a %GUIX_PROFILE ]]; then
+  export $GUIX_PROFILE
+  export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
+  export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
+  source $GUIX_PROFILE/etc/profile
+fi
 debug "Guix config loaded."
 #----------------------------------------------------------------------------}}}
 
