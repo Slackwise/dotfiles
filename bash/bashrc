@@ -58,7 +58,7 @@ fi
 # Color Escapes
 white_on_red="\[\e[41m\]"
 green="\[\e[32m\]"
-blue="\[\e[34m\]"
+cyan="\[\e[36m\]"
 neutre="\[\e[m\]" # Reset to neutral color
 
 debug "Local variables read."
@@ -75,12 +75,12 @@ function P
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then P $white_on_red; fi
 
-if [[ "$USER" != "slackwise" ]]; then P "$blue\u$neutre"; fi
+if [[ "$USER" != "slackwise" ]]; then P "$cyan\u$neutre"; fi
 
 
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
-  P "$blue@\H$neutre"
+  P "$cyan@\H$neutre"
 fi
 
 P "\w" # Add full working directory
