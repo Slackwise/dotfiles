@@ -1,24 +1,25 @@
 #!/bin/sh
 # vim: fdm=marker
+
 #set -euo pipefail # For actual scripts, refuse failure!
 
-# use [[ over test or [. Rationale: https://google.github.io/styleguide/shell.xml?showone=Test,_%5B_and_%5B%5B#Test,_%5B_and_%5B%5B
+# use [[ over test or [ commands. Rationale: https://google.github.io/styleguide/shell.xml?showone=Test,_%5B_and_%5B%5B#Test,_%5B_and_%5B%5B
 
 
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
 debug_mode=false
 function debug
 {
-  $debug_mode && echo "[DEBUG] $1"
+  $debug_mode && echo "[BASHRC DEBUG] $1"
 }
-debug "[BASHRC DEBUG MODE ON]"
+debug "Starting bashrc debugging..."
 #----------------------------------------------------------------------------}}}
 
 # GLOBAL UTILITY VARIABLES --------------------------------------------------{{{
 export LAMBDA=$'\u03BB'
 export EDITOR=/usr/bin/vim
 export DOTFILES=$HOME/src/dotfiles
-debug "Global variables read."
+debug "Global variables exported."
 #----------------------------------------------------------------------------}}}
 
 # GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
@@ -131,3 +132,4 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
 export Sw_BASHRC_READ=true # To know that my personal bashrc was read fully!
 debug "bashrc finished processing."
+unset -f debug
