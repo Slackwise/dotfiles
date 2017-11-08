@@ -11,7 +11,7 @@
 "       #######################
 
 
-" NOTES ---------------------------------------------------------------------{{{
+" NOTES ------------------------------------------------------------------{{{
 " RFC2822 'Internet Message Format' requires no more than 78 character long
 " lines, but RFC1855 'Netiquette Guidelines' says you should limit line
 " length to fewer than 65 to handle various clients as well as '> ' style
@@ -22,7 +22,7 @@
 " }}}---------------------------------
 
 
-" INITALIZATION ------------------------------------------------------------{{{
+" INITALIZATION ----------------------------------------------------------{{{
 source $VIMRUNTIME/vimrc_example.vim    " Has some good defaults that I am now
                                         " used to.
 source $VIMRUNTIME/mswin.vim            " Always behave Windows-like, because
@@ -39,7 +39,7 @@ let &viminfo = $VIMDIR . "viminfo"
 " }}}---------------------------------
 
 
-" PLUGIN CONFIGURATION -----------------------------------------------------{{{
+" PLUGIN CONFIGURATION ---------------------------------------------------{{{
 try
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
@@ -65,7 +65,7 @@ endif
 " }}}---------------------------------
 
 
-" CUSTOM KEYBINDINGS -------------------------------------------------------{{{
+" CUSTOM KEYBINDINGS -----------------------------------------------------{{{
 " I never use 's' for anything I'd rather us 'c' for, so I've decided to use
 " it for my own personal scripts and utilities.
 nmap ss .
@@ -83,7 +83,7 @@ nmap N Nzz
 " }}}---------------------------------
 
 
-" BASE SETTINGS ------------------------------------------------------------{{{
+" BASE SETTINGS ----------------------------------------------------------{{{
 "if $USERDOMAIN == "MILLNET" | set guioptions+=b | endif
 if v:version > 702 && has("syntax") | set colorcolumn=81 | endif " Highlight column 81
 set mouse=a
@@ -110,7 +110,7 @@ filetype plugin on           " Enable filetype-specific plugins
 " }}}---------------------------------
 
 
-" UTILITY FUNCTIONS --------------------------------------------------------{{{
+" UTILITY FUNCTIONS ------------------------------------------------------{{{
 function FindInPath(filename)
     let paths = split($PATH, has("win32") ? ';' : ':')
     for path in paths
@@ -144,28 +144,33 @@ endfunction
 " }}}---------------------------------
 
 
-" YAML SPECIFIC SETTINGS ---------------------------------------------------{{{
+" YAML SPECIFIC SETTINGS -------------------------------------------------{{{
 autocmd BufRead,BufNewFile *.yml,*.yaml,*.yaml.txt setlocal filetype=yaml
 autocmd FileType yaml setlocal textwidth=64 colorcolumn=65
 " }}}---------------------------------
 
 
-" MARKDOWN SPECIFIC SETTINGS -----------------------------------------------{{{
+" MARKDOWN SPECIFIC SETTINGS ---------------------------------------------{{{
 autocmd BufRead,BufNewFile *.md,*.mmd,*.mkd,*.mdown,*.markdown,*.markdown.txt setlocal filetype=markdown
 autocmd FileType markdown setlocal textwidth=64 colorcolumn=65 spell
 " }}}---------------------------------
 
-" SHELL SPECIFIC SETTINGS --------------------------------------------------{{{
+" SHELL SPECIFIC SETTINGS ------------------------------------------------{{{
 autocmd FileType sh,bash setlocal 
     \ tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
-" SHELL SPECIFIC SETTINGS --------------------------------------------------{{{
+" HTML SPECIFIC SETTINGS -------------------------------------------------{{{
 autocmd FileType html setlocal 
     \ tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
-" RUBY SPECIFIC SETTINGS ---------------------------------------------------{{{
+" JAVASCRIPT SPECIFIC SETTINGS -------------------------------------------{{{
+autocmd FileType javascript setlocal 
+    \ tabstop=2 shiftwidth=2 expandtab
+" }}}---------------------------------
+
+" RUBY SPECIFIC SETTINGS -------------------------------------------------{{{
 autocmd FileType ruby,eruby setlocal
     \ tabstop=2 shiftwidth=2 expandtab fileencodings=utf-8 " http://github.com/bbatsov/ruby-style-guide#source-code-layout
     \ omnifunc=rubycomplete#Complete |
@@ -175,7 +180,7 @@ autocmd FileType ruby,eruby setlocal
 " }}}---------------------------------
 
 
-" PYTHON SPECIFIC SETTINGS -------------------------------------------------{{{
+" PYTHON SPECIFIC SETTINGS -----------------------------------------------{{{
 autocmd FileType python setlocal 
     \ tabstop=4 shiftwidth=4 expandtab
     \ textwidth=79 " http://python.org/dev/peps/pep-0008/#maximum-line-length
@@ -183,23 +188,23 @@ autocmd FileType python setlocal
 " }}}---------------------------------
 
 
-" LUA SPECIFIC SETTINGS ----------------------------------------------------{{{
+" LUA SPECIFIC SETTINGS --------------------------------------------------{{{
 autocmd FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
 
-" GO SPECIFIC SETTINGS -----------------------------------------------------{{{
+" GO SPECIFIC SETTINGS ---------------------------------------------------{{{
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 " }}}---------------------------------
 
 
-" CLOJURE SPECIFIC SETTINGS ------------------------------------------------{{{
+" CLOJURE SPECIFIC SETTINGS ----------------------------------------------{{{
 autocmd BufRead,BufNewFile *.clj setlocal filetype=clojure
 autocmd FileType clojure setlocal tabstop=2 shiftwidth=2 expandtab
 " }}}---------------------------------
 
 
-" HEX EDITING --------------------------------------------------------------{{{
+" HEX EDITING ------------------------------------------------------------{{{
 " vim -b : edit binary using xxd-format!
 augroup Binary
     au!
@@ -214,14 +219,14 @@ augroup END
 " }}}---------------------------------
 
 
-" XTERM SETTINGS -----------------------------------------------------------{{{
+" XTERM SETTINGS ---------------------------------------------------------{{{
 if &term=='xterm' || &term=='screen'
   colorscheme slate
 endif
 " }}}---------------------------------
 
 
-" GUI SETTINGS -------------------------------------------------------------{{{
+" GUI SETTINGS --------------------------------------------------------------{{{
 if has("gui_running")
     set columns=84          " Required for &relativenumber
     set lines=40            " Increase default height of window
@@ -230,7 +235,7 @@ endif
 " }}}---------------------------------
 
 
-" GTK SETTINGS -------------------------------------------------------------{{{
+" GTK SETTINGS --------------------------------------------------------------{{{
 if has("gui_gtk")
     try
         set guifont=Inconsolata\ Medium\ 16
@@ -239,7 +244,7 @@ endif
 " }}}---------------------------------
 
 
-" WINDOWS SPECIFIC SETTINGS ------------------------------------------------{{{
+" WINDOWS SPECIFIC SETTINGS ----------------------------------------------{{{
 if has("win32")
     if has("gui_win32")
         try
