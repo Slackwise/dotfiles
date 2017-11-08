@@ -34,6 +34,7 @@ set rtp+=$VIMDIR
 set rtp+=~/src/dotfiles/vim/
 let &dir = finddir("swap", &rtp)
 let &backupdir = finddir("backup", &rtp)
+let &undodir = finddir("undo", &rtp)
 let &viminfo = $VIMDIR . "viminfo"
 " }}}---------------------------------
 
@@ -43,20 +44,20 @@ try
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
 catch
-	    " Do nothing!
+        " Do nothing!
 endtry
 
 if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-commentary'
-    Bundle 'tpope/vim-markdown'
-    Bundle 'tpope/vim-fireplace'
+    " Bundle 'tpope/vim-repeat'
+    " Bundle 'tpope/vim-surround'
+    " Bundle 'tpope/vim-commentary'
+    " Bundle 'tpope/vim-markdown'
+    " Bundle 'tpope/vim-fireplace'
     " Bundle 'tpope/vim-sexp-mappings-for-regular-people'
     " Bundle 'guns/vim-sexp'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'godlygeek/tabular'
+    " Bundle 'scrooloose/nerdtree'
+    " Bundle 'godlygeek/tabular'
     " Bundle 'tpope/fugitive'
     " Bundle 'colornames'
     " Bundle 'yurifury/hexHighlight'
@@ -89,11 +90,11 @@ set mouse=a
 set shortmess+=I        " Disable :intro
 set nowrap              " Do not wrap lines
 "set linebreak           " Wrap on words when 'wrap' is set.
-set relativenumber          " Turns on relative-to-current-line numbering.
+set relativenumber      " Turns on relative-to-current-line numbering.
 set backup
 try | colorscheme semantichroma | catch /^Vim\%((\a\+)\)\=:E185/ | colorscheme slate | endtry
 set background=dark
-" set list lcs=trail:·,tab:»·  " Added visibility for unwanted whitespace chars.
+"set list lcs=trail:·,tab:»·  " Added visibility for unwanted whitespace chars.
 set tabstop=4                " How many columns <Tab> counts for
 " set softtabstop=4          " Causes backspace to delete X spaces
 set shiftwidth=4             " Number of spaces to use for each step of (auto)indent

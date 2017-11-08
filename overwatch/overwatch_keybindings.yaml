@@ -1,0 +1,41 @@
+Global:
+  Mouse:
+    Sensitivity: 7? (15?)
+  Reticle:
+    Show Accuracy: On
+    Color: White
+    Thickness: 1
+    Crosshair Length: 9
+    Center Gap: 8
+    Opacity: 100
+    Dot Size: 7
+    Dot Opacity: 60
+  Hero:
+    Allied Health Bars: On
+  Movement:
+    Crouch: LSHIFT
+    Toggle Crouch: RALT
+  Weapons & Abilities:
+    Ability 1: LCONTROL
+    Ability 2: Q, E
+    Ability 3: F
+    Equip Weapon 1: SCROLL_UP
+    Equip Weapon 2: SCROLL_DOWN
+    Quick Melee: MOUSE3
+  Communication:
+    Communications Menu: X, SHIFT+C
+    Emote (DEFAULT): UNBOUND
+    Hello: H
+    Need Heals: Z
+    Group Up: G
+    Ultimate Status: SHIFT+F
+    Voice Line (Default): V
+    Acknowledge: C
+    Thanks: T
+  Sprays:
+    Spray Menu: Y  
+  Emotes:
+    Emote Menu: UNBOUND
+    Emote Left: UNBOUND
+    Emote Down: UNBOUND
+    Emote Right: UNBOUND
