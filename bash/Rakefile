@@ -1,9 +1,14 @@
 #!/usr/bin/env ruby
 
-HOME        = ENV['HOME']
-USERNAME    = ENV['USERNAME']
-BASHRC_PATH = HOME + '/src/dotfiles/bash/bashrc'
-PROFILE_CONTENTS = "[ -f $HOME/.bashrc ] && source $HOME/.bashrc"
+require 'fileutils'
+
+HOME                = ENV['HOME']
+USERNAME            = ENV['USERNAME']
+HOME_BASHRC         = HOME + '/.bashrc'
+HOME_BASHRC_SYS     = HOME_BASHRC + '.sys'
+BASHRC              = HOME + '/src/dotfiles/bash/bashrc'
+BASH_PROFILE        = HOME + '/.bash_profile'
+PROFILE_CONTENTS    = %|[ -f $HOME/.bashrc ] && source $HOME/.bashrc|
 
 
 def windows_setup
@@ -11,19 +16,25 @@ def windows_setup
 end
 
 def create_profile
-  bash_profile = "#{HOME}/.bash_profile" 
-  if File.exists? bash_profile
+  if File.exists? BASH_PROFILE
     raise '~/.bash_profile already exists.'
   else
-    File.open(bash_profile, 'w') do |profile|
+    File.open(BASH_PROFILE, 'w') do |profile|
       profile.puts PROFILE_CONTENTS
     end
     puts 'Created ~/.bash_profile.'
   end
 end
 
+def mv_existing_bashrc
+  if File.exists? HOME_BASHRC
+    FileUtils.mv HOME_BASHRC, HOME_BASHRC_SYS
+  end
+end
+
 def symlink_bashrc
-  File.symlink(BASHRC_PATH, HOME + '/.bashrc')
+  mv_existing_bashrc
+  File.symlink(BASHRC, HOME_BASHRC)
   puts 'Symlinked ~/.bashrc.'
 end
 

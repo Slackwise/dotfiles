@@ -238,7 +238,11 @@ endif
 " GTK SETTINGS --------------------------------------------------------------{{{
 if has("gui_gtk")
     try
-        set guifont=Inconsolata\ Medium\ 16
+        set guifont=Consolas\ 11
+    catch
+        try
+            set guifont=Inconsolata\ Medium\ 16
+        endtry
     endtry
 endif
 " }}}---------------------------------
