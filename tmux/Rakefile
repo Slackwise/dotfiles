@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
-HOME          = ENV['HOME']
-USERNAME      = ENV['USERNAME']
+require 'pathname'
+
+HOME      = Pathname(ENV['HOME'])
 TMUX_PATH = HOME + '/src/dotfiles/tmux/tmux.conf'
+TMUX_CONF = HOME + '.tmux.conf'
 
 
 def symlink_tmuxconf
-  File.symlink(TMUX_PATH, HOME + '/.tmux.conf')
+  File.symlink(TMUX_PATH, TMUX_CONF)
   puts 'Symlinked ~/.tmux.conf'
 rescue
   puts "Failed to symlink ~/.tmux.conf: #$!"

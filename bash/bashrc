@@ -6,6 +6,7 @@
 # use [[ over test or [ commands. Rationale: https://google.github.io/styleguide/shell.xml?showone=Test,_%5B_and_%5B%5B#Test,_%5B_and_%5B%5B
 
 
+
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
 debug_mode=false
 function debug
@@ -22,6 +23,16 @@ export EDITOR=/usr/bin/vim
 export DOTFILES=$HOME/src/dotfiles
 debug "Global variables exported."
 #----------------------------------------------------------------------------}}}
+
+
+# SOURCE SYSTEM BASHRC ------------------------------------------------------{{{
+debug "Sourcing system bashrc..."
+if [[ -f ~/.bashrc.sys ]]; then
+  source ~/.bashrc.sys
+fi
+debug "Sourced system bashrc."
+#----------------------------------------------------------------------------}}}
+
 
 
 # GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
@@ -100,15 +111,6 @@ if [[ $is_root_user ]]; then P $neutre; fi
 
 unset -f P # Remove our temporary utility function
 debug "Prompt created."
-#----------------------------------------------------------------------------}}}
-
-
-# SOURCE SYSTEM BASHRC ------------------------------------------------------{{{
-debug "Sourcing system bashrc..."
-if [[ -f ~/.bashrc.sys ]]; then
-  source ~/.bashrc.sys
-fi
-debug "Sourced system bashrc."
 #----------------------------------------------------------------------------}}}
 
 
