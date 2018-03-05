@@ -5,10 +5,13 @@ require 'pathname'
 HOME                 = Pathname(ENV['HOME'])
 EMACS_DIR            = HOME + '.emacs.d'
 SPACEMACS_GIT_DIR    = HOME + 'src' + 'spacemacs'
+SPACEMACS_CONF       = HOME + SPACEMACS_GIT_DIR + 'init.el'
+SPACEMACS_DOTFILE    = HOME + '.spacemacs'
 DESKTOP_SHORTCUT     = Pathname('.') + 'spacemacs.desktop'
 DESKTOP_SHORTCUT_DIR = HOME + '.local' + 'share' + 'applications'
 GIT_CLONE_CMD        = %|git clone --recursive https://github.com/syl20bnr/spacemacs "#{SPACEMACS_GIT_DIR}"|
-MKLINK_CMD           = %|CMD /C MKLINK /D "#{EMACS_DIR.expand_path}" "#{SPACEMACS_GIT_DIR.expand_path}"|
+MKLINK_EMACS_DIR_CMD = %|cmd /c mklink /d "#{EMACS_DIR.expand_path}" "#{SPACEMACS_GIT_DIR.expand_path}"|
+MKLINK_DOTFILE_CMD   = %|cmd /c mklink "#{SPACEMACS_DOTFILE.expand_path}" "#{SPACEMACS_CONF.expand_path}"|
 
 def windows?
   RUBY_PLATFORM.match(/mswin/) || RUBY_PLATFORM.match(/mingw32/)
@@ -35,9 +38,11 @@ desc "Link Spacemacs directory."
 task :link_dirs do
   begin
     if windows?
-      system(MKLINK_CMD) || raise "Windows MKLINK failed"
+      system(MKLINK_EMACS_DIR_CMD) || raise("Windows ~/.emacs.d/ MKLINK failed")
+      system(MKLINK_DOTFILE_CMD)   || raise("Windows ~/.spacemacs MKLINK failed")
     else
       File.symlink(SPACEMACS_GIT_DIR.expand_path, EMACS_DIR.expand_path)
+      File.symlink(SPACEMACS_CONF.expand_path, SPACEMACS_DOTFILE)
     end
   rescue
     puts "Failed to symlink Spacemacs directory: #$!"
