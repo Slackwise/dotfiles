@@ -24,26 +24,11 @@ List<String>
 .LINK
 Source for the script: https://github.com/Slackwise/dotfiles/blob/master/binw/Find-LongPaths.ps1
 #>
-function global:Find-LongPaths {
-    param (
-        [int]$Length = 256,
-        [parameter(Position=0,ValueFromPipeline=$True)][String]$Path = $pwd
-    )
-    begin
-    {
-        $longPaths = New-Object System.Collections.Generic.List[String]
-        $logPathFn = { if ($_.FullName.Length -ge $Length) {$longPaths.Add($_.FullName)} }
-    }
-    process
-    {
-        dir $path -Recurse | % $logPathFn
-    }
-    end
-    {
-        # Normally, I'd wish to instead return some sort of object representing
-        # paths, but .NET does not provide one, so an Array of Strings it is!
-        return $longPaths.ToArray()
-    }
+function global:Find-LongPaths(
+    [int]$Length = 256,
+    [parameter(Position=0,ValueFromPipeline=$True)][String]$Path = $pwd
+    ) {
+        ls -r $Path | ? {$_.FullName.Length -ge $Length} | Select -ExpandProperty FullName
 }
 
 if ($args) { Find-LongPaths $args[0] }
