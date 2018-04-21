@@ -54,6 +54,7 @@ values."
      sql
      syntax-checking
      version-control
+     windows-scripts
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
