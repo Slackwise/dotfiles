@@ -24,10 +24,10 @@ List<String>
 .LINK
 Source for the script: https://github.com/Slackwise/dotfiles/blob/master/binw/Find-LongPaths.ps1
 #>
-function Find-LongPaths {
+function global:Find-LongPaths {
     param (
         [int]$Length = 256,
-        [parameter(Position=0)][String]$Path = $pwd
+        [parameter(Position=0,ValueFromPipeline=$True)][String]$Path = $pwd
     )
     begin
     {
