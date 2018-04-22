@@ -63,7 +63,7 @@ flashbang
 hegrenade
 
 awp
-sg550
 aug
+sg550
 scout
 mp5navy
