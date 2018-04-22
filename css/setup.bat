@@ -16,7 +16,7 @@ mklink /h %CSS_DIR%\%AUTOBUY_FILE%         %DOTFILES_DIR%\%AUTOBUY_FILE%
 mklink /h %CSS_DIR%\%CT_BUY_FILE%          %DOTFILES_DIR%\%CT_BUY_FILE%
 mklink /h %CSS_DIR%\%T_BUY_FILE%           %DOTFILES_DIR%\%T_BUY_FILE% 
 
-echo "=============================================="
-echo "=== Make sure to set your LAUNCH OPTIONS!" ==="
-echo "=============================================="
+echo ==============================================
+echo === Make sure to set your LAUNCH OPTIONS!" ===
+echo ==============================================
 pause

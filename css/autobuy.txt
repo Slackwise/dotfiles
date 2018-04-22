@@ -59,6 +59,7 @@ defuser
 
 smokegrenade
 flashbang
+flashbang
 hegrenade
 
 awp

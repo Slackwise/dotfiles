@@ -5,7 +5,7 @@
 		"PresetName"	"S"
 		"version"		"4"
 		"primary"		"scout/3="
-		"secondary"		"none/0+"
+		"secondary"		"deagle/5="
 		"equipment"		"vesthelm/100 flash/0 sgren/0 hegren/0 defuser/1 nvgs/0"
 	}
 	"2"
@@ -21,7 +21,7 @@
 		"PresetName"	"F"
 		"version"		"4"
 		"primary"		"m4a1/1+"
-		"secondary"		"none/0+"
+		"secondary"		"deagle/5="
 		"equipment"		"vesthelm/100 flash/0 sgren/0 hegren/0 defuser/1 nvgs/0"
 	}
 	"4"
@@ -29,7 +29,7 @@
 		"PresetName"	"G"
 		"version"		"4"
 		"primary"		"none/0+"
-		"secondary"		"none/0+"
-		"equipment"		"vesthelm/100 flash/1+ sgren/1 hegren/1 defuser/1 nvgs/0"
+		"secondary"		"deagle/5="
+		"equipment"		"vesthelm/100 flash/2 sgren/1 hegren/1 defuser/1 nvgs/0"
 	}
 }
