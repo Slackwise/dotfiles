@@ -24,11 +24,18 @@ List<String>
 .LINK
 Source for the script: https://github.com/Slackwise/dotfiles/blob/master/binw/Find-LongPaths.ps1
 #>
-function global:Find-LongPaths(
-    [int]$Length = 256,
-    [parameter(Position=0,ValueFromPipeline=$True)][String]$Path = $pwd
-    ) {
-        ls -r $Path | ? {$_.FullName.Length -ge $Length} | Select -ExpandProperty FullName
+function Find-LongPaths
+{
+    param
+    (
+        [int]$Length = 256,
+        [parameter(Position=0,ValueFromPipeline=$True)][String]$Path = $pwd
+    ) 
+    process
+    {
+        Get-ChildItem -Recurse $Path | ?{$_.FullName.Length -ge $Length} | Select -ExpandProperty FullName
+    }
 }
 
-if ($args) { Find-LongPaths $args[0] }
+
+Export-ModuleMember -Function Find-LongPaths
