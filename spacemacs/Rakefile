@@ -2,16 +2,18 @@
 
 require 'pathname'
 
-HOME                 = Pathname(ENV['HOME'])
-EMACS_DIR            = HOME + '.emacs.d'
-SPACEMACS_GIT_DIR    = HOME + 'src' + 'spacemacs'
-SPACEMACS_CONF       = HOME + SPACEMACS_GIT_DIR + 'init.el'
-SPACEMACS_DOTFILE    = HOME + '.spacemacs'
-DESKTOP_SHORTCUT     = Pathname('.') + 'spacemacs.desktop'
-DESKTOP_SHORTCUT_DIR = HOME + '.local' + 'share' + 'applications'
-GIT_CLONE_CMD        = %|git clone --recursive https://github.com/syl20bnr/spacemacs "#{SPACEMACS_GIT_DIR}"|
-MKLINK_EMACS_DIR_CMD = %|cmd /c mklink /d "#{EMACS_DIR.expand_path}" "#{SPACEMACS_GIT_DIR.expand_path}"|
-MKLINK_DOTFILE_CMD   = %|cmd /c mklink "#{SPACEMACS_DOTFILE.expand_path}" "#{SPACEMACS_CONF.expand_path}"|
+HOME                    = Pathname(ENV['HOME'])
+EMACS_D                 = HOME + '.emacs.d'
+SPACEMACS_D             = HOME + '.spacemacs.d'
+SPACEMACS_GIT_DIR       = HOME + 'src' + 'spacemacs'
+DOTFILES_SPACEMACS_DIR  = HOME + 'src' + 'dotfiles' + 'spacemacs'
+DESKTOP_SHORTCUT        = Pathname('.') + 'spacemacs.desktop'
+DESKTOP_SHORTCUT_DIR    = HOME + '.local' + 'share' + 'applications'
+GIT_CLONE_CMD           = %|git clone --recursive https://github.com/syl20bnr/spacemacs "#{SPACEMACS_GIT_DIR}"|
+MKLINK_EMACS_D_CMD      = %|cmd /c mklink /d "#{EMACS_D.expand_path}" "#{SPACEMACS_GIT_DIR.expand_path}"|
+MKLINK_SPACEMACS_D_CMD  = %|cmd /c mklink /d "#{SPACEMACS_D.expand_path}" "#{DOTFILES_SPACEMACS_DIR.expand_path}"|
+TAKEOWN_CMD             = %|takeown /f "#{EMACS_D.expand_path}" /r|
+CREATE_HOME_CMD         = %|setx HOME "%USERPROFILE%"|
 
 def windows?
   RUBY_PLATFORM.match(/mswin/) || RUBY_PLATFORM.match(/mingw32/)
@@ -20,7 +22,7 @@ end
 desc "Clone Spacemacs master repository."
 task :git_clone do
   if system(GIT_CLONE_CMD)
-    puts "Successfully git-cloned Spacemacs to ~/.emacs.d"
+    puts "Git-cloned Spacemacs to ~/.emacs.d"
   else
     puts "Failed to git-clone Spacemacs!"
     exit 1
@@ -30,23 +32,35 @@ end
 desc "Fix Windows folder owner permissions."
 task :fix_win_perms => [:git_clone] do
   if windows?
-    #TODO: Change owner of ~/emacs.d and children to self.
+    system(TAKEOWN_CMD) || raise("Failed to take ownership of ~/.emacs.d/ files!")
+    puts "Took ownership of ~/.emacs.d/"
   end
 end
 
-desc "Link Spacemacs directory."
-task :link_dirs do
+desc "Setup necessary directories/symlinks."
+task :setup_dirs do
   begin
     if windows?
-      system(MKLINK_EMACS_DIR_CMD) || raise("Windows ~/.emacs.d/ MKLINK failed")
-      system(MKLINK_DOTFILE_CMD)   || raise("Windows ~/.spacemacs MKLINK failed")
+      system(MKLINK_EMACS_D_CMD) || raise("Windows ~/.emacs.d/ MKLINK failed")
+      system(MKLINK_SPACEMACS_D_CMD) || raise("Windows ~/.spacemacs.d/ MKLINK failed")
+      Rake::Task['fix_win_perms'].execute
+      Rake::Task['create_home'].execute
     else
-      File.symlink(SPACEMACS_GIT_DIR.expand_path, EMACS_DIR.expand_path)
-      File.symlink(SPACEMACS_CONF.expand_path, SPACEMACS_DOTFILE)
+      File.symlink(SPACEMACS_GIT_DIR.expand_path, EMACS_D.expand_path)
+      File.symlink(DOTFILES_SPACEMACS_DIR.expand_path, SPACEMACS_D.expand_path)
     end
+    "Linked directories."
   rescue
     puts "Failed to symlink Spacemacs directory: #$!"
     exit 1
+  end
+end
+
+desc "Create $HOME for Windows."
+task :create_home do
+  if windows?
+    system(CREATE_HOME_CMD) || raise("Failed to create $HOME for Windows!")
+    puts "Created $HOME for Windows."
   end
 end
 
@@ -54,6 +68,7 @@ desc "Create desktop shortcut."
 task :desktop_shortcut do
   begin
     File.symlink(DESKTOP_SHORTCUT.expand_path, DESKTOP_SHORTCUT_DIR.expand_path)
+    puts "Created desktop shortcut."
   rescue
     puts "Failed to symlink desktop shortcut: #$!"
     exit 1
@@ -61,6 +76,6 @@ task :desktop_shortcut do
 end
 
 desc "Install Spacemacs."
-task :default => [:fix_win_perms, :link_dirs] do
+task :default => [:git_clone, :setup_dirs] do
   puts "Spacemacs successfully installed."
 end
