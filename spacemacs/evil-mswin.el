@@ -53,7 +53,7 @@
 ;; >     cmap <S-Insert>		<C-R>+
 (define-key evil-command-window-mode-map "\C-v" (kbd "C-r *"))
 (define-key evil-command-window-mode-map [S-insert] (kbd "C-r *"))
-;; > endif
+;; > endif
 ;; #TODO: Use evil-paste-from-register directly?
 ;; #NOTE: All the above commands use the * register because + apparently doesn't work. (Windows only...?)
 
@@ -102,8 +102,8 @@
 
 ;; > " CTRL-Y is Redo (although not repeat); not in cmdline though
 ;; > noremap <C-Y> <C-R>
-;; > inoremap <C-Y> <C-O><C-R>
-;; #NOTE: Since when is this a standard? I'm not going to bother with this.
+ ;; > inoremap <C-Y> <C-O><C-R>
+;; #NOTE: I don't think this is muscle memory for anyone, but if it is, I'll add it in.
 
 ;; > " Alt-Space is System menu
 ;; > if has("gui")
@@ -111,7 +111,7 @@
 ;; >   inoremap <M-Space> <C-O>:simalt ~<CR>
 ;; >   cnoremap <M-Space> <C-C>:simalt ~<CR>
 ;; > endif
-;; #NOTE: Adding this would probably break some Emacs GUI stuff. I'm leaving it off.
+;; #NOTE: This would be an okay default, if this script got loaded before users other configs.
 
 ;; > " CTRL-A is Select all
 ;; > noremap <C-A> gggH<C-O>G
@@ -120,12 +120,11 @@
 ;; > onoremap <C-A> <C-C>gggH<C-O>G
 ;; > snoremap <C-A> <C-C>gggH<C-O>G
 ;; > xnoremap <C-A> <C-C>ggVG
-(defun evil-select-all ()
-  (interactive)
-  (evil-visual-select 0 (point-max)))
-(define-key evil-normal-state-map "\C-a" 'evil-select-all)
-(define-key evil-insert-state-map "\C-a" 'evil-select-all)
-(define-key evil-command-window-mode-map "\C-a" 'evil-select-all)
+(let
+    ((evil-select-all (lambda () (interactive) (evil-visual-select 0 (point-max)))))
+  (define-key evil-normal-state-map "\C-a" evil-select-all)
+  (define-key evil-insert-state-map "\C-a" evil-select-all)
+  (define-key evil-command-window-mode-map "\C-a" evil-select-all))
 ;; #NOTE: The rest of the modes have no maps.
 
 ;; > " CTRL-Tab is Next window
@@ -133,14 +132,14 @@
 ;; > inoremap <C-Tab> <C-O><C-W>w
 ;; > cnoremap <C-Tab> <C-C><C-W>w
 ;; > onoremap <C-Tab> <C-C><C-W>w
-;; #NOTE: This would probably just break people's workflow.
+;; #NOTE: This would probably just break people's workflow, especially in Spacemacs.
 
 ;; > " CTRL-F4 is Close window
 ;; > noremap <C-F4> <C-W>c
 ;; > inoremap <C-F4> <C-O><C-W>c
 ;; > cnoremap <C-F4> <C-C><C-W>c
 ;; > onoremap <C-F4> <C-C><C-W>c
-;; #NOTE: Another UI related binding that might break workflow.
+;; #NOTE: Another UI related binding that might break workflow, especially in Spacemacs.
 
 ;; > if has("gui")
 ;; >   " CTRL-F is the search dialog
