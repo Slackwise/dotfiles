@@ -82,9 +82,9 @@
 ;; > noremap <C-S>		:update<CR>
 ;; > vnoremap <C-S>		<C-C>:update<CR>
 ;; > inoremap <C-S>		<Esc>:update<CR>gi
-(define-key evil-normal-state-map "\C-s" 'evil-save)
-(define-key evil-visual-state-map "\C-s" 'evil-save)
-(define-key evil-insert-state-map "\C-s" 'evil-save)
+(define-key evil-normal-state-map "\C-s" 'evil-write)
+(define-key evil-visual-state-map "\C-s" 'evil-write)
+(define-key evil-insert-state-map "\C-s" 'evil-write)
 
 ;; > " For CTRL-V to work autoselect must be off.
 ;; > " On Unix we have two selections, autoselect can be used.
