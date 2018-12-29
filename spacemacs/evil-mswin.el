@@ -7,8 +7,11 @@
 (define-key evil-visual-state-map (kbd "DEL") 'evil-delete)
 
 ;; Cut
-(define-key evil-visual-state-map "\C-x" "\"+x")
-(define-key evil-visual-state-map (kbd "S-DEL") "\"+x")
+(let ((cut (lambda ()
+              (interactive)
+              (apply 'evil-delete (append (seq-take (evil-visual-range) 3) '(?+))))))
+  (define-key evil-visual-state-map "\C-x" cut)
+  (define-key evil-visual-state-map (kbd "S-DEL") cut))
 
 ;; Copy
 (let ((yank (lambda ()
