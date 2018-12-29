@@ -1,4 +1,5 @@
 ;;; Approximate mswin.vim behavior for Emacs evil-mode.
+
 ;; I will attempt to rewrite the relevant statements line-by-line from:
 ;; https://github.com/vim/vim/blob/master/runtime/mswin.vim
 
@@ -40,13 +41,20 @@
 ;; >     " CTRL-C and CTRL-Insert are Copy
 ;; >     vnoremap <C-C> "+y
 ;; >     vnoremap <C-Insert> "+y
-(define-key evil-visual-state-map "\C-c" "\"*y")
-(define-key evil-visual-state-map [C-insert] "\"*y")
+(let ((yank (lambda ()
+              (interactive)
+              (let ((range (seq-take (evil-visual-range) 3)))
+                (apply 'evil-yank (append range '(?+)))
+                (message "range is %s" range)
+                (apply 'evil-yank (append range '(?*)))
+                (message "range is %s" range)))))
+  (define-key evil-visual-state-map "\C-c" yank)
+  (define-key evil-visual-state-map [C-insert] yank))
 
 ;; >     " CTRL-V and SHIFT-Insert are Paste
 ;; >     map <C-V>		"+gP
 ;; >     map <S-Insert>		"+gP
-(define-key evil-visual-state-map "\C-v" "\"*gP")
+(define-key evil-visual-state-map "\C-v" "\"*P") ; #NOTE: gP doesn't exist in evil
 (define-key evil-visual-state-map [S-insert] "\"*y")
 
 ;; >     cmap <C-V>		<C-R>+
@@ -120,8 +128,7 @@
 ;; > onoremap <C-A> <C-C>gggH<C-O>G
 ;; > snoremap <C-A> <C-C>gggH<C-O>G
 ;; > xnoremap <C-A> <C-C>ggVG
-(let
-    ((evil-select-all (lambda () (interactive) (evil-visual-select 0 (point-max)))))
+(let ((evil-select-all (lambda () (interactive) (evil-visual-select 0 (point-max)))))
   (define-key evil-normal-state-map "\C-a" evil-select-all)
   (define-key evil-insert-state-map "\C-a" evil-select-all)
   (define-key evil-command-window-mode-map "\C-a" evil-select-all))
