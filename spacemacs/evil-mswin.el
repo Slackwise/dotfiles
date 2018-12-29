@@ -28,10 +28,10 @@
       ;;                 (interactive "P<x>")
       (paste-before (lambda (count &optional register yank-handler)
                       (interactive "P<x>")
-                      (call-interactively 'evil-paste-before)))
+                      (evil-paste-before (or count 1) ?+ yank-handler)))
       (paste-after (lambda (count &optional register yank-handler)
                       (interactive "P<x>")
-                      (call-interactively 'evil-paste-after))))
+                      (evil-paste-after (or count 1) ?+))))
   (define-key evil-command-window-mode-map "\C-v" paste)
   (define-key evil-command-window-mode-map [S-insert] paste)
   (define-key evil-insert-state-map "\C-v" paste)
@@ -40,7 +40,7 @@
   (define-key evil-visual-state-map [S-insert] paste-after)
   (define-key evil-normal-state-map "\C-v" paste-before)
   (define-key evil-normal-state-map [S-insert] paste-after))
- 
+
 ;; Save
 (define-key evil-normal-state-map "\C-s" 'evil-write)
 (define-key evil-visual-state-map "\C-s" 'evil-write)
