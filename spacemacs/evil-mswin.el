@@ -35,32 +35,28 @@
 ;; >     " CTRL-X and SHIFT-Del are Cut
 ;; >     vnoremap <C-X> "+x
 ;; >     vnoremap <S-Del> "+x
-(define-key evil-visual-state-map "\C-x" "\"*x")
-(define-key evil-visual-state-map (kbd "S-DEL") "\"*x")
+(define-key evil-visual-state-map "\C-x" "\"+x")
+(define-key evil-visual-state-map (kbd "S-DEL") "\"+x")
 
 ;; >     " CTRL-C and CTRL-Insert are Copy
 ;; >     vnoremap <C-C> "+y
 ;; >     vnoremap <C-Insert> "+y
 (let ((yank (lambda ()
               (interactive)
-              (let ((range (seq-take (evil-visual-range) 3)))
-                (apply 'evil-yank (append range '(?+)))
-                (message "range is %s" range)
-                (apply 'evil-yank (append range '(?*)))
-                (message "range is %s" range)))))
+              (apply 'evil-yank (append (seq-take (evil-visual-range) 3) '(?+))))))
   (define-key evil-visual-state-map "\C-c" yank)
   (define-key evil-visual-state-map [C-insert] yank))
 
 ;; >     " CTRL-V and SHIFT-Insert are Paste
 ;; >     map <C-V>		"+gP
 ;; >     map <S-Insert>		"+gP
-(define-key evil-visual-state-map "\C-v" "\"*P") ; #NOTE: gP doesn't exist in evil
-(define-key evil-visual-state-map [S-insert] "\"*y")
+(define-key evil-visual-state-map "\C-v" "\"+P") ; #NOTE: gP doesn't exist in evil
+(define-key evil-visual-state-map [S-insert] "\"+p")
 
 ;; >     cmap <C-V>		<C-R>+
 ;; >     cmap <S-Insert>		<C-R>+
-(define-key evil-command-window-mode-map "\C-v" (kbd "C-r *"))
-(define-key evil-command-window-mode-map [S-insert] (kbd "C-r *"))
+(define-key evil-command-window-mode-map "\C-v" (kbd "C-r +"))
+(define-key evil-command-window-mode-map [S-insert] (kbd "C-r +"))
 ;; > endif
 ;; #TODO: Use evil-paste-from-register directly?
 ;; #NOTE: All the above commands use the * register because + apparently doesn't work. (Windows only...?)
@@ -78,8 +74,8 @@
 
 ;; >;; > imap <S-Insert>		<C-V>
 ;; > vmap <S-Insert>		<C-V>
-(define-key evil-insert-state-map "\C-v" (kbd "C-r *"))
-(define-key evil-insert-state-map [S-insert] (kbd "C-r *"))
+(define-key evil-insert-state-map "\C-v" (kbd "C-r +"))
+(define-key evil-insert-state-map [S-insert] (kbd "C-r +"))
 
 ;; > " Use CTRL-Q to do what CTRL-V used to do
 ;; > noremap <C-Q>		<C-V>
@@ -128,7 +124,9 @@
 ;; > onoremap <C-A> <C-C>gggH<C-O>G
 ;; > snoremap <C-A> <C-C>gggH<C-O>G
 ;; > xnoremap <C-A> <C-C>ggVG
-(let ((evil-select-all (lambda () (interactive) (evil-visual-select 0 (point-max)))))
+(let ((evil-select-all (lambda ()
+                         (interactive)
+                         (evil-visual-select 0 (point-max)))))
   (define-key evil-normal-state-map "\C-a" evil-select-all)
   (define-key evil-insert-state-map "\C-a" evil-select-all)
   (define-key evil-command-window-mode-map "\C-a" evil-select-all))
