@@ -31,7 +31,7 @@
                       (evil-paste-before (or count 1) ?+ yank-handler)))
       (paste-after (lambda (count &optional register yank-handler)
                       (interactive "P<x>")
-                      (evil-paste-after (or count 1) ?+))))
+                      (evil-paste-after (or count 1) ?+ yank-handler))))
   (define-key evil-command-window-mode-map "\C-v" paste)
   (define-key evil-command-window-mode-map [S-insert] paste)
   (define-key evil-insert-state-map "\C-v" paste)
