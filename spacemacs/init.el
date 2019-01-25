@@ -2,6 +2,12 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+;; Need to use a proxy for package updates at work
+(let ((work-username "aflanczewski")
+    (work-proxy-file "~/.spacemacs.d/work-proxy.el"))
+(when (and (string= (user-login-name) work-username) (file-exists-p work-proxy-file))
+  (load-file work-proxy-file)))
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
 This function should only modify configuration layer settings."
