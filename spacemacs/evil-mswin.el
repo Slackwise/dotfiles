@@ -6,6 +6,8 @@
 ;; Disable clipboard saving on mouse select
 (fset 'evil-visual-update-x-selection 'ignore)
 
+;; Add Vim's context menu
+
 ;; Delete in visual mode
 (define-key evil-visual-state-map (kbd "DEL") 'evil-delete)
 
