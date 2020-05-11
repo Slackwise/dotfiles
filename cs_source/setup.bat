@@ -1,6 +1,6 @@
 @echo off
 set CSS_DIR="C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Source\cstrike\cfg"
-set DOTFILES_DIR="C:\Users\Slackwise\src\dotfiles\css"
+set DOTFILES_DIR="C:\Users\Slackwise\src\dotfiles\cs_source"
 set CONFIG_FILE="slackwise.cfg"
 set AUTOBUY_FILE="autobuy.txt"
 set CT_BUY_FILE="buypresets_ct.vdf"
