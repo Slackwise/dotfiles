@@ -461,8 +461,8 @@ before packages are loaded."
   ;; Make underscore a word character for Ruby and Python:
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-  (load "~/.spacemacs.d/evil-mswin.el")
-  (load "~/.spacemacs.d/evil-config.el"))
+  (load "~/src/dotfiles/emacs/evil-mswin.el")
+  (load "~/src/dotfiles/emacs/evil-config.el"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
