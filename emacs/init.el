@@ -12,8 +12,9 @@
 
 ;; Keep the customize system from borking up this file.
 (setq-default
-  custom-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.config/emacs/") "custom.el")
-(when (file-exists-p custom-file) (load custom-file))
+  custom-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.config/emacs/") "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; Disable toolbar
 (tool-bar-mode -1)
@@ -22,8 +23,11 @@
 ;; Set default font.
 ;; #TODO
 (add-to-list 'default-frame-alist
-             '(font . "Consolas-16"))
+             '(font . "Consolas-18"))
 
 ;; Configure Evil mode.
 (load "~/src/dotfiles/emacs/evil-mswin.el")
 (load "~/src/dotfiles/emacs/evil-config.el")
+
+(provide 'init)
+;;; init.el ends here
