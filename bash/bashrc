@@ -123,8 +123,8 @@ debug "Console config loaded."
 
 # GUIX CONFIG ---------------------------------------------------------------{{{
 GUIX_PROFILE=$HOME/.guix-profile
-if [[ -a %GUIX_PROFILE ]]; then
-  export $GUIX_PROFILE
+if [[ -a $GUIX_PROFILE ]]; then
+  export GUIX_PROFILE
   export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
   export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
   source $GUIX_PROFILE/etc/profile
