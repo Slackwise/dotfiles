@@ -8,10 +8,12 @@
 
 
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
-debug_mode=false
+if [[ -z $bashrc_debug ]]; then
+  bashrc_debug=false
+fi
 function debug
 {
-  $debug_mode && echo "[BASHRC DEBUG] $1"
+  $bashrc_debug && echo "[BASHRC DEBUG] $1"
 }
 debug "Starting bashrc debugging..."
 #----------------------------------------------------------------------------}}}
@@ -87,22 +89,34 @@ function P
 }
 
 # If root, highlight in bright red:
-if [[ $is_root_user ]]; then P $white_on_red; fi
+if [[ $is_root_user ]]; then
+  P $white_on_red;
+else
+  debug "Is root user."
+fi
 
-if [[ "$USER" != "slackwise" ]]; then P "$cyan\u$neutre"; fi
+if [[ "$USER" != "slackwise" ]]; then
+  P "$cyan\u$neutre";
+  debug "Is user 'slackwise'."
+fi
 
 
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
   P "$cyan@\H$neutre"
+  debug "Is SSH connection."
+else
+  debug "Not SSH connection."
 fi
 
 P "\w" # Add full working directory
 
 if [[ $is_unicode_term ]]; then
   P $green$LAMBDA$neutre
+  debug "Is unicode terminal."
 else
   P "$green\$$neutre"
+  debug "Not unicode terminal."
 fi
 
 P " " # Add a trailing blank to give space for commands
@@ -128,8 +142,10 @@ if [[ -a $GUIX_PROFILE ]]; then
   export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
   export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
   source $GUIX_PROFILE/etc/profile
+  debug "Guix config loaded."
+else
+  debug "Guix config skipped."
 fi
-debug "Guix config loaded."
 #----------------------------------------------------------------------------}}}
 
 
@@ -137,6 +153,16 @@ debug "Guix config loaded."
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 debug "RVM config loaded."
+#----------------------------------------------------------------------------}}}
+
+
+# DOOM EMACS CONFIG ---------------------------------------------------------{{{
+if [[ -a $HOME/.emacs.d/bin/doom ]]; then
+  export PATH=$HOME/.emacs.d/bin:$PATH # Required to run the 'doom' commands
+  debug "Doom Emacs config loaded."
+else
+  debug "Doom Emacs config skipped."
+fi
 #----------------------------------------------------------------------------}}}
 
 
