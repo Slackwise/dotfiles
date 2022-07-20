@@ -97,7 +97,7 @@ fi
 
 if [[ "$USER" != "slackwise" ]]; then
   P "$cyan\u$neutre";
-  debug "Is user 'slackwise'."
+  debug "Is not my default user 'slackwise'."
 fi
 
 
