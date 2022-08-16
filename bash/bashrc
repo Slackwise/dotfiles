@@ -91,13 +91,16 @@ function P
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
   P $white_on_red;
-else
   debug "Is root user."
+else
+  debug "Not root user."
 fi
 
-if [[ "$USER" != "slackwise" ]]; then
-  P "$cyan\u$neutre";
+if [[ "$USER" == "slackwise" ]]; then
   debug "Is user 'slackwise'."
+else
+  P "$cyan\u$neutre";
+  debug "Not user 'slackwise'."
 fi
 
 
@@ -150,15 +153,19 @@ fi
 
 
 # RVM CONFIG ----------------------------------------------------------------{{{
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-export PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-debug "RVM config loaded."
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+  source "$HOME/.rvm/scripts/rvm"
+  export PATH=$HOME/.rvm/bin:$PATH
+  debug "RVM config loaded."
+else
+  debug "RVM config skipped."
+fi
 #----------------------------------------------------------------------------}}}
 
 
 # DOOM EMACS CONFIG ---------------------------------------------------------{{{
 if [[ -a $HOME/.emacs.d/bin/doom ]]; then
-  export PATH=$HOME/.emacs.d/bin:$PATH # Required to run the 'doom' commands
+  export PATH=$HOME/.emacs.d/bin:$PATH
   debug "Doom Emacs config loaded."
 else
   debug "Doom Emacs config skipped."
