@@ -103,7 +103,6 @@ else
   debug "Not user 'slackwise'."
 fi
 
-
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
   P "$cyan@\H$neutre"
