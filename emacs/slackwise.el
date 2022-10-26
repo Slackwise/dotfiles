@@ -1,3 +1,6 @@
+;;;;;;;;;; -*- lexical-binding:t -*- ;;;;;;;;;;
+
+
 ;;; slackwise --- Adam "Slackwise" Flanczewski's Emacs config
 
 ;;; Commentary:
@@ -7,14 +10,11 @@
 ;;; Code:
 (package-initialize)
 
+; (load-theme 'vscode-dark-plus)
+
 (setq user-full-name "Adam Flanczewski"
       user-mail-address (concat "slackwise" "@" "slackwise.net"))
 
-;; Need proxy at work
-(load "~/src/dotfiles/emacs/proxy.el")
-
-;; Dynamic is dangerous. Lexical, please.
-(setq lexical-binding t)
 
 ;; Keep the customize system from borking up this file.
 (setq-default
@@ -25,17 +25,20 @@
 ;; Disable toolbar
 (tool-bar-mode -1)
 
+;; Org/Roam
 (setq org-directory "~/org/")
+(after! org (setq org-roam-directory "~/src/org/"))
 
 (setq display-line-numbers-type 'relative)
 
 ;; Set default font.
 (add-to-list 'default-frame-alist
              '(font . "Consolas-11"))
-;;
+
 ;; Make underscore a word character for Ruby and Python:
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
 ;; Configure Evil mode.
 (load "~/src/dotfiles/emacs/evil-mswin.el")
 ;; (load "~/src/dotfiles/emacs/evil-config.el") ; Do I really need to separate this?
