@@ -26,8 +26,8 @@
 (tool-bar-mode -1)
 
 ;; Org/Roam
-(setq org-directory "~/org/")
-(after! org (setq org-roam-directory "~/src/org/"))
+(setq org-directory "~/notes/")
+(after! org (setq org-roam-directory "~/notes/"))
 
 (setq display-line-numbers-type 'relative)
 
