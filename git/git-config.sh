@@ -7,6 +7,7 @@ git config --global color.ui always
 git config --global diff.tool vimdiff
 git config --global diff.merge vimdiff
 git config --global difftool.prompt false
+git config --global init.defaultBranch main
 git config --global pull.rebase merges
 git config --global alias.c "commit -am"
 git config --global alias.p "push"
