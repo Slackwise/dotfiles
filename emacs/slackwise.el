@@ -15,6 +15,8 @@
 (setq user-full-name "Adam Flanczewski"
       user-mail-address (concat "slackwise" "@" "slackwise.net"))
 
+;; Let Emacs traverse symlinks
+(setq find-file-visit-truename t)
 
 ;; Keep the customize system from borking up this file.
 (setq-default
@@ -26,8 +28,9 @@
 (tool-bar-mode -1)
 
 ;; Org/Roam
-(setq org-directory "~/notes/")
-(after! org (setq org-roam-directory "~/notes/"))
+(setq org-directory (file-truename "~/notes"))
+(after! org (setq org-roam-directory (file-truename "~/notes")))
+; (org-roam-db-autosync-mode)
 
 (setq display-line-numbers-type 'relative)
 
