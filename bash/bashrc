@@ -175,6 +175,14 @@ fi
 # My personal PATH additions, which must precede all others:
 export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
+
+# Aliases:
+alias update-ubuntu="sudo -s -- 'apt update && apt dist-upgrade -y'"
+alias update-guix="guix pull && guix upgrade"
+alias update-emacs="doom sync ; cd $HOME/src/dotfiles && git pull ; cd $HOME/notes && git pull ; cd $HOME/notes/private && git pull"
+alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
+
+
 export Sw_BASHRC_READ=true # To know that my personal bashrc was read fully!
 debug "bashrc finished processing."
 unset -f debug
