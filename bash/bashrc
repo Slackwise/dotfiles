@@ -178,8 +178,8 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
 # Aliases:
 alias update-ubuntu="sudo -s eval 'apt update && apt dist-upgrade -y'"
-alias wsl-guix-daemon="sudo -s eval 'guix-daemon &'"
-alias update-guix="wsl-guix-daemon && guix pull && guix upgrade"
+alias wsl-guix-daemon="sudo -s bash 'guix-daemon &'" # TODO: Fix
+alias update-guix="guix pull && guix upgrade"
 alias update-emacs="doom sync ; cd $HOME/src/dotfiles && git pull ; cd $HOME/notes && git pull ; cd $HOME/notes/private && git pull"
 alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
 
