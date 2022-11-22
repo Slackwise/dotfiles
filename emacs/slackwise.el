@@ -29,7 +29,12 @@
 
 ;; Org/Roam
 (setq org-directory (file-truename "~/notes"))
-(after! org (setq org-roam-directory (file-truename "~/notes")))
+(after! org (setq
+             org-roam-directory (file-truename "~/notes")
+             org-roam-capture-templates '(("d" "default" plain "%?"
+                                           :target (file+head "${slug}.org"
+                                                              "#+title: ${title}\n")
+                                           :unnarrowed t))))
 ; (org-roam-db-autosync-mode)
 
 (setq display-line-numbers-type 'relative)
