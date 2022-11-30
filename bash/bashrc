@@ -177,6 +177,11 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
 
 # Aliases:
+
+# Command Aliases
+alias g='git'
+
+# Short Script Aliases
 alias update-ubuntu="sudo -s eval 'apt update && apt dist-upgrade -y'"
 alias wsl-guix-daemon="sudo -s bash 'guix-daemon &'" # TODO: Fix
 alias update-guix="guix pull && guix upgrade"

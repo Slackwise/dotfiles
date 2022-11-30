@@ -10,4 +10,5 @@ git config --global difftool.prompt false
 git config --global init.defaultBranch main
 git config --global pull.rebase merges
 git config --global alias.c "commit -am"
+git config --global alias.l "log --stat"
 git config --global alias.p "push"
