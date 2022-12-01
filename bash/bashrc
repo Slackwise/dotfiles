@@ -29,7 +29,7 @@ debug "Global variables exported."
 
 # WSL JUNK ----------------------------------------------------------------{{{
 if [[ -n WSL_DISTRO_NAME ]]; then
-  export WSL_USER=$(cmd.exe /q /d /c "echo %USERNAME%" 2> nul)
+  export WINDOWS_USER=$(cmd.exe /q /d /c "echo %USERNAME%" 2> nul)
 fi
 #----------------------------------------------------------------------------}}}
 
