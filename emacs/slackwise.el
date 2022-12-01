@@ -41,7 +41,7 @@
 
 ;; Set default font.
 (add-to-list 'default-frame-alist
-             '(font . "Consolas-11"))
+             '(font . "-ARRW-Recursive Mono Linear Static-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 
 ;; Make underscore a word character for Ruby and Python:
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
