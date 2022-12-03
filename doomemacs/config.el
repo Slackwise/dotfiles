@@ -75,4 +75,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Disable dumbass "smart" parens which constantly fight me
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
 (load "~/src/dotfiles/emacs/slackwise.el")
