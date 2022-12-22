@@ -192,8 +192,8 @@ alias g='git'
 alias update-ubuntu="sudo -s eval 'apt update && apt dist-upgrade -y'"
 alias wsl-guix-daemon="sudo -s bash 'guix-daemon &'" # TODO: Fix
 alias update-guix="guix pull && guix upgrade"
-alias update-dotfiles="cd $HOME/src/dotfiles && git pull && cd $OLDPWD"
-alias update-notes="cd $HOME/notes && git pull && cd $OLDPWD ; cd $HOME/notes/private && git pull && cd $OLDPWD"
+alias update-dotfiles="git -C $HOME/src/dotfiles pull"
+alias update-notes="git -C $HOME/notes pull ; git -C $HOME/notes/private pull"
 alias update-emacs="doom sync ; update-dotfiles ; update-notes"
 alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
 
