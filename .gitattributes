@@ -1,3 +1,6 @@
+# Binary files (NO TOUCHY)
+*.ttf binary
+
 # Custom for Visual Studio
 *.cs     diff=csharp
 *.sln    merge=union
