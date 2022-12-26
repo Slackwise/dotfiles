@@ -10,24 +10,24 @@
 ;;; Code:
 (package-initialize)
 
-; (load-theme 'vscode-dark-plus)
+; (load-theme 'vscode-dark-plus) ; loaded via doom's config
 
 (setq user-full-name "Adam Flanczewski"
       user-mail-address (concat "slackwise" "@" "slackwise.net"))
 
-;; Let Emacs traverse symlinks
+;; Let Emacs traverse symlinks:
 (setq find-file-visit-truename t)
 
-;; Keep the customize system from borking up this file.
+;; Keep the customize system from borking up this file:
 (setq-default
   custom-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.config/emacs/") "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
 
-;; Disable toolbar
-(tool-bar-mode -1)
+;; Disable toolbar:
+(tool-bar-mode -1) ; still accessible via F10
 
-;; Org/Roam
+;; Org/Roam:
 (setq org-directory (file-truename "~/notes"))
 (after! org (setq
              org-roam-directory (file-truename "~/notes")
@@ -35,11 +35,11 @@
                                            :target (file+head "${slug}.org"
                                                               "#+title: ${title}\n")
                                            :unnarrowed t))))
-; (org-roam-db-autosync-mode)
+; (org-roam-db-autosync-mode) ; unnecessary?
 
 (setq display-line-numbers-type 'relative)
 
-;; Set default font.
+;; Set default font:
 (add-to-list 'default-frame-alist
              '(font . "-GOOG-Roboto Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1"))
 
