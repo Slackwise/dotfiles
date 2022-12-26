@@ -187,6 +187,7 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
 # Command Aliases
 alias g='git'
+alias emacs-detached="emacs & disown %%"
 
 # Short Script Aliases
 alias wsl-guix-daemon-start="sudo -i -u root guix-daemon &"
