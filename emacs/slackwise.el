@@ -5,7 +5,7 @@
 
 
 ;; Author: Adam "Slackwise" Flanczewski
-;; Package-Requires: ((emacs "24.1") (s "1.13.1"))
+;; Package-Requires: ((emacs "27.1") (s "1.13.1"))
 ;; URL: https://github.com/Slackwise/dotfiles/
 
 ;;; Commentary:
@@ -33,11 +33,12 @@
 ;; Disable toolbar:
 (tool-bar-mode -1) ; still accessible via F10
 
-(defun concat-lines (&rest lines)
-  "Concatenate strings &LINES into one newline-seperated string."
-  (s-join "\n" lines))
-  ;(apply 'string-join (cons lines "\n"))
-  ;(seq-reduce (lambda (line s) (concat line s)) lines ""))
+;; Enable global tab bar:
+(global-tab-line-mode)
+
+(defvar concat-lines (apply-partially #'s-join "\n"))
+
+;; TODO: Override org-roam--title-to-slug: https://github.com/org-roam/org-roam/issues/686
 
 ;; Org/Roam:
 (setq org-directory (file-truename "~/notes"))
