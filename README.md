@@ -9,11 +9,6 @@ bin
 A directory I add to my `$PATH` on unix-y machines.
 
 
-binw
-----
-Same as `bin`, but only added on Windows machines.
-
-
 lib
 ---
 Various minor libraries I use for customization. These aren't
