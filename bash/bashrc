@@ -187,6 +187,7 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 
 # Command Aliases
 alias g='git'
+alias e="emacsclient -c -n --alternate-editor= "
 alias emacs-detached="emacs & disown %%"
 
 # Short Script Aliases
