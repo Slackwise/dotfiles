@@ -76,7 +76,7 @@
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
 ;; Configure Evil mode:
-(load "~/src/dotfiles/emacs/evil-mswin.el")
+(load "~/src/dotfiles/emacs/mswin.vim.el")
 ;; (load "~/src/dotfiles/emacs/evil-config.el") ; Do I really need to separate this?
 
 (provide 'slackwise)
