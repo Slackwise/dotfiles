@@ -86,6 +86,20 @@
 
 ;; Comment/Uncomment like in VS/VSCode:
 ;; #TODO: Create uncomment-line function??
+
+;; #WIP, untested:
+(defun comment-line-once ()
+  (when (not (evil-in-comment-p))
+    (comment-line)))
+
+(defun comment-region-once ()
+  (when (not (evil-in-comment-p))
+    (comment-region)))
+
+(defun uncomment-line ()
+  (when (evil-in-comment-p) ; Uncomment
+    (comment-line)))
+
 (define-key evil-insert-state-map (kbd "C-k") (make-sparse-keymap))
 (define-key evil-insert-state-map (kbd "C-k C-k") 'comment-line)
 (define-key evil-insert-state-map (kbd "C-k C-c") 'comment-line)
