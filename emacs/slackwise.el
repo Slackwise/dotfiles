@@ -81,7 +81,7 @@
 
 ;; Smush Windows, Vim, and Emacs/readline bindings into a muscle-memory friendly mush for insert mode:
 
-;; Find what akey is bound to using: https://www.gnu.org/software/emacs/manual/html_node/elisp/Functions-for-Key-Lookup.html
+;; Find what a key is bound to using: https://www.gnu.org/software/emacs/manual/html_node/elisp/Functions-for-Key-Lookup.html
 ;; Example: `(lookup-key (current-global-map) "\C-x\C-f")`
 
 ;; Comment/Uncomment like in VS/VSCode:
