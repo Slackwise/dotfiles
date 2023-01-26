@@ -79,5 +79,28 @@
 (load "~/src/dotfiles/emacs/mswin.vim.el")
 ;; (load "~/src/dotfiles/emacs/evil-config.el") ; Do I really need to separate this?
 
+;; Smush Windows, Vim, and Emacs/readline bindings into a muscle-memory friendly mush for insert mode:
+
+;; Find what akey is bound to using: https://www.gnu.org/software/emacs/manual/html_node/elisp/Functions-for-Key-Lookup.html
+;; Example: `(lookup-key (current-global-map) "\C-x\C-f")`
+
+;; Comment/Uncomment like in VS/VSCode:
+;; #TODO: Create uncomment-line function??
+(define-key evil-insert-state-map (kbd "C-k") (make-sparse-keymap))
+(define-key evil-insert-state-map (kbd "C-k C-k") 'comment-line)
+(define-key evil-insert-state-map (kbd "C-k C-c") 'comment-line)
+(define-key evil-insert-state-map (kbd "C-k C-u") 'comment-line)
+
+(define-key evil-normal-state-map (kbd "C-k") (make-sparse-keymap))
+(define-key evil-normal-state-map (kbd "C-k C-k") 'comment-line)
+(define-key evil-normal-state-map (kbd "C-k C-c") 'comment-line)
+(define-key evil-normal-state-map (kbd "C-k C-u") 'comment-line)
+
+(define-key evil-visual-state-map (kbd "C-k") (make-sparse-keymap))
+(define-key evil-normal-state-map (kbd "C-k C-k") 'comment-region)
+(define-key evil-visual-state-map (kbd "C-k C-c") 'comment-region)
+(define-key evil-visual-state-map (kbd "C-k C-u") 'comment-region)
+
+
 (provide 'slackwise)
 ;;; slackwise.el ends here
