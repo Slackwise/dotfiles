@@ -33,8 +33,8 @@
 ;; Disable toolbar:
 (tool-bar-mode -1) ; still accessible via F10
 
-;; Enable global tab bar:
-(global-tab-line-mode)
+;; Enable frame tab bar (not to be confused with "tab-line-mode" which is per window):
+(tab-bar-mode 1)
 
 (defvar concat-lines (apply-partially #'s-join "\n"))
 
