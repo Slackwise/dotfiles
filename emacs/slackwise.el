@@ -111,7 +111,7 @@
 (define-key evil-normal-state-map (kbd "C-k C-u") 'comment-line)
 
 (define-key evil-visual-state-map (kbd "C-k") (make-sparse-keymap))
-(define-key evil-normal-state-map (kbd "C-k C-k") 'comment-region)
+(define-key evil-visual-state-map (kbd "C-k C-k") 'comment-region)
 (define-key evil-visual-state-map (kbd "C-k C-c") 'comment-region)
 (define-key evil-visual-state-map (kbd "C-k C-u") 'comment-region)
 
