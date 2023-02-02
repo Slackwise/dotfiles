@@ -49,3 +49,6 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+;; Required for org-roam:
+(package! emacsql-sqlite :built-in 'prefer)
