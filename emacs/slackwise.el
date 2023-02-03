@@ -36,7 +36,8 @@
 ;; Enable frame tab bar (not to be confused with "tab-line-mode" which is per window):
 (tab-bar-mode 1)
 
-(defvar concat-lines (apply-partially #'s-join "\n"))
+(defun concat-lines (&rest lines)
+  (seq-reduce (lambda (a c) (concat a "\n" c)) (cdr lines) (car lines)))
 
 ;; TODO: Override org-roam--title-to-slug: https://github.com/org-roam/org-roam/issues/686
 
@@ -44,24 +45,25 @@
 (setq org-directory (file-truename "~/notes"))
 (after! org (setq
              org-roam-directory (file-truename "~/notes")
-             org-roam-capture-templates '(("d" "default" plain "%?"
+             org-roam-capture-templates `(("d" "default" plain "%?"
                                            :target (file+head "private/captures/${slug}.org"
-                                                              (concat-lines "#+title: ${title}"
+                                                              ,(concat-lines "#+title: ${title}"
                                                                             "#+filetags: private captures"))
                                            :unnarrowed t)
                                           ("p" "private" plain "%?"
                                            :target (file+head "private/${slug}.org"
-                                                              (concat-lines "#+title: ${title}"
+                                                              ,(concat-lines "#+title: ${title}"
                                                                             "#+filetags: private"))
                                            :unnarrowed t)
                                           ("w" "work" plain "%?"
                                            :target (file+head "private/work/${slug}.org"
-                                                              (concat-lines "#+title: ${title}"
+                                                              ,(concat-lines "#+title: ${title}"
                                                                             "#+filetags: private work"))
                                            :unnarrowed t)
                                           ("n" "public" plain "%?"
                                            :target (file+head "${slug}.org"
-                                                              "#+title: ${title}")
+                                                               ,(concat-lines "#+title: ${title}"
+                                                                            "#+filetags: "))
                                            :unnarrowed t))))
 ; (org-roam-db-autosync-mode) ; unnecessary?
 
