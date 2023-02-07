@@ -39,34 +39,6 @@
 (defun concat-lines (&rest lines)
   (seq-reduce (lambda (a c) (concat a "\n" c)) (cdr lines) (car lines)))
 
-;; TODO: Override org-roam--title-to-slug: https://github.com/org-roam/org-roam/issues/686
-
-;; Org/Roam:
-(setq org-directory (file-truename "~/notes"))
-(after! org (setq
-             org-roam-directory (file-truename "~/notes")
-             org-roam-capture-templates `(("d" "default" plain "%?"
-                                           :target (file+head "private/captures/${slug}.org"
-                                                              ,(concat-lines "#+title: ${title}"
-                                                                            "#+filetags: private captures"))
-                                           :unnarrowed t)
-                                          ("p" "private" plain "%?"
-                                           :target (file+head "private/${slug}.org"
-                                                              ,(concat-lines "#+title: ${title}"
-                                                                            "#+filetags: private"))
-                                           :unnarrowed t)
-                                          ("w" "work" plain "%?"
-                                           :target (file+head "private/work/${slug}.org"
-                                                              ,(concat-lines "#+title: ${title}"
-                                                                            "#+filetags: private work"))
-                                           :unnarrowed t)
-                                          ("n" "public" plain "%?"
-                                           :target (file+head "${slug}.org"
-                                                               ,(concat-lines "#+title: ${title}"
-                                                                            "#+filetags: "))
-                                           :unnarrowed t))))
-; (org-roam-db-autosync-mode) ; unnecessary?
-
 (setq display-line-numbers-type 'relative)
 
 ;; Set default font:
@@ -90,6 +62,50 @@
 (define-key evil-insert-state-map (kbd "C-/") 'comment-line)
 (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
 (define-key evil-visual-state-map (kbd "C-/") 'comment-region)
+
+
+;; Org/Roam:
+(setq org-directory (file-truename "~/notes"))
+(after! org
+  ;; Override org-roam--title-to-slug: https://github.com/org-roam/org-roam/issues/686
+  (defun org-roam--title-to-slug (title)
+    "Convert TITLE to a filename-suitable slug. Uses hyphens rather than underscores."
+    (cl-flet* ((nonspacing-mark-p (char)
+                                  (eq 'Mn (get-char-code-property char 'general-category)))
+               (strip-nonspacing-marks (s)
+                                       (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                   (ucs-normalize-NFD-string s))))
+               (cl-replace (title pair)
+                           (replace-regexp-in-string (car pair) (cdr pair) title)))
+      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric
+                      ("--*" . "-")  ;; remove sequential underscores
+                      ("^-" . "")  ;; remove starting underscore
+                      ("-$" . "")))  ;; remove ending underscore
+             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+        (s-downcase slug))))
+  (setq org-roam-directory (file-truename "~/notes")
+        org-roam-capture-templates `(("d" "default" plain "%?"
+                                 :target (file+head "private/captures/${slug}.org"
+                                                    ,(concat-lines "#+title: ${title}"
+                                                                   "#+filetags: private captures"))
+                                 :unnarrowed t)
+                                ("p" "private" plain "%?"
+                                 :target (file+head "private/${slug}.org"
+                                                    ,(concat-lines "#+title: ${title}"
+                                                                   "#+filetags: private"))
+                                 :unnarrowed t)
+                                ("w" "work" plain "%?"
+                                 :target (file+head "private/work/${slug}.org"
+                                                    ,(concat-lines "#+title: ${title}"
+                                                                   "#+filetags: private work"))
+                                 :unnarrowed t)
+                                ("n" "public" plain "%?"
+                                 :target (file+head "${slug}.org"
+                                                    ,(concat-lines "#+title: ${title}"
+                                                                   "#+filetags: "))
+                                 :unnarrowed t))))
+                                        ; (org-roam-db-autosync-mode) ; unnecessary?
+
 
 (provide 'slackwise)
 ;;; slackwise.el ends here
