@@ -68,6 +68,7 @@
 (setq org-directory (file-truename "~/notes"))
 (after! org
   ;; Override how org-roam generates filenames/slugs, replacing its underscores with hyphens/dashes:
+  ;; (Solution found on Reddit: https://www.reddit.com/r/emacs/comments/omxl6n/config_for_orgroam_v2/ )
   (cl-defmethod org-roam-node-slug ((node org-roam-node))
     (let ((title (org-roam-node-title node))
           (slug-trim-chars '(;; Combining Diacritical Marks https://www.unicode.org/charts/PDF/U0300.pdf
