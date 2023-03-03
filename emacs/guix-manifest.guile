@@ -5,7 +5,8 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "emacs-org-roam"
+  (list "ripgrep"
+        "emacs-org-roam"
         "emacs"
         "emacs-sqlite"
         "emacs-all-the-icons"))
