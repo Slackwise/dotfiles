@@ -199,6 +199,7 @@ alias update-guix="guix pull && guix upgrade"
 alias update-dotfiles="git -C $HOME/src/dotfiles pull"
 alias update-notes="git -C $HOME/notes pull ; git -C $HOME/notes/private pull"
 alias update-emacs="update-dotfiles ; update-notes ; doom up"
+alias update-system="update-ubuntu ; update-guix"
 alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
 
 
