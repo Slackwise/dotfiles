@@ -109,6 +109,7 @@
                              (replace-regexp-in-string (car pair) (cdr pair) title)))
         (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")
                         ("--*" . "-")
+                        (" " . "-")
                         ("^-" . "")
                         ("-$" . "")))
                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
