@@ -49,6 +49,12 @@
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
+;; Web mode settings:
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-enable-auto-closing nil)))
+
 ;; Configure Evil mode:
 (load "~/src/dotfiles/emacs/mswin.vim.el")
 ;; (load "~/src/dotfiles/emacs/evil-config.el") ; Do I really need to separate this?
