@@ -6,8 +6,7 @@
 
 (specifications->manifest
   (list "emacs-emacsql-sqlite3"
-        "fd"
         "emacs"
+        "fd"
         "emacs-all-the-icons"
-        "gcc"
         "ripgrep"))

@@ -72,6 +72,7 @@
 
 ;; Org/Roam:
 (setq org-directory (file-truename "~/notes"))
+(setq emacsql-sqlite-executable "~/.guix-profile/bin/emacsql-sqlite")
 (after! org
   ;; Override how org-roam generates filenames/slugs, replacing its underscores with hyphens/dashes:
   ;; (Solution found on Reddit: https://www.reddit.com/r/emacs/comments/omxl6n/config_for_orgroam_v2/ )
@@ -107,11 +108,11 @@
                                                                       (ucs-normalize-NFD-string s)))))
                  (cl-replace (title pair)
                              (replace-regexp-in-string (car pair) (cdr pair) title)))
-        (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")
-                        ("--*" . "-")
-                        (" " . "-")
-                        ("^-" . "")
-                        ("-$" . "")))
+        (let* ((pairs `((" " . "-")     ; Replace spaces with dashes
+                        ("--*" . "-")   ; Replace double dashes with a single
+                        ("^-" . "")     ; Remove starting dash
+                        ("-$" . "")     ; Remove trailing dash
+                        ("[^[:alnum:][:digit:]]" . "")))   ; Remove other chars
                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
           (downcase slug)))))
   (setq org-roam-directory (file-truename "~/notes")
