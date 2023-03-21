@@ -194,7 +194,7 @@ alias emacs-detached="emacs & disown %%"
 # Short Script Aliases
 alias wsl-guix-daemon-start="sudo -i -u root guix-daemon &"
 alias wsl-guix-daemon-stop="sudo -i -u root killall -9 guix-daemon"
-alias update-ubuntu="sudo -s eval 'apt update && apt dist-upgrade -y'"
+alias update-ubuntu="sudo -s eval 'NEEDRESTART_MODE=a apt update && apt dist-upgrade -y'"
 alias update-guix="guix pull && guix upgrade"
 alias update-dotfiles="git -C $HOME/src/dotfiles pull"
 alias update-notes="git -C $HOME/notes pull ; git -C $HOME/notes/private pull"
