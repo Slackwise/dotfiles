@@ -77,10 +77,11 @@
   ;; Override how org-roam generates filenames/slugs, replacing its underscores with hyphens/dashes:
   ;; (Solution found on Reddit: https://www.reddit.com/r/emacs/comments/omxl6n/config_for_orgroam_v2/ )
   (cl-defmethod org-roam-node-slug ((node org-roam-node))
+    "Return the slug of NODE."
     (let ((title (org-roam-node-title node))
           (slug-trim-chars '(;; Combining Diacritical Marks https://www.unicode.org/charts/PDF/U0300.pdf
-                             768    ; U+0300 COMBINING GRAVE ACCENT
-                             769    ; U+0301 COMBINING ACUTE ACCENT
+                             768 ; U+0300 COMBINING GRAVE ACCENT
+                             769 ; U+0301 COMBINING ACUTE ACCENT
                              770 ; U+0302 COMBINING CIRCUMFLEX ACCENT
                              771 ; U+0303 COMBINING TILDE
                              772 ; U+0304 COMBINING MACRON
@@ -89,6 +90,7 @@
                              776 ; U+0308 COMBINING DIAERESIS
                              777 ; U+0309 COMBINING HOOK ABOVE
                              778 ; U+030A COMBINING RING ABOVE
+                             779 ; U+030B COMBINING DOUBLE ACUTE ACCENT
                              780 ; U+030C COMBINING CARON
                              795 ; U+031B COMBINING HORN
                              803 ; U+0323 COMBINING DOT BELOW
@@ -100,19 +102,16 @@
                              816 ; U+0330 COMBINING TILDE BELOW
                              817 ; U+0331 COMBINING MACRON BELOW
                              )))
-      (cl-flet* ((nonspacing-mark-p (char)
-                                    (memq char slug-trim-chars))
-                 (strip-nonspacing-marks (s)
-                                         (ucs-normalize-NFC-string
-                                          (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                      (ucs-normalize-NFD-string s)))))
-                 (cl-replace (title pair)
-                             (replace-regexp-in-string (car pair) (cdr pair) title)))
-        (let* ((pairs `((" " . "-")     ; Replace spaces with dashes
-                        ("--*" . "-")   ; Replace double dashes with a single
-                        ("^-" . "")     ; Remove starting dash
-                        ("-$" . "")     ; Remove trailing dash
-                        ("[^[:alnum:][:digit:]]" . "")))   ; Remove other chars
+      (cl-flet* ((nonspacing-mark-p (char) (memq char slug-trim-chars))
+                 (strip-nonspacing-marks (s) (string-glyph-compose
+                                              (apply #'string
+                                                     (seq-remove #'nonspacing-mark-p
+                                                                 (string-glyph-decompose s)))))
+                 (cl-replace (title pair) (replace-regexp-in-string (car pair) (cdr pair) title)))
+        (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-") ;; convert anything not alphanumeric
+                        ("__*" . "-")                   ;; remove sequential dashes
+                        ("^_" . "")                     ;; remove starting dash
+                        ("_$" . "")))                   ;; remove ending dash
                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
           (downcase slug)))))
   (setq org-roam-directory (file-truename "~/notes")
