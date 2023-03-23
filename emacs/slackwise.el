@@ -53,6 +53,8 @@
 (add-hook 'web-mode-hook
           (lambda ()
             (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-css-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)
             (setq web-mode-enable-auto-closing nil)))
 
 ;; Configure Evil mode:
