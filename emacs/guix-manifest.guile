@@ -5,8 +5,10 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (specifications->manifest
-  (list "emacs-emacsql-sqlite3"
-        "emacs"
+  (list "ispell"
+        "emacs-emacsql-sqlite3"
         "fd"
+        "emacs"
         "emacs-all-the-icons"
+        "gcc"
         "ripgrep"))
