@@ -1,11 +1,6 @@
-# This is Git's per-user configuration file.
 [user]
 	email = 76595+Slackwise@users.noreply.github.com
 	name = Adam Flanczewski
-# Please adapt and uncomment the following lines:
-#	name = Adam Flanczewski
-#	email = slackwise@F01-LAP-0139.corp.falconinsgroup.com
-
 [core]
 	autocrlf = false
 	eol = lf
