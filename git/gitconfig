@@ -20,5 +20,6 @@
 	c = commit -am
 	p = push
 	l = log --stat
+# Requires Git version >= 2.36
 [includeIf "hasconfig:remote.*.url:https://aflanczewski@bitbucket.org/**"]
     path = gitconfig-work
