@@ -1,0 +1,30 @@
+# This is Git's per-user configuration file.
+[user]
+	email = 76595+Slackwise@users.noreply.github.com
+	name = Adam Flanczewski
+# Please adapt and uncomment the following lines:
+#	name = Adam Flanczewski
+#	email = slackwise@F01-LAP-0139.corp.falconinsgroup.com
+
+[core]
+	autocrlf = false
+	eol = lf
+	editor = vim
+[color]
+	ui = always
+[diff]
+	tool = vimdiff
+	merge = vimdiff
+[difftool]
+	prompt = false
+[init]
+	defaultBranch = main
+[pull]
+	rebase = merges
+[alias]
+	c = commit -am
+	p = push
+	l = log --stat
+
+[includeIf "gitdir:~/win/src/"]
+    path = ~/win/.gitconfig
