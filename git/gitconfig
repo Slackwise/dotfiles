@@ -25,5 +25,5 @@
 	c = commit -am
 	p = push
 	l = log --stat
-[includeIf "hasconfig:remote.*.url:*bitbucket*"]
+[includeIf "hasconfig:remote.*.url:https://aflanczewski@bitbucket.org/**"]
     path = gitconfig-work
