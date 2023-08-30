@@ -1,0 +1,11 @@
+[user]
+	email = aflanczewski@falconinsgroup.com
+[init]
+	defaultBranch = master
+[core]
+	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

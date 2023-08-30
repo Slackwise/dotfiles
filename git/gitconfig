@@ -25,6 +25,5 @@
 	c = commit -am
 	p = push
 	l = log --stat
-
-[includeIf "gitdir:~/win/src/"]
-    path = ~/win/.gitconfig
+[includeIf "hasconfig:remote.*.url:*bitbucket*"]
+    path = gitconfig-work
