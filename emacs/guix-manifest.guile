@@ -11,4 +11,6 @@
         "emacs"
         "emacs-all-the-icons"
         "gcc"
+        "git"
+	"nss-certs"
         "ripgrep"))
