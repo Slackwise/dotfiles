@@ -3,7 +3,6 @@
 [init]
 	defaultBranch = master
 [core]
-	autocrlf = true
 	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
 [filter "lfs"]
 	process = git-lfs filter-process
