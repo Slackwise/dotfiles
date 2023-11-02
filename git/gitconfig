@@ -16,6 +16,10 @@
 	defaultBranch = main
 [pull]
 	rebase = merges
+[merge]
+	autoStash = true
+[rebase]
+	autoStash = true
 [alias]
 	c = commit -am
 	p = push
