@@ -208,7 +208,9 @@ alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
 # Enable fancier auto-complete
 bind 'set show-all-if-ambiguous on' # Still list files if no match
 bind 'TAB:menu-complete'
-
+bind 'set menu-complete-display-prefix on'
+bind 'set colored-completion-prefix on'
+bind 'set colored-stats on'
 
 export Sw_BASHRC_READ=true # To know that my personal bashrc was read fully!
 debug "bashrc finished processing."
