@@ -203,6 +203,9 @@ alias update-emacs="update-dotfiles ; update-notes ; doom up --force"
 alias update-system="update-ubuntu ; update-guix"
 alias update-wsl="update-ubuntu ; update-guix ; update-emacs"
 
+# Options:
+shopt -s autocd # Automatically `cd` into directories you type out (never use `cd` again!)
+
 # Keybinds:
 
 # Enable fancier auto-complete
