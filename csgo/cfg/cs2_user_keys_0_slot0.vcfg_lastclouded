@@ -1,0 +1,23 @@
+"config"
+{
+	"bindings"
+	{
+		"1"		"<unbound>"
+		"MWHEELUP"		"slot1"
+		"2"		"<unbound>"
+		"MWHEELDOWN"		"slot2"
+		"3"		"<unbound>"
+		"MOUSE3"		"slot3"
+		"6"		"<unbound>"
+		"q"		"slot6"
+		"7"		"<unbound>"
+		"f"		"slot7"
+		"8"		"<unbound>"
+		"g"		"slot8"
+		"9"		"<unbound>"
+		"x"		"slot9"
+		"0"		"<unbound>"
+		"c"		"slot10"
+		"z"		"slot11"
+	}
+}
