@@ -26,5 +26,5 @@
 	l = log --stat
 	delete-last-commit = reset HEAD^
 # Requires Git version >= 2.36
-[includeIf "hasconfig:remote.*.url:https://aflanczewski@bitbucket.org/**"]
+[includeIf "hasconfig:remote.*.url:https://*bitbucket.org/**"]
     path = gitconfig-work
