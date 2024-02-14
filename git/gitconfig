@@ -26,6 +26,7 @@
 	l = log --stat
 	whoami = config user.email
 	delete-last-commit = reset HEAD^
+	pull-branch = fetch origin # Pull a branch while not switching to it
 # Requires Git version >= 2.36
 [includeIf "hasconfig:remote.*.url:https://*bitbucket.org/**"]
     path = gitconfig-work
