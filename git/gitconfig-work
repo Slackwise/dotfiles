@@ -1,5 +1,14 @@
 [user]
 	email = aflanczewski@falconinsgroup.com
+[diff]
+	tool = vscode
+	merge = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
 [init]
 	defaultBranch = master
 [core]
