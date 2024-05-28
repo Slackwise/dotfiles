@@ -1,0 +1,15 @@
+[user]
+	email = 76595+Slackwise@users.noreply.github.com
+[diff]
+	tool = vscode
+	merge = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[init]
+	defaultBranch = main
+[core]
+	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait

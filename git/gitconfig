@@ -1,5 +1,4 @@
 [user]
-	email = 76595+Slackwise@users.noreply.github.com
 	name = Adam Flanczewski
 [core]
 	autocrlf = false
@@ -7,19 +6,22 @@
 	editor = vim
 [color]
 	ui = always
-[diff]
-	tool = vimdiff
-	merge = vimdiff
+# [diff]
+# 	tool = vimdiff
+# 	merge = vimdiff
 [difftool]
 	prompt = false
-[init]
-	defaultBranch = main
 [pull]
 	rebase = merges
 [merge]
 	autoStash = true
 [rebase]
 	autoStash = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 [alias]
 	c = commit -am
 	p = push
@@ -29,7 +31,16 @@
 	pull-branch = fetch origin # Pull a branch while not switching to it
 	squish-last-two = reset --soft HEAD~2
 
-# Requires Git version >= 2.36
+
+# The following conditional configs require Git version >= 2.36
+
+# Personal repo configs:
+[includeIf "hasconfig:remote.*.url:https://*github.com/**"]
+    path = gitconfig-personal
+[includeIf "hasconfig:remote.*.url:*@github.com:*/**"]
+    path = gitconfig-personal
+
+# Work repo configs:
 [includeIf "hasconfig:remote.*.url:https://*bitbucket.org/**"]
     path = gitconfig-work
 [includeIf "hasconfig:remote.*.url:*@bitbucket.org:*/**"]

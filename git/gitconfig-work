@@ -1,20 +1,6 @@
 [user]
 	email = aflanczewski@falconinsgroup.com
-[diff]
-	tool = vscode
-	merge = vscode
-[difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
-[merge]
-	tool = vscode
-[mergetool "vscode"]
-	cmd = code --wait $MERGED
 [init]
 	defaultBranch = master
 [core]
 	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
