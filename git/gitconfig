@@ -35,12 +35,16 @@
 # The following conditional configs require Git version >= 2.36
 
 # Personal repo configs:
-[includeIf "hasconfig:remote.*.url:https://*github.com/**"]
+[includeIf "hasconfig:remote.*.url:https://*github.com/Slackwise/**"]
     path = gitconfig-personal
-[includeIf "hasconfig:remote.*.url:*@github.com:*/**"]
+[includeIf "hasconfig:remote.*.url:*@github.com:Slackwise/**"]
     path = gitconfig-personal
 
 # Work repo configs:
+[includeIf "hasconfig:remote.*.url:https://*github.com/Talon-Financial-Services-LLC/**"]
+    path = gitconfig-work
+[includeIf "hasconfig:remote.*.url:*@github.com:Talon-Financial-Services-LLC/**"]
+    path = gitconfig-work
 [includeIf "hasconfig:remote.*.url:https://*bitbucket.org/**"]
     path = gitconfig-work
 [includeIf "hasconfig:remote.*.url:*@bitbucket.org:*/**"]
