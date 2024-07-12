@@ -28,6 +28,7 @@
 	l = log --stat
 	whoami = config user.email
 	delete-last-commit = reset HEAD^
+	delete-all-pending-changes = reset --hard
 	pull-branch = fetch origin # Pull a branch while not switching to it
 	squish-last-two = reset --soft HEAD~2
 
