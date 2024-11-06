@@ -15,6 +15,7 @@
 	rebase = merges
 [merge]
 	autoStash = true
+	ff = false
 [rebase]
 	autoStash = true
 [filter "lfs"]
