@@ -24,4 +24,16 @@ if "%current_mode%"=="0x1" (
 REM Force an update by refreshing the theme
 RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters
 
+
+REM Check Windows version and restart Explorer only if Windows 11
+for /f "tokens=6 delims=[.] " %%i in ('ver') do (
+    :: Check build number:
+    echo "%%i"
+    if %%i GEQ 22000 (
+        echo Windows 11 detected; restarting Explorer to apply theme changes...
+        taskkill /f /im explorer.exe
+        start explorer.exe
+    )
+)
+
 endlocal
