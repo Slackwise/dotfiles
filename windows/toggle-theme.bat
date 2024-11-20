@@ -28,7 +28,7 @@ RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters
 REM Check Windows version and restart Explorer only if Windows 11
 for /f "tokens=6 delims=[.] " %%i in ('ver') do (
     :: Check build number:
-    echo "%%i"
+    REM echo "%%i"
     if %%i GEQ 22000 (
         echo Windows 11 detected; restarting Explorer to apply theme changes...
         taskkill /f /im explorer.exe
