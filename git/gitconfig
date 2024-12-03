@@ -27,6 +27,7 @@
 	c = commit -am
 	p = push
 	l = log --stat
+	unstage = restore --staged
 	whoami = config user.email
 	delete-last-commit = reset HEAD^
 	delete-all-pending-changes = reset --hard
