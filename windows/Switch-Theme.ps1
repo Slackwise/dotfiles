@@ -102,3 +102,7 @@ $SMTO_ABORTIFHUNG = 0x0002
 #     Stop-Process -Name "explorer" -Force
 #     Start-Process "explorer"
 # }
+
+
+# Close the PowerShell window we don't need:
+exit 0
