@@ -4,3 +4,4 @@
 	defaultBranch = master
 [core]
 	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
