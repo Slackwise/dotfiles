@@ -33,6 +33,8 @@
 	delete-all-pending-changes = reset --hard
 	pull-branch = fetch origin # Pull a branch while not switching to it
 	squish-last-two = reset --soft HEAD~2
+	merge-all-incoming = git merge --strategy-option=theirs
+	merge-some-incoming = git merge --strategy-option=ours
 
 
 # The following conditional configs require Git version >= 2.36
