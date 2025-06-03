@@ -28,9 +28,11 @@ debug "Global variables exported."
 
 
 # WSL JUNK ----------------------------------------------------------------{{{
-if [[ -n WSL_DISTRO_NAME ]]; then
+if [[ -n $WSL_DISTRO_NAME ]]; then
+  debug "Detected WSL, retrieving WSL variables..."
   export WINDOWS_USERNAME=$(cmd.exe /q /d /c "echo %USERNAME%" 2> /dev/null)
   export WINDOWS_USERPROFILE=$(cmd.exe /q /d /c "echo %USERPROFILE%" 2> /dev/null)
+  debug "Exported WSL variables."
 fi
 #----------------------------------------------------------------------------}}}
 
@@ -120,8 +122,12 @@ fi
 
 P "\w" # Add full working directory
 
+P "$cyan`__git_ps1`$neutre" # Add git branch info if in a git repo
+
+P "\n" # Add a newline before the prompt because directories tend to take up too much space
+
 if [[ $is_unicode_term ]]; then
-  P $green$LAMBDA$neutre
+  P "$green$LAMBDA$neutre"
   debug "Is unicode terminal."
 else
   P "$green\$$neutre"
@@ -217,5 +223,5 @@ bind 'set colored-completion-prefix on'
 bind 'set colored-stats on'
 
 export Sw_BASHRC_READ=true # To know that my personal bashrc was read fully!
-debug "bashrc finished processing."
+debug "Finished bashrc processing."
 unset -f debug
