@@ -81,9 +81,15 @@ if [[ $LANG == "en_US.UTF-8" ]]; then
 fi
 
 # Color Escapes
-white_on_red="\[\e[41m\]"
+black="\[\e[30m\]"
+red="\[\e[31m\]"
 green="\[\e[32m\]"
+yellow="\[\e[33m\]"
+blue="\[\e[34m\]"
+purple="\[\e[35m\]"
 cyan="\[\e[36m\]"
+white="\[\e[37m\]"
+white_on_red="\[\e[41m\]"
 neutre="\[\e[m\]" # Reset to neutral color
 
 debug "Local variables read."
