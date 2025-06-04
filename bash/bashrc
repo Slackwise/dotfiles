@@ -136,6 +136,11 @@ fi
 
 P "$cyan\w$neutre" # Add full working directory
 
+function my_prompt_command() {
+  # Need to replace $PS1 value and re-export it... 
+}
+PROMPT_COMMAND='my_prompt_command'
+
 P "$cyan$(__git_ps1 " (%s)")$neutre" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
