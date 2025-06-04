@@ -147,7 +147,7 @@ function my_prompt_command() {
     # We pass " (%s)" to __git_ps1, meaning it will output " (branch_name_with_indicators)"
     # or an empty string if not in a Git repo.
     # We also apply a color (Cyan) to the Git branch info.
-    git_branch_output="$(__git_ps1 " \[\e[36m\](%s)\[\e[0m\]")"
+    git_branch_output="$(__git_ps1 " (%s)")"
   fi
 
   # Replace "--GITPS1--" in the base template with the actual Git branch info.
