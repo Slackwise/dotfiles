@@ -49,11 +49,7 @@ debug "Sourced system bashrc."
 # GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
 function command_exists
 {
-  if command -v $1 >/dev/null; then
-    return 0
-  else
-    return 1
-  fi
+  type "$1" &> /dev/null ;
 }
 
 dreamhost_shared_hostname="elmonica"
@@ -111,12 +107,19 @@ else
   debug "Not root user."
 fi
 
-if [[ "$USER" == "slackwise" ]]; then
-  debug "Is user 'slackwise'."
+# Check if $USER is not set or is empty, AND $USERNAME is set and not empty
+# This is primarily an issue for "Git Bash" on Windows.
+if [[ -z "$USER" && -n "$USERNAME" ]]; then
+  export USER="$USERNAME"
+fi
+
+if [[ "$USER" == "slackwise" || "$USER" == "aflanczewski" ]]; then
+  debug "Is default user '$USER'."
 else
   P "$cyan\u$neutre";
-  debug "Not user 'slackwise'."
+  debug "Not my default user, so display username '$USER'."
 fi
+
 
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
@@ -126,7 +129,7 @@ else
   debug "Not SSH connection."
 fi
 
-P "\w" # Add full working directory
+P "$cyan\w$neutre" # Add full working directory
 
 P "$cyan`__git_ps1`$neutre" # Add git branch info if in a git repo
 
@@ -177,6 +180,16 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   debug "RVM config loaded."
 else
   debug "RVM config skipped."
+fi
+#----------------------------------------------------------------------------}}}
+
+
+# FNM CONFIG ----------------------------------------------------------------{{{
+if command_exists fnm; then
+  eval "$(fnm env --use-on-cd --shell bash)"
+  debug "Fast Node Manager (FNM) config loaded."
+else
+  debug "Fast Node Manager (FNM) config skipped."
 fi
 #----------------------------------------------------------------------------}}}
 
