@@ -52,6 +52,11 @@ function command_exists
   type "$1" &> /dev/null ;
 }
 
+# Function to check if a file exists and is readable
+file_exists_readable() {
+  [[ -f "$1" && -r "$1" ]]
+}
+
 dreamhost_shared_hostname="elmonica"
 if [[ $HOSTNAME == $dreamhost_shared_hostname ]]; then
   function http_errors
@@ -131,7 +136,7 @@ fi
 
 P "$cyan\w$neutre" # Add full working directory
 
-P "$cyan`__git_ps1`$neutre" # Add git branch info if in a git repo
+P "$cyan$(__git_ps1 " (%s)")$neutre" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
