@@ -137,22 +137,8 @@ fi
 P "$cyan\w$neutre" # Add full working directory
 
 function my_prompt_command() {
-  # Need to replace $PS1 value and re-export it... 
-  local git_branch_output=""
-
-  # Check if __git_ps1 is available and if we are in a Git repository.
-  # The `type __git_ps1 &>/dev/null` ensures the function is loaded.
-  if type __git_ps1 &>/dev/null; then
-    # Capture the output of __git_ps1.
-    # We pass " (%s)" to __git_ps1, meaning it will output " (branch_name_with_indicators)"
-    # or an empty string if not in a Git repo.
-    # We also apply a color (Cyan) to the Git branch info.
-    git_branch_output="$(__git_ps1 " (%s)")"
-  fi
-
-  # Replace "--GITPS1--" in the base template with the actual Git branch info.
-  # If $git_branch_output is empty (not in a Git repo), "GITPS1" will be replaced by nothing.
-  export PS1="${UNPROCESSED_PROMPT//GITPS1/$git_branch_output}"
+  # Not necessary anymore, but leaving this in case I need it in the future.
+  return 0;
 }
 export PROMPT_COMMAND='my_prompt_command'
 
@@ -162,7 +148,7 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM="auto" # or "verbose", "true", "git"
 export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
-P "${cyan}GITPS1${neutre}" # Add git branch info if in a git repo
+P "$cyan\`__git_ps1\`$neutre" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
@@ -178,7 +164,7 @@ P " " # Add a trailing blank to give space for commands
 
 if [[ $is_root_user ]]; then P $neutre; fi
 
-export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
+# export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
 unset -f P # Remove our temporary utility function
 debug "Prompt created."
 #----------------------------------------------------------------------------}}}
