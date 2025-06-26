@@ -97,12 +97,29 @@ debug "Local variables read."
 #----------------------------------------------------------------------------}}}
 
 
+
 # BUILD UP A CUSTOM PROMPT --------------------------------------------------{{{
 export PS1=""
 function P
 {
   export PS1=$PS1$1
 }
+
+# Bracket:
+
+# Two-line curly brace:
+# BRACE1=$'\u23B0'
+# BRACE2=$'\u23B1'
+
+# Box brace:
+# BRACE1=$'\u250C'
+# BRACE2=$'\u2514'
+
+# Rounded box brace:
+BRACE1=$'\u256D'
+BRACE2=$'\u2570'
+
+P "$BRACE1"
 
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
@@ -151,6 +168,8 @@ export GIT_PS1_FULL_DESC=1
 P "$cyan\`__git_ps1\`$neutre" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
+
+P "$BRACE2"
 
 if [[ $is_unicode_term ]]; then
   P "$green$LAMBDA$neutre"
