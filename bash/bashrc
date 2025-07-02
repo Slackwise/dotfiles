@@ -123,6 +123,7 @@ BOX_LINE=$'\u2500'
 
 P "$black_hi"
 P "$BRACE1"
+P "$BOX_LINE"
 
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
