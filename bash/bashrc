@@ -83,6 +83,7 @@ fi
 
 # Color Escapes
 black="\[\e[30m\]"
+black_hi="\[\e[0;90m\]"
 red="\[\e[31m\]"
 green="\[\e[32m\]"
 yellow="\[\e[33m\]"
@@ -118,7 +119,9 @@ function P
 # Rounded box brace:
 BRACE1=$'\u256D'
 BRACE2=$'\u2570'
+BOX_LINE=$'\u2500'
 
+P "$black_hi"
 P "$BRACE1"
 
 # If root, highlight in bright red:
@@ -138,20 +141,20 @@ fi
 if [[ "$USER" == "slackwise" || "$USER" == "aflanczewski" ]]; then
   debug "Is default user '$USER'."
 else
-  P "$cyan\u$neutre";
+  P "\u";
   debug "Not my default user, so display username '$USER'."
 fi
 
 
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
-  P "$cyan@\H$neutre"
+  P "@\H"
   debug "Is SSH connection."
 else
   debug "Not SSH connection."
 fi
 
-P "$cyan\w$neutre" # Add full working directory
+P "$BOX_LINE(\w)$BOX_LINE" # Add full working directory
 
 function my_prompt_command() {
   # Not necessary anymore, but leaving this in case I need it in the future.
@@ -165,7 +168,7 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM="auto" # or "verbose", "true", "git"
 export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
-P "$cyan\`__git_ps1\`$neutre" # Add git branch info if in a git repo
+P "\`__git_ps1\`" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
@@ -179,6 +182,7 @@ else
   debug "Not unicode terminal."
 fi
 
+P "$neutre" # Reset color to neutral
 P " " # Add a trailing blank to give space for commands
 
 if [[ $is_root_user ]]; then P $neutre; fi
