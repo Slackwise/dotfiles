@@ -118,6 +118,7 @@ function P
 
 # Rounded box brace:
 BRACE1=$'\u256D'
+#EXAMPLE_8DIGIT_UNICODE=$'\U0001FBE1'
 BRACE2=$'\u2570'
 BOX_LINE=$'\u2500'
 
