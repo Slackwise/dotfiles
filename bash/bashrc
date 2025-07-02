@@ -84,6 +84,7 @@ fi
 # Color Escapes
 black="\[\e[30m\]"
 black_hi="\[\e[0;90m\]"
+black_hi_bg="\[\e[0;100m\]"
 red="\[\e[31m\]"
 green="\[\e[32m\]"
 yellow="\[\e[33m\]"
