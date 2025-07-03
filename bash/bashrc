@@ -113,6 +113,10 @@ function P
 # BRACE1=$'\u23B0'
 # BRACE2=$'\u23B1'
 
+# Two-line parenthesis brace:
+# BRACE1=$'\U000239B'
+# BRACE2=$'\U000239D'
+
 # Box brace:
 # BRACE1=$'\u250C'
 # BRACE2=$'\u2514'
@@ -141,7 +145,7 @@ if [[ -z "$USER" && -n "$USERNAME" ]]; then
   export USER="$USERNAME"
 fi
 
-if [[ "$USER" == "slackwise" || "$USER" == "aflanczewski" ]]; then
+if [[ "$USER" == "slackwise" || "$USER" == "Slackwise" || "$USER" == "aflanczewski" ]]; then
   debug "Is default user '$USER'."
 else
   P "\u";
