@@ -126,9 +126,12 @@ BRACE1=$'\u256D'
 #EXAMPLE_8DIGIT_UNICODE=$'\U0001FBE1'
 BRACE2=$'\u2570'
 BOX_LINE=$'\u2500'
+BOX_LINE_LEFT_END=$'\u2576'
+BOX_LINE_RIGHT_END=$'\u2574'
 
 P "$black_hi"
 P "$BRACE1"
+P "$BOX_LINE"
 P "$BOX_LINE"
 
 # If root, highlight in bright red:
@@ -138,6 +141,13 @@ if [[ $is_root_user ]]; then
 else
   debug "Not root user."
 fi
+
+# Add timestamp:
+P "$BOX_LINE_RIGHT_END"
+P "\@"
+P "$BOX_LINE_LEFT_END"
+P "$BOX_LINE"
+P "$BOX_LINE"
 
 # Check if $USER is not set or is empty, AND $USERNAME is set and not empty
 # This is primarily an issue for "Git Bash" on Windows.
@@ -161,7 +171,7 @@ else
   debug "Not SSH connection."
 fi
 
-P "$BOX_LINE(\w)$BOX_LINE" # Add full working directory
+P "$BOX_LINE_RIGHT_END\w" # Add full working directory
 
 function my_prompt_command() {
   # Not necessary anymore, but leaving this in case I need it in the future.
@@ -180,6 +190,7 @@ P "\`__git_ps1\`" # Add git branch info if in a git repo
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
 P "$BRACE2"
+P "$BOX_LINE_RIGHT_END" 
 
 if [[ $is_unicode_term ]]; then
   P "$green$LAMBDA$neutre"
