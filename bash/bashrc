@@ -6,6 +6,10 @@
 # use [[ over test or [ commands. Rationale: https://google.github.io/styleguide/shell.xml?showone=Test,_%5B_and_%5B%5B#Test,_%5B_and_%5B%5B
 
 
+# Lowercase all variables created in this file to avoid conflicts with environment variables.
+# Use underscores to separate words in variable names, e.g. my_variable_name.
+# Use ALL_CAPS for environment variables only.
+
 
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
 if [[ -z $bashrc_debug ]]; then
@@ -25,7 +29,6 @@ export EDITOR=/usr/bin/vim
 export DOTFILES=$HOME/src/dotfiles
 debug "Global variables exported."
 #----------------------------------------------------------------------------}}}
-
 
 # WSL JUNK ----------------------------------------------------------------{{{
 if [[ -n $WSL_DISTRO_NAME ]]; then
