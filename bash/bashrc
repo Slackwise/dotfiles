@@ -99,11 +99,11 @@ white_on_red="\[\e[41m\]"
 neutre="\[\e[m\]" # Reset to neutral color
 
 # BOX-DRAWING UNICODE:
-BOX_TOP_LEFT=$'\u256D'
-BOX_BOTTOM_LEFT=$'\u2570'
-BOX_LINE=$'\u2500'
-BOX_LINE_RIGHT_HALF=$'\u2576'
-BOX_LINE_LEFT_HALF=$'\u2574'
+box_top_left=$'\u256D'
+box_bottom_left=$'\u2570'
+box_line=$'\u2500'
+box_line_left_half=$'\u2574'
+box_line_right_half=$'\u2576'
 
 debug "Local variables read."
 #----------------------------------------------------------------------------}}}
@@ -118,9 +118,9 @@ function P
 }
 
 P "$black_hi"
-P "$BOX_TOP_LEFT"
-P "$BOX_LINE"
-P "$BOX_LINE"
+P "$box_top_left"
+P "$box_line"
+P "$box_line"
 
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
@@ -131,11 +131,11 @@ else
 fi
 
 # Add timestamp:
-P "$BOX_LINE_LEFT_HALF"
+P "$box_line_left_half"
 P "\@"
-P "$BOX_LINE_RIGHT_HALF"
-P "$BOX_LINE"
-P "$BOX_LINE"
+P "$box_line_right_half"
+P "$box_line"
+P "$box_line"
 
 # Check if $USER is not set or is empty, AND $USERNAME is set and not empty
 # This is primarily an issue for "Git Bash" on Windows.
@@ -159,7 +159,7 @@ else
   debug "Not SSH connection."
 fi
 
-P "$BOX_LINE_LEFT_HALF\w" # Add full working directory
+P "$box_line_left_half\w" # Add full working directory
 
 function my_prompt_command() {
   # Not necessary anymore, but leaving this in case I need it in the future.
@@ -177,8 +177,8 @@ P "\`__git_ps1\`" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
-P "$BOX_BOTTOM_LEFT"
-P "$BOX_LINE_LEFT_HALF" 
+P "$box_bottom_left"
+P "$box_line_left_half" 
 
 if [[ $is_unicode_term ]]; then
   P "$green$LAMBDA$neutre"
