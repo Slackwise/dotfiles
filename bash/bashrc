@@ -59,14 +59,6 @@ function command_exists
 file_exists_readable() {
   [[ -f "$1" && -r "$1" ]]
 }
-
-dreamhost_shared_hostname="elmonica"
-if [[ $HOSTNAME == $dreamhost_shared_hostname ]]; then
-  function http_errors
-  {
-    tail -n 50 -f "$HOME/logs/$1/http/error.log"
-  }
-fi
 debug "Global functions read."
 #----------------------------------------------------------------------------}}}
 
