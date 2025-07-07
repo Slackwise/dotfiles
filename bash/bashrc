@@ -95,6 +95,13 @@ white="\[\e[37m\]"
 white_on_red="\[\e[41m\]"
 neutre="\[\e[m\]" # Reset to neutral color
 
+# BOX-DRAWING UNICODE:
+BOX_TOP_LEFT=$'\u256D'
+BOX_BOTTOM_LEFT=$'\u2570'
+BOX_LINE=$'\u2500'
+BOX_LINE_RIGHT_HALF=$'\u2576'
+BOX_LINE_LEFT_HALF=$'\u2574'
+
 debug "Local variables read."
 #----------------------------------------------------------------------------}}}
 
@@ -107,30 +114,8 @@ function P
   export PS1=$PS1$1
 }
 
-# Bracket:
-
-# Two-line curly brace:
-# BRACE1=$'\u23B0'
-# BRACE2=$'\u23B1'
-
-# Two-line parenthesis brace:
-# BRACE1=$'\U000239B'
-# BRACE2=$'\U000239D'
-
-# Box brace:
-# BRACE1=$'\u250C'
-# BRACE2=$'\u2514'
-
-# Rounded box brace:
-BRACE1=$'\u256D'
-#EXAMPLE_8DIGIT_UNICODE=$'\U0001FBE1'
-BRACE2=$'\u2570'
-BOX_LINE=$'\u2500'
-BOX_LINE_LEFT_END=$'\u2576'
-BOX_LINE_RIGHT_END=$'\u2574'
-
 P "$black_hi"
-P "$BRACE1"
+P "$BOX_TOP_LEFT"
 P "$BOX_LINE"
 P "$BOX_LINE"
 
@@ -143,9 +128,9 @@ else
 fi
 
 # Add timestamp:
-P "$BOX_LINE_RIGHT_END"
+P "$BOX_LINE_LEFT_HALF"
 P "\@"
-P "$BOX_LINE_LEFT_END"
+P "$BOX_LINE_RIGHT_HALF"
 P "$BOX_LINE"
 P "$BOX_LINE"
 
@@ -171,7 +156,7 @@ else
   debug "Not SSH connection."
 fi
 
-P "$BOX_LINE_RIGHT_END\w" # Add full working directory
+P "$BOX_LINE_LEFT_HALF\w" # Add full working directory
 
 function my_prompt_command() {
   # Not necessary anymore, but leaving this in case I need it in the future.
@@ -189,8 +174,8 @@ P "\`__git_ps1\`" # Add git branch info if in a git repo
 
 P "\n" # Add a newline before the prompt because directories tend to take up too much space
 
-P "$BRACE2"
-P "$BOX_LINE_RIGHT_END" 
+P "$BOX_BOTTOM_LEFT"
+P "$BOX_LINE_LEFT_HALF" 
 
 if [[ $is_unicode_term ]]; then
   P "$green$LAMBDA$neutre"
