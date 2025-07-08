@@ -50,12 +50,11 @@ debug "Sourced system bashrc."
 
 
 # GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
-function command_exists
-{
-  type "$1" &> /dev/null ;
+function command_exists {
+  type "$1" &> /dev/null
 }
 
-readable_file_exists() {
+function readable_file_exists {
   [[ -f "$1" && -r "$1" ]]
 }
 debug "Global functions read."
