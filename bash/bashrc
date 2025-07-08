@@ -73,7 +73,7 @@ fi
 
 # SOURCE SYSTEM BASHRC ------------------------------------------------------{{{
 debug "Sourcing system bashrc..."
-if [[ -f ~/.bashrc.sys ]]; then
+if readable_file_exists ~/.bashrc.sys ; then
   source ~/.bashrc.sys
 fi
 debug "Sourced system bashrc."
