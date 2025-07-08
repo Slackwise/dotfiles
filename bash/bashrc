@@ -59,7 +59,7 @@ function file_exists {
 }
 
 function readable_file_exists {
-  [[ -f "$1" && -r "$1" ]]
+  [[ -r "$1" ]]
 }
 
 function nonempty_file_exists {
