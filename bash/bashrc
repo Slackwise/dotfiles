@@ -50,6 +50,14 @@ debug "Sourced system bashrc."
 
 
 # GLOBAL UTILITY FUNCTIONS --------------------------------------------------{{{
+function empty_string {
+  [[ -z "$1" ]]
+}
+
+function nonempty_string {
+  [[ -n "$1" ]]
+}
+
 function command_exists {
   type "$1" &> /dev/null
 }
