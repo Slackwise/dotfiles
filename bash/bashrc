@@ -54,9 +54,18 @@ function command_exists {
   type "$1" &> /dev/null
 }
 
+function file_exists {
+  [[ -e "$1" ]]
+}
+
 function readable_file_exists {
   [[ -f "$1" && -r "$1" ]]
 }
+
+function nonempty_file_exists {
+  [[ -s "$1" ]]
+}
+
 debug "Global functions read."
 #----------------------------------------------------------------------------}}}
 
@@ -198,7 +207,7 @@ debug "Console config loaded."
 
 # GUIX CONFIG ---------------------------------------------------------------{{{
 GUIX_PROFILE=$HOME/.guix-profile
-if [[ -a $GUIX_PROFILE ]]; then
+if file_exists "$GUIX_PROFILE"; then
   export GUIX_PROFILE
   export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale${GUIX_LOCPATH:+:}$GUIX_LOCPATH"
   export PATH="$GUIX_PROFILE/bin:/root/.guix-profile/sbin${PATH:+:}$PATH"
@@ -211,7 +220,7 @@ fi
 
 
 # RVM CONFIG ----------------------------------------------------------------{{{
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+if nonempty_file_exists "$HOME/.rvm/scripts/rvm"; then
   source "$HOME/.rvm/scripts/rvm"
   export PATH=$HOME/.rvm/bin:$PATH
   debug "RVM config loaded."
@@ -232,7 +241,7 @@ fi
 
 
 # DOOM EMACS CONFIG ---------------------------------------------------------{{{
-if [[ -a $HOME/.emacs.d/bin/doom ]]; then
+if file_exists "$HOME/.emacs.d/bin/doom"; then
   export PATH=$HOME/.emacs.d/bin:$PATH
   debug "Doom Emacs config loaded."
 else
