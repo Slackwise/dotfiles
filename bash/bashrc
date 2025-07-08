@@ -55,8 +55,7 @@ function command_exists
   type "$1" &> /dev/null ;
 }
 
-# Function to check if a file exists and is readable
-file_exists_readable() {
+readable_file_exists() {
   [[ -f "$1" && -r "$1" ]]
 }
 debug "Global functions read."
