@@ -12,6 +12,7 @@
 
 
 # SCRIPT DEBUGGING UTILITIES ------------------------------------------------{{{
+# $bashrc_debug=true
 if [[ -z $bashrc_debug ]]; then
   bashrc_debug=false
 fi
@@ -28,24 +29,6 @@ export LAMBDA=$'\u03BB'
 export EDITOR=/usr/bin/vim
 export DOTFILES=$HOME/src/dotfiles
 debug "Global variables exported."
-#----------------------------------------------------------------------------}}}
-
-# WSL JUNK ----------------------------------------------------------------{{{
-if [[ -n $WSL_DISTRO_NAME ]]; then
-  debug "Detected WSL, retrieving WSL variables..."
-  export WINDOWS_USERNAME=$(cmd.exe /q /d /c "echo %USERNAME%" 2> /dev/null)
-  export WINDOWS_USERPROFILE=$(cmd.exe /q /d /c "echo %USERPROFILE%" 2> /dev/null)
-  debug "Exported WSL variables."
-fi
-#----------------------------------------------------------------------------}}}
-
-
-# SOURCE SYSTEM BASHRC ------------------------------------------------------{{{
-debug "Sourcing system bashrc..."
-if [[ -f ~/.bashrc.sys ]]; then
-  source ~/.bashrc.sys
-fi
-debug "Sourced system bashrc."
 #----------------------------------------------------------------------------}}}
 
 
@@ -75,6 +58,25 @@ function nonempty_file_exists {
 }
 
 debug "Global functions read."
+#----------------------------------------------------------------------------}}}
+
+
+# WSL JUNK ----------------------------------------------------------------{{{
+if nonempty_string $WSL_DISTRO_NAME; then
+  debug "Detected WSL, retrieving WSL variables..."
+  export WINDOWS_USERNAME=$(cmd.exe /q /d /c "echo %USERNAME%" 2> /dev/null)
+  export WINDOWS_USERPROFILE=$(cmd.exe /q /d /c "echo %USERPROFILE%" 2> /dev/null)
+  debug "Exported WSL variables."
+fi
+#----------------------------------------------------------------------------}}}
+
+
+# SOURCE SYSTEM BASHRC ------------------------------------------------------{{{
+debug "Sourcing system bashrc..."
+if [[ -f ~/.bashrc.sys ]]; then
+  source ~/.bashrc.sys
+fi
+debug "Sourced system bashrc."
 #----------------------------------------------------------------------------}}}
 
 
