@@ -83,7 +83,7 @@ if [[ $UID == 0 ]]; then
   is_root_user=true
 fi
 
-if [[ -n "$SSH_CONNECTION" ]]; then
+if nonempty_string "$SSH_CONNECTION" ; then
   is_ssh_connection=true
 fi
 
@@ -146,7 +146,7 @@ prompt "$box_line"
 
 # Check if $USER is not set or is empty, AND $USERNAME is set and not empty
 # This is primarily an issue for "Git Bash" on Windows.
-if [[ -z "$USER" && -n "$USERNAME" ]]; then
+if empty_string "$USER" && nonempty_string "$USERNAME" ; then
   export USER="$USERNAME"
 fi
 
