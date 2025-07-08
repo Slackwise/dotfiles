@@ -103,30 +103,30 @@ debug "Local variables read."
 
 # BUILD UP A CUSTOM PROMPT --------------------------------------------------{{{
 export PS1=""
-function P
+function prompt
 {
   export PS1=$PS1$1
 }
 
-P "$black_hi"
-P "$box_top_left"
-P "$box_line"
-P "$box_line"
+prompt "$black_hi"
+prompt "$box_top_left"
+prompt "$box_line"
+prompt "$box_line"
 
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
-  P $white_on_red;
+  prompt $white_on_red;
   debug "Is root user."
 else
   debug "Not root user."
 fi
 
 # Add timestamp:
-P "$box_line_left_half"
-P "\@"
-P "$box_line_right_half"
-P "$box_line"
-P "$box_line"
+prompt "$box_line_left_half"
+prompt "\@"
+prompt "$box_line_right_half"
+prompt "$box_line"
+prompt "$box_line"
 
 # Check if $USER is not set or is empty, AND $USERNAME is set and not empty
 # This is primarily an issue for "Git Bash" on Windows.
@@ -137,20 +137,20 @@ fi
 if [[ "$USER" == "slackwise" || "$USER" == "Slackwise" || "$USER" == "aflanczewski" ]]; then
   debug "Is default user '$USER'."
 else
-  P "\u";
+  prompt "\u";
   debug "Not my default user, so display username '$USER'."
 fi
 
 
 # If connected to a machine via SSH, show the hostname:
 if [[ $is_ssh_connection ]]; then
-  P "@\H"
+  prompt "@\H"
   debug "Is SSH connection."
 else
   debug "Not SSH connection."
 fi
 
-P "$box_line_left_half\w" # Add full working directory
+prompt "$box_line_left_half\w" # Add full working directory
 
 function my_prompt_command() {
   # Not necessary anymore, but leaving this in case I need it in the future.
@@ -164,25 +164,25 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM="auto" # or "verbose", "true", "git"
 export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
-P "\`__git_ps1\`" # Add git branch info if in a git repo
+prompt "\`__git_ps1\`" # Add git branch info if in a git repo
 
-P "\n" # Add a newline before the prompt because directories tend to take up too much space
+prompt "\n" # Add a newline before the prompt because directories tend to take up too much space
 
-P "$box_bottom_left"
-P "$box_line_left_half" 
+prompt "$box_bottom_left"
+prompt "$box_line_left_half" 
 
 if [[ $is_unicode_term ]]; then
-  P "$green$LAMBDA$neutre"
+  prompt "$green$LAMBDA$neutre"
   debug "Is unicode terminal."
 else
-  P "$green\$$neutre"
+  prompt "$green\$$neutre"
   debug "Not unicode terminal."
 fi
 
-P "$neutre" # Reset color to neutral
-P " " # Add a trailing blank to give space for commands
+prompt "$neutre" # Reset color to neutral
+prompt " " # Add a trailing blank to give space for commands
 
-if [[ $is_root_user ]]; then P $neutre; fi
+if [[ $is_root_user ]]; then prompt $neutre; fi
 
 # export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
 unset -f P # Remove our temporary utility function
