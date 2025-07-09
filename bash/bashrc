@@ -57,6 +57,12 @@ function nonempty_file_exists {
   [[ -s "$1" ]]
 }
 
+function ps1_status {
+  if [[ $1 -ne 0 ]]; then
+    echo -e "$box_line$box_line$1$box_line"
+  fi
+}
+
 debug "Global functions read."
 #----------------------------------------------------------------------------}}}
 
@@ -184,10 +190,14 @@ export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
 prompt "\`__git_ps1\`" # Add git branch info if in a git repo
 
+prompt "$neutre" # Reset before newline to avoid rendering issues
 prompt "\n" # Add a newline before the prompt because directories tend to take up too much space
+prompt "$black_hi" # Resume coloring, hopefully avoiding the rendering issues
 
 prompt "$box_bottom_left"
+prompt "\`ps1_status \$?\`" # Show status of last command, if it failed
 prompt "$box_line_left_half" 
+
 
 if [[ $is_unicode_term ]]; then
   prompt "$green$LAMBDA$neutre"
