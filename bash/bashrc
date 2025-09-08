@@ -282,6 +282,7 @@ alias e="emacsclient -c -n --alternate-editor= "
 alias grep-all="grep -rni"
 alias kill-e="emacsclient -e '(kill-emacs)'"
 alias emacs-detached="emacs & disown %%"
+alias unixtime='date +%s'
 
 # Short Script Aliases
 alias wsl-guix-daemon-start="sudo -i -u root guix-daemon &"
