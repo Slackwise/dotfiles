@@ -27,7 +27,6 @@
 	c = commit -am
 	p = push
 	l = log --stat
-	commit-version = -m "$(cat VERSION.TXT)"
 	unstage = restore --staged
 	whoami = config user.email
 	delete-last-commit = reset HEAD^
