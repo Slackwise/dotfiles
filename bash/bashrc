@@ -279,7 +279,7 @@ export PATH=.:$HOME/.bin:$HOME/src/dotfiles/bin:$PATH
 # Command Aliases
 alias g='git'
 alias git-add-all='git add . && git status'
-alias git-commit-version='git commit -m $(cat VERSION.TXT) ; git log -1'
+alias git-commit-version='git commit -m "$(cat VERSION.TXT)" ; git log -1'
 alias e="emacsclient -c -n --alternate-editor= "
 alias grep-all="grep -rni"
 alias kill-e="emacsclient -e '(kill-emacs)'"
