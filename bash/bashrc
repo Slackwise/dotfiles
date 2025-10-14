@@ -116,18 +116,32 @@ if [[ $LANG == "en_US.UTF-8" ]]; then
 fi
 
 # Color Escapes
-black="\[\e[30m\]"
-black_hi="\[\e[0;90m\]"
-black_hi_bg="\[\e[0;100m\]"
-red="\[\e[31m\]"
-green="\[\e[32m\]"
-yellow="\[\e[33m\]"
-blue="\[\e[34m\]"
-purple="\[\e[35m\]"
-cyan="\[\e[36m\]"
-white="\[\e[37m\]"
-white_on_red="\[\e[41m\]"
-neutre="\[\e[m\]" # Reset to neutral color
+black="\e[30m"
+black_hi="\e[0;90m"
+black_hi_bg="\e[0;100m"
+red="\e[31m"
+green="\e[32m"
+yellow="\e[33m"
+blue="\e[34m"
+purple="\e[35m"
+cyan="\e[36m"
+white="\e[37m"
+white_on_red="\e[41m"
+neutre="\e[m" # Reset to neutral color
+
+# Color Escapes with prompt escape sequences:
+prompt_black="\[\e[30m\]"
+prompt_black_hi="\[\e[0;90m\]"
+prompt_black_hi_bg="\[\e[0;100m\]"
+prompt_red="\[\e[31m\]"
+prompt_green="\[\e[32m\]"
+prompt_yellow="\[\e[33m\]"
+prompt_blue="\[\e[34m\]"
+prompt_purple="\[\e[35m\]"
+prompt_cyan="\[\e[36m\]"
+prompt_white="\[\e[37m\]"
+prompt_white_on_red="\[\e[41m\]"
+prompt_neutre="\[\e[m\]" # Reset to neutral color
 
 # Named colors:
 shade_color=$black_hi
@@ -155,7 +169,7 @@ function prompt
   export PS1=$PS1$1
 }
 
-prompt "$black_hi"
+prompt "$prompt_black_hi"
 prompt "$box_top_left"
 prompt "$box_line"
 prompt "$box_line"
@@ -213,9 +227,9 @@ export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
 prompt "\`__git_ps1\`" # Add git branch info if in a git repo
 
-prompt "$neutre" # Reset before newline to avoid rendering issues
+prompt "$prompt_neutre" # Reset before newline to avoid rendering issues
 prompt "\n" # Add a newline before the prompt because directories tend to take up too much space
-prompt "$black_hi" # Resume coloring, hopefully avoiding the rendering issues
+prompt "$prompt_black_hi" # Resume coloring, hopefully avoiding the rendering issues
 
 prompt "$box_bottom_left"
 prompt "\`ps1_status \$?\`" # Show status of last command, if it failed
@@ -223,17 +237,17 @@ prompt "$box_line_left_half"
 
 
 if [[ $is_unicode_term ]]; then
-  prompt "$green$LAMBDA$neutre"
+  prompt "$prompt_green$LAMBDA$prompt_neutre"
   debug "Is unicode terminal."
 else
-  prompt "$green\$$neutre"
+  prompt "$prompt_green\$$prompt_neutre"
   debug "Not unicode terminal."
 fi
 
-prompt "$neutre" # Reset color to neutral
+prompt "$prompt_neutre" # Reset color to neutral
 prompt " " # Add a trailing blank to give space for commands
 
-if [[ $is_root_user ]]; then prompt $neutre; fi
+if [[ $is_root_user ]]; then prompt $prompt_neutre; fi
 
 # export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
 unset -f P # Remove our temporary utility function
