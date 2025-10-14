@@ -58,7 +58,7 @@ function nonempty_file_exists {
 }
 
 function color_shade {
-  echo -e "$prompt_color$1$neutre"
+  echo -e "$shade_color$1$neutre"
 }
 
 function color_change {
@@ -130,7 +130,7 @@ white_on_red="\[\e[41m\]"
 neutre="\[\e[m\]" # Reset to neutral color
 
 # Named colors:
-prompt_color=$black_hi
+shade_color=$black_hi
 change_color=$green
 warn_color=$yellow
 error_color=$red
