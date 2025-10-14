@@ -73,6 +73,10 @@ function color_error {
   echo -e "$error_color$1$neutre"
 }
 
+function pcolor {
+  echo -e "\[$1\]"
+}
+
 function ps1_status {
   if [[ $1 -ne 0 ]]; then
     echo -e "$box_line$box_line$(color_error $1)$box_line"
@@ -237,7 +241,7 @@ prompt "$box_line_left_half"
 
 
 if [[ $is_unicode_term ]]; then
-  prompt "$prompt_green$LAMBDA$prompt_neutre"
+  prompt "`pcolor $green`$LAMBDA`pcolor $neutre`"
   debug "Is unicode terminal."
 else
   prompt "$prompt_green\$$prompt_neutre"
