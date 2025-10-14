@@ -133,20 +133,6 @@ white="\e[37m"
 white_on_red="\e[41m"
 neutre="\e[m" # Reset to neutral color
 
-# Color Escapes with prompt escape sequences:
-prompt_black="\[\e[30m\]"
-prompt_black_hi="\[\e[0;90m\]"
-prompt_black_hi_bg="\[\e[0;100m\]"
-prompt_red="\[\e[31m\]"
-prompt_green="\[\e[32m\]"
-prompt_yellow="\[\e[33m\]"
-prompt_blue="\[\e[34m\]"
-prompt_purple="\[\e[35m\]"
-prompt_cyan="\[\e[36m\]"
-prompt_white="\[\e[37m\]"
-prompt_white_on_red="\[\e[41m\]"
-prompt_neutre="\[\e[m\]" # Reset to neutral color
-
 # Named colors:
 shade_color=$black_hi
 change_color=$green
@@ -173,14 +159,14 @@ function prompt
   export PS1=$PS1$1
 }
 
-prompt "$prompt_black_hi"
+prompt "`pcolor $black_hi`"
 prompt "$box_top_left"
 prompt "$box_line"
 prompt "$box_line"
 
 # If root, highlight in bright red:
 if [[ $is_root_user ]]; then
-  prompt $white_on_red;
+  prompt `pcolor $white_on_red`;
   debug "Is root user."
 else
   debug "Not root user."
@@ -231,9 +217,9 @@ export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
 prompt "\`__git_ps1\`" # Add git branch info if in a git repo
 
-prompt "$prompt_neutre" # Reset before newline to avoid rendering issues
+prompt "`pcolor $neutre`" # Reset before newline to avoid rendering issues
 prompt "\n" # Add a newline before the prompt because directories tend to take up too much space
-prompt "$prompt_black_hi" # Resume coloring, hopefully avoiding the rendering issues
+prompt "`pcolor $black_hi`" # Resume coloring, hopefully avoiding the rendering issues
 
 prompt "$box_bottom_left"
 prompt "\`ps1_status \$?\`" # Show status of last command, if it failed
@@ -244,14 +230,14 @@ if [[ $is_unicode_term ]]; then
   prompt "`pcolor $green`$LAMBDA`pcolor $neutre`"
   debug "Is unicode terminal."
 else
-  prompt "$prompt_green\$$prompt_neutre"
+  prompt "`pcolor $green`\$`pcolor $neutre`"
   debug "Not unicode terminal."
 fi
 
-prompt "$prompt_neutre" # Reset color to neutral
+prompt "`pcolor $neutre`" # Reset color to neutral
 prompt " " # Add a trailing blank to give space for commands
 
-if [[ $is_root_user ]]; then prompt $prompt_neutre; fi
+if [[ $is_root_user ]]; then prompt `pcolor $neutre`; fi
 
 # export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
 unset -f P # Remove our temporary utility function
