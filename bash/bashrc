@@ -78,7 +78,13 @@ function pcolor {
 }
 
 function prompt_color {
-  echo -e "\[$1\]$2\[$neutre\]"
+  local color="$1"
+  shift # Remove first argument so $@ contains only strings to colorize
+  local result=""
+  for str in "$@"; do
+    result+="\[$color\]$str"
+  done
+  echo -e "${result}\[$neutre\]"
 }
 
 function ps1_status {
