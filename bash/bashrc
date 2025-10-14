@@ -57,6 +57,22 @@ function nonempty_file_exists {
   [[ -s "$1" ]]
 }
 
+function color_shade {
+  echo -e "$prompt_color$1$neutre"
+}
+
+function color_change {
+  echo -e "$change_color$1$neutre"
+}
+
+function color_warn {
+  echo -e "$warn_color$1$neutre"
+}
+
+function color_error {
+  echo -e "$error_color$1$neutre"
+}
+
 function ps1_status {
   if [[ $1 -ne 0 ]]; then
     echo -e "$box_line$box_line$1$box_line"
@@ -112,6 +128,13 @@ cyan="\[\e[36m\]"
 white="\[\e[37m\]"
 white_on_red="\[\e[41m\]"
 neutre="\[\e[m\]" # Reset to neutral color
+
+# Named colors:
+prompt_color=$black_hi
+change_color=$green
+warn_color=$yellow
+error_color=$red
+
 
 # BOX-DRAWING UNICODE:
 box_top_left=$'\u256D'
