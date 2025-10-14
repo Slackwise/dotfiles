@@ -75,7 +75,7 @@ function color_error {
 
 function ps1_status {
   if [[ $1 -ne 0 ]]; then
-    echo -e "$box_line$box_line$1$box_line"
+    echo -e "$box_line$box_line$(color_error $1)$box_line"
   fi
 }
 
