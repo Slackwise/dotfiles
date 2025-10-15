@@ -73,10 +73,6 @@ function color_error {
   echo -e "${error_color}$1${colors[neutre]}"
 }
 
-function pcolor {
-  echo -e "\[$1\]"
-}
-
 function prompt_color {
   local color="$1"
   shift # Remove first argument so $@ contains only strings to colorize
@@ -178,14 +174,14 @@ function prompt
   export PS1=$PS1$1
 }
 
-prompt "`pcolor ${colors[black_hi]}`"
+prompt "${prompt_colors[black_hi]}"
 prompt "$box_top_left"
 prompt "$box_line"
 prompt "$box_line"
 
 # If root, highlight in bright red:
   if [[ $is_root_user ]]; then
-  prompt `pcolor ${colors[white_on_red]}`;
+  prompt "${prompt_colors[white_on_red]}";
   debug "Is root user."
 else
   debug "Not root user."
@@ -236,29 +232,29 @@ export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_FULL_DESC=1
 prompt "\`__git_ps1\`" # Add git branch info if in a git repo
 
-prompt "`pcolor ${colors[neutre]}`" # Reset before newline to avoid rendering issues
+prompt "${prompt_colors[neutre]}" # Reset before newline to avoid rendering issues
 prompt "\n" # Add a newline before the prompt because directories tend to take up too much space
-prompt "`pcolor ${colors[black_hi]}`" # Resume coloring, hopefully avoiding the rendering issues
+prompt "${prompt_colors[black_hi]}" # Resume coloring, hopefully avoiding the rendering issues
 
 prompt "$box_bottom_left"
 prompt "\`ps1_status \$?\`" # Show status of last command, if it failed
-prompt "`pcolor ${colors[black_hi]}`" # Resume coloring, hopefully avoiding the rendering issues
+prompt "${prompt_colors[black_hi]}" # Resume coloring, hopefully avoiding the rendering issues
 prompt "$box_line_left_half" 
 
 
 if [[ $is_unicode_term ]]; then
-  # prompt "`pcolor ${colors[green]}`$LAMBDA`pcolor ${colors[neutre]}`"
+  # prompt "${prompt_colors[green]}$LAMBDA${prompt_colors[neutre]}"
   prompt `prompt_color ${colors[green]} $LAMBDA`
   debug "Is unicode terminal."
 else
-  prompt "`pcolor ${colors[green]}`\$`pcolor ${colors[neutre]}`"
+  prompt "${prompt_colors[green]}\$${prompt_colors[neutre]}"
   debug "Not unicode terminal."
 fi
 
-prompt "`pcolor ${colors[neutre]}`" # Reset color to neutral
+prompt "${prompt_colors[neutre]}" # Reset color to neutral
 prompt " " # Add a trailing blank to give space for commands
 
-if [[ $is_root_user ]]; then prompt `pcolor ${colors[neutre]}`; fi
+if [[ $is_root_user ]]; then prompt ${prompt_colors[neutre]}; fi
 
 # export UNPROCESSED_PROMPT="$PS1" # Save the unprocessed prompt for later use
 unset -f P # Remove our temporary utility function
