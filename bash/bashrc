@@ -145,6 +145,13 @@ declare -A colors=(
   [neutre]="\e[m"
 )
 
+# Color Escapes with Prompt Escapes:
+declare -A prompt_colors
+for color_name in "${!colors[@]}"; do
+  prompt_colors[$color_name]="\[${colors[$color_name]}\]"
+done
+
+
 # Named colors: pull values from the colors associative array
 shade_color=${colors[black_hi]}
 change_color=${colors[green]}
