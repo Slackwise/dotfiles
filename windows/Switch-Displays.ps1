@@ -11,11 +11,9 @@ function Install-MultiMonitorTool {
     $zipPath = Join-Path -Path $binPath -ChildPath "multimonitortool.zip"
     $downloadUrl = "https://www.nirsoft.net/utils/multimonitortool-x64.zip"
 
-    # Check if the tool is already installed
     if (-Not (Test-Path -Path $exePath)) {
         Write-Host "MultiMonitorTool not found. Preparing to download to $binPath..." -ForegroundColor Cyan
         
-        # Create C:\bin\ if it doesn't exist
         if (-Not (Test-Path -Path $binPath)) {
             try {
                 New-Item -Path $binPath -ItemType Directory -Force | Out-Null
@@ -49,7 +47,6 @@ function Get-TaskbarMode {
     $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
     $currentState = (Get-ItemProperty -Path $regPath -Name "MMTaskbarEnabled" -ErrorAction SilentlyContinue).MMTaskbarEnabled
     
-    # 1 means taskbar is on all displays. 0 or null means main display only.
     if ($currentState -eq 1) {
         return 'All'
     } else {
@@ -79,32 +76,40 @@ function Set-TaskbarMode {
     Start-Sleep -Seconds 2
 }
 
-# 4. Function to set the main display by name
+# 4. Function to set the main display by identifier
 function Set-MainDisplay {
     param (
-        [string]$MonitorName
+        [string]$MonitorIdentifier
     )
     
     $ToolPath = "C:\bin\MultiMonitorTool.exe"
 
-    Write-Host "Display: Setting primary monitor to '$MonitorName'..." -ForegroundColor DarkGray
+    Write-Host "Display: Setting primary monitor to Display '$MonitorIdentifier'..." -ForegroundColor DarkGray
     
-    # Calls the utility with the /SetPrimary argument and waits for it to finish
-    Start-Process -FilePath $ToolPath -ArgumentList "/SetPrimary `"$MonitorName`"" -Wait -NoNewWindow
+    # Calls the utility with the /SetPrimary argument using the display number
+    Start-Process -FilePath $ToolPath -ArgumentList "/SetPrimary `"$MonitorIdentifier`"" -Wait -NoNewWindow
+    
+    # Added Sleep: Give the graphics driver and Windows time to stabilize the layout
+    Write-Host "Waiting 3 seconds for display layout to stabilize..." -ForegroundColor DarkGray
+    Start-Sleep -Seconds 3
+
     return $true
 }
 
 # 5. Master Function to evaluate state and toggle modes
 function Toggle-GameWorkMode {
+    # --- DISPLAY CONFIGURATION VARIABLES ---
+    $WORK_MAIN_DISPLAY = "5"   # Xeneon Edge
+    $GAMING_MAIN_DISPLAY = "1" # Odyssey G95NC
+    # ---------------------------------------
+
     Write-Host "=== Display & Taskbar Mode Toggler ===" -ForegroundColor Cyan
 
-    # Ensure our dependency is met before doing anything
     if (-Not (Install-MultiMonitorTool)) {
         Write-Warning "Aborting toggle process due to missing MultiMonitorTool."
         return
     }
 
-    # Fetch the current state using our dedicated check function
     $currentTaskbarMode = Get-TaskbarMode
 
     # If taskbar is on all screens -> Currently in GAME MODE
@@ -112,7 +117,7 @@ function Toggle-GameWorkMode {
         Write-Host "Current State detected as: GAME MODE" -ForegroundColor Yellow
         Write-Host "Switching to: WORK MODE" -ForegroundColor Green
         
-        $displaySwitched = Set-MainDisplay -MonitorName "XENEON EDGE"
+        $displaySwitched = Set-MainDisplay -MonitorIdentifier $WORK_MAIN_DISPLAY
         
         if ($displaySwitched) {
             Set-TaskbarMode -Mode 'Main'
@@ -124,7 +129,7 @@ function Toggle-GameWorkMode {
         Write-Host "Current State detected as: WORK MODE" -ForegroundColor Yellow
         Write-Host "Switching to: GAME MODE" -ForegroundColor Green
         
-        $displaySwitched = Set-MainDisplay -MonitorName "Odyssey G95NC"
+        $displaySwitched = Set-MainDisplay -MonitorIdentifier $GAMING_MAIN_DISPLAY
         
         if ($displaySwitched) {
             Set-TaskbarMode -Mode 'All'
