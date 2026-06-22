@@ -5,8 +5,8 @@
 A_IconTip := "Slackeys"
 
 ; --- CONFIGURATION VARIABLES ---
-Global WorkMainDisplay := "5"   ; Xeneon Edge
-Global GameMainDisplay := "1"   ; Odyssey G95NC
+Global WorkMainDisplay := "CRXED00"   ; Xeneon Edge
+Global GameMainDisplay := "SAM7474"   ; Odyssey G95NC
 
 ; Fetch the %USERPROFILE% environment variable
 Global BinPath := EnvGet("USERPROFILE") . "\.bin"
