@@ -13,6 +13,8 @@
 	prompt = false
 [pull]
 	rebase = merges
+[push]
+	autoSetupRemote = true
 [merge]
 	autoStash = true
 	ff = false
