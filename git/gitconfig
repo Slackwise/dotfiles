@@ -31,6 +31,7 @@
 	l = log --stat
 	unstage = restore --staged
 	whoami = config user.email
+	wipe = !git reset --hard HEAD && git clean -fd
 	delete-last-commit = reset HEAD^
 	delete-all-pending-changes = reset --hard
 	pull-branch = fetch origin # Pull a branch while not switching to it
