@@ -6,11 +6,12 @@
 	editor = vim
 [color]
 	ui = always
-# [diff]
-# 	tool = vimdiff
-# 	merge = vimdiff
+[diff]
+	tool = vscode
 [difftool]
 	prompt = false
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
 [pull]
 	rebase = merges
 [push]
@@ -18,6 +19,12 @@
 [merge]
 	autoStash = true
 	ff = false
+	tool = vscode
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "vscode"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [rebase]
 	autoStash = true
 [filter "lfs"]
