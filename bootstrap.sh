@@ -39,7 +39,15 @@ esac
 log "Detected OS: $detected_os${distro_id:+ ($distro_id)}"
 
 # INSTALL NODE.JS -------------------------------------------------------------
-install_node_windows() {
+is_work_machine() {
+  shopt -s nocasematch
+  [[ "$(hostname 2>/dev/null)" == F01-* ]]
+  local result=$?
+  shopt -u nocasematch
+  return $result
+}
+
+install_node_windows_work() {
   if command_exists nvs; then
     log "nvs already installed."
     return
@@ -50,6 +58,60 @@ install_node_windows() {
   fi
   log "Installing nvs (Node Version Switcher) via winget..."
   winget install --exact --id jasongin.nvs
+}
+
+install_node_windows_personal() {
+  if command_exists node; then
+    log "Node.js already installed."
+  elif ! command_exists curl; then
+    warn "curl not found; cannot download the Node.js MSI. Install it manually: https://nodejs.org/"
+  else
+    log "Looking up the latest Node.js version..."
+    local latest_version msi_url msi_path
+    latest_version="$(curl -fsSL https://nodejs.org/dist/index.json | grep -o '"version": *"[^"]*"' | head -n1 | grep -o 'v[0-9][0-9.]*')"
+
+    if [[ -z "$latest_version" ]]; then
+      warn "Could not determine latest Node.js version; install it manually: https://nodejs.org/"
+    else
+      msi_url="https://nodejs.org/dist/${latest_version}/node-${latest_version}-x64.msi"
+      msi_path="$(mktemp -u "${TMPDIR:-/tmp}/node-XXXXXX.msi")"
+      log "Downloading Node.js $latest_version from $msi_url..."
+      curl -fsSL -o "$msi_path" "$msi_url"
+      log "Installing Node.js $latest_version via msiexec (progress bar will appear)..."
+      msiexec.exe //i "$(cygpath -w "$msi_path" 2>/dev/null || echo "$msi_path")" //passive //norestart
+      rm -f "$msi_path"
+    fi
+  fi
+
+  if ! command_exists winget; then
+    warn "winget not found; cannot install build tools. Install Python and Visual Studio Build Tools manually."
+    return
+  fi
+
+  if command_exists python || command_exists python3; then
+    log "Python already installed."
+  else
+    log "Installing Python via winget..."
+    winget install --exact --id Python.Python.3.12
+  fi
+
+  if winget list --id Microsoft.VisualStudio.2022.BuildTools -e >/dev/null 2>&1; then
+    log "Visual Studio Build Tools already installed."
+  else
+    log "Installing Visual Studio Build Tools (C++ workload) via winget..."
+    winget install --exact --id Microsoft.VisualStudio.2022.BuildTools --override \
+      "--quiet --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+  fi
+}
+
+install_node_windows() {
+  if is_work_machine; then
+    log "Work machine detected (hostname starts with F01-); installing nvs."
+    install_node_windows_work
+  else
+    log "Personal machine/server detected; installing vanilla Node.js and build tools."
+    install_node_windows_personal
+  fi
 }
 
 install_node_linux() {
