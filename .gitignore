@@ -3,3 +3,7 @@
 
 # VSCode:
 .vscode/settings.json
+
+
+# Larger sub-repo I don't want to clone everywhere:
+scripts/
