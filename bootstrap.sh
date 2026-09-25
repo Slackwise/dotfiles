@@ -214,4 +214,55 @@ if [[ "${USER:-${USERNAME:-}}" == "slackwise" ]]; then
   fi
 fi
 
+# ADD windows/bin TO USER PATH (Windows only) ---------------------------------
+if [[ "$detected_os" == "Windows" ]]; then
+  windows_bin_dir="$(cygpath -w "$dotfiles_dir/windows/bin" 2>/dev/null || echo "$dotfiles_dir/windows/bin")"
+
+  if ! command_exists reg.exe; then
+    warn "reg.exe not found; cannot update user PATH. Add $windows_bin_dir to your PATH manually."
+  else
+    current_user_path="$(reg.exe query 'HKCU\Environment' /v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
+
+    if [[ ";${current_user_path};" == *";${windows_bin_dir};"* ]]; then
+      log "windows/bin already in user PATH."
+    else
+      new_user_path="${current_user_path:+${current_user_path};}${windows_bin_dir}"
+      log "Adding $windows_bin_dir to user PATH..."
+      reg.exe add 'HKCU\Environment' /v Path /t REG_EXPAND_SZ /d "$new_user_path" /f >/dev/null
+    fi
+  fi
+fi
+
+# ADD C:\bin TO SYSTEM PATH (Windows only, requires elevation) ---------------
+if [[ "$detected_os" == "Windows" ]]; then
+  system_bin_dir='C:\bin'
+  system_env_key='HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+
+  if ! command_exists reg.exe; then
+    warn "reg.exe not found; cannot update system PATH. Add $system_bin_dir to it manually."
+  else
+    current_system_path="$(reg.exe query "$system_env_key" /v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
+
+    if [[ ";${current_system_path};" == *";${system_bin_dir};"* ]]; then
+      log "$system_bin_dir already in system PATH."
+    elif ! command_exists powershell.exe; then
+      warn "powershell.exe not found; cannot elevate. Add $system_bin_dir to the system PATH manually."
+    else
+      new_system_path="${current_system_path:+${current_system_path};}${system_bin_dir}"
+      log "Adding $system_bin_dir to system PATH (elevation prompt will appear)..."
+
+      # Elevating reg.exe directly is finicky to quote from bash, so run it via a temp batch file instead.
+      elevate_bat="$(mktemp -u "${TMPDIR:-/tmp}/system-path-XXXXXX.bat")"
+      printf 'reg add "%s" /v Path /t REG_EXPAND_SZ /d "%s" /f\n' "$system_env_key" "$new_system_path" > "$elevate_bat"
+      elevate_bat_win="$(cygpath -w "$elevate_bat" 2>/dev/null || echo "$elevate_bat")"
+
+      if ! powershell.exe -NoProfile -Command "\$p = Start-Process -FilePath '$elevate_bat_win' -Verb RunAs -Wait -PassThru; exit \$p.ExitCode"; then
+        warn "Could not update system PATH (elevation was declined or failed). Add $system_bin_dir to it manually."
+      fi
+
+      rm -f "$elevate_bat"
+    fi
+  fi
+fi
+
 log "Setup complete! Your dotfiles are 100% ready to go."
