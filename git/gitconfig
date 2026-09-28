@@ -3,7 +3,8 @@
 [core]
 	autocrlf = false
 	eol = lf
-	editor = vim
+	# editor = vim
+	editor = code --wait
 [color]
 	ui = always
 [diff]

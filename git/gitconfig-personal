@@ -11,5 +11,3 @@
 	cmd = code --wait $MERGED
 [init]
 	defaultBranch = main
-[core]
-	editor = \"C:\\Users\\aflanczewski\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
