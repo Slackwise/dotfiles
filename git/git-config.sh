@@ -1,4 +1,5 @@
-GITCONFIG_FILE_PATH="~/src/dotfiles/git/gitconfig"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GITCONFIG_FILE_PATH="$SCRIPT_DIR/gitconfig"
 GIT_INCLUDE_MY_CONFIG=$'\n[include]\n\tpath = '
 GIT_INCLUDE_MY_CONFIG+=$GITCONFIG_FILE_PATH
 GIT_CONFIG_FILE="$HOME/.gitconfig"
