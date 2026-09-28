@@ -7,6 +7,9 @@ PowerShell equivalent of bash/bashrc-install.sh: makes $PROFILE a symlink into
 this repo so Profile.ps1's PATH/PSModulePath setup runs on every new session.
 #>
 
+Import-Module (Join-Path $PSScriptRoot 'Modules\Request-Elevation\Request-Elevation.psm1') -Force
+Request-Elevation -ScriptPath $PSCommandPath
+
 $profileTarget = Join-Path $PSScriptRoot 'Profile.ps1'
 $profilePath = $PROFILE
 $profileBackup = "$profilePath.sys"
