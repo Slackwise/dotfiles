@@ -15,7 +15,3 @@ if (($env:Path -split ';') -notcontains $psCommandsDir) {
 if (($env:PSModulePath -split ';') -notcontains $psModulesDir) {
     $env:PSModulePath = "$psModulesDir;$env:PSModulePath"
 }
-
-if (($env:PATHEXT -split ';') -notcontains '.PS1') {
-    $env:PATHEXT = "$env:PATHEXT;.PS1"
-}
