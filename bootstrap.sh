@@ -221,14 +221,14 @@ if [[ "$detected_os" == "Windows" ]]; then
   if ! command_exists reg.exe; then
     warn "reg.exe not found; cannot update user PATH. Add $windows_bin_dir to your PATH manually."
   else
-    current_user_path="$(reg.exe query 'HKCU\Environment' /v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
+    current_user_path="$(reg.exe query 'HKCU\Environment' //v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
 
     if [[ ";${current_user_path};" == *";${windows_bin_dir};"* ]]; then
       log "windows/bin already in user PATH."
     else
       new_user_path="${current_user_path:+${current_user_path};}${windows_bin_dir}"
       log "Adding $windows_bin_dir to user PATH..."
-      reg.exe add 'HKCU\Environment' /v Path /t REG_EXPAND_SZ /d "$new_user_path" /f >/dev/null
+      reg.exe add 'HKCU\Environment' //v Path //t REG_EXPAND_SZ //d "$new_user_path" //f >/dev/null
     fi
   fi
 fi
@@ -241,7 +241,7 @@ if [[ "$detected_os" == "Windows" ]]; then
   if ! command_exists reg.exe; then
     warn "reg.exe not found; cannot update system PATH. Add $system_bin_dir to it manually."
   else
-    current_system_path="$(reg.exe query "$system_env_key" /v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
+    current_system_path="$(reg.exe query "$system_env_key" //v Path 2>/dev/null | sed -n 's/^.*Path[ \t]*REG_[A-Z_]*[ \t]*//p')"
 
     if [[ ";${current_system_path};" == *";${system_bin_dir};"* ]]; then
       log "$system_bin_dir already in system PATH."
