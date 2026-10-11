@@ -39,34 +39,15 @@
      inkscape:pagecheckerboard="true"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.8284271"
-     inkscape:cx="446.36116"
-     inkscape:cy="167.23076"
+     inkscape:cx="348.07332"
+     inkscape:cy="132.22897"
      inkscape:window-width="3652"
      inkscape:window-height="1894"
-     inkscape:window-x="2082"
-     inkscape:window-y="222"
+     inkscape:window-x="1958"
+     inkscape:window-y="223"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg296"
-     inkscape:export-bgcolor="#ffffff00">
-    <inkscape:page
-       x="0"
-       y="0"
-       width="290.98453"
-       height="336"
-       id="page1"
-       margin="0"
-       bleed="0"
-       inkscape:label="Square Bounded" />
-    <inkscape:page
-       x="300.98453"
-       y="0"
-       width="290.98453"
-       height="336"
-       id="page2"
-       margin="0"
-       bleed="0"
-       inkscape:label="Circle Bounded" />
-  </sodipodi:namedview>
+     inkscape:export-bgcolor="#ffffff00" />
   <g
      id="background"
      style="display:inline">
@@ -1340,5 +1321,5 @@
      cy="167.99809"
      rx="168.51199"
      ry="168.51172"
-     display="inline" />
+     display="none" />
 </svg>
