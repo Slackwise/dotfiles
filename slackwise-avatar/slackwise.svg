@@ -13,8 +13,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs id="defs296" />
-  <style>
+  <defs
+     id="defs1" />
+  <view
+     id="circle"
+     viewBox="-120 -120 240 240" />
+  <style
+     id="style1">
     #background path { fill: #00cc00; }
     #S path { fill: #ffffff; }
     #right-brace .brace-dark { fill: #010203; }
@@ -24,7 +29,7 @@
     #left-brace .brace-gray { fill: #808181; }
     #left-brace .brace-green { fill: #016702; }
    </style>
-   <sodipodi:namedview
+  <sodipodi:namedview
      id="namedview296"
      pagecolor="#ffffff"
      bordercolor="#000000"
@@ -33,16 +38,35 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="true"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="4.845722"
-     inkscape:cx="117.52635"
-     inkscape:cy="173.34878"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="446.36116"
+     inkscape:cy="167.23076"
      inkscape:window-width="3652"
      inkscape:window-height="1894"
-     inkscape:window-x="2089"
-     inkscape:window-y="44"
+     inkscape:window-x="2082"
+     inkscape:window-y="222"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg296"
-     inkscape:export-bgcolor="#ffffff00" />
+     inkscape:export-bgcolor="#ffffff00">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="290.98453"
+       height="336"
+       id="page1"
+       margin="0"
+       bleed="0"
+       inkscape:label="Square Bounded" />
+    <inkscape:page
+       x="300.98453"
+       y="0"
+       width="290.98453"
+       height="336"
+       id="page2"
+       margin="0"
+       bleed="0"
+       inkscape:label="Circle Bounded" />
+  </sodipodi:namedview>
   <g
      id="background"
      style="display:inline">
@@ -1107,83 +1131,103 @@
     <path
        d="m 145.49227,119.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path106" class="brace-gray" />
+       id="path106"
+       class="brace-gray" />
     <path
        d="m 166.27688,131.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path120" class="brace-dark" />
+       id="path120"
+       class="brace-dark" />
     <path
        d="m 166.27688,131.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path121" class="brace-dark" />
+       id="path121"
+       class="brace-dark" />
     <path
        d="m 187.06149,143.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path135" class="brace-dark" />
+       id="path135"
+       class="brace-dark" />
     <path
        d="m 187.06149,143.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path136" class="brace-dark" />
+       id="path136"
+       class="brace-dark" />
     <path
        d="m 207.8461,155.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path150" class="brace-dark" />
+       id="path150"
+       class="brace-dark" />
     <path
        d="m 187.06149,167.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path164" class="brace-dark" />
+       id="path164"
+       class="brace-dark" />
     <path
        d="m 207.8461,179.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path179" class="brace-dark" />
+       id="path179"
+       class="brace-dark" />
     <path
        d="m 207.8461,179.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path180" class="brace-dark" />
+       id="path180"
+       class="brace-dark" />
     <path
        d="m 228.63071,191.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path194" class="brace-dark" />
+       id="path194"
+       class="brace-dark" />
     <path
        d="m 228.63071,191.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path195" class="brace-green" />
+       id="path195"
+       class="brace-green" />
     <path
        d="m 207.8461,203.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path207" class="brace-dark" />
+       id="path207"
+       class="brace-dark" />
     <path
        d="m 207.8461,203.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path208" class="brace-dark" />
+       id="path208"
+       class="brace-dark" />
     <path
        d="m 187.06149,215.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path222" class="brace-dark" />
+       id="path222"
+       class="brace-dark" />
     <path
        d="m 207.8461,227.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path236" class="brace-dark" />
+       id="path236"
+       class="brace-dark" />
     <path
        d="m 187.06149,239.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path249" class="brace-dark" />
+       id="path249"
+       class="brace-dark" />
     <path
        d="m 187.06149,239.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path250" class="brace-dark" />
+       id="path250"
+       class="brace-dark" />
     <path
        d="m 166.27688,251.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path261" class="brace-dark" />
+       id="path261"
+       class="brace-dark" />
     <path
        d="m 166.27688,251.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path262" class="brace-dark" />
+       id="path262"
+       class="brace-dark" />
     <path
        d="m 145.49227,263.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path272" class="brace-green" />
+       id="path272"
+       class="brace-green" />
   </g>
   <g
      id="left-brace"
@@ -1191,82 +1235,110 @@
     <path
        d="m 145.49227,48 -20.78461,12 20.78461,11.999995 z"
        stroke-width="0"
-       id="path25" class="brace-green" />
+       id="path25"
+       class="brace-green" />
     <path
        d="m 124.70766,60 -20.78461,11.999995 20.78461,12 z"
        stroke-width="0"
-       id="path35" class="brace-dark" />
+       id="path35"
+       class="brace-dark" />
     <path
        d="m 124.70766,60 v 23.999995 l 20.78461,-12 z"
        stroke-width="0"
-       id="path36" class="brace-dark" />
+       id="path36"
+       class="brace-dark" />
     <path
        d="m 103.92305,71.999995 -20.78461,12 20.78461,12.000003 z"
        stroke-width="0"
-       id="path47" class="brace-dark" />
+       id="path47"
+       class="brace-dark" />
     <path
        d="M 103.92305,71.999995 V 95.999998 L 124.70766,83.999995 Z"
        stroke-width="0"
-       id="path48" class="brace-dark" />
+       id="path48"
+       class="brace-dark" />
     <path
        d="M 83.13844,83.999995 V 107.99999 L 103.92305,95.999998 Z"
        stroke-width="0"
-       id="path61" class="brace-dark" />
+       id="path61"
+       class="brace-dark" />
     <path
        d="m 103.92305,95.999998 -20.78461,11.999992 20.78461,12 z"
        stroke-width="0"
-       id="path75" class="brace-dark" />
+       id="path75"
+       class="brace-dark" />
     <path
        d="m 83.13844,107.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path88" class="brace-dark" />
+       id="path88"
+       class="brace-dark" />
     <path
        d="m 83.13844,107.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path89" class="brace-dark" />
+       id="path89"
+       class="brace-dark" />
     <path
        d="m 62.35383,119.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path101" class="brace-green" />
+       id="path101"
+       class="brace-green" />
     <path
        d="m 62.35383,119.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path102" class="brace-dark" />
+       id="path102"
+       class="brace-dark" />
     <path
        d="m 83.13844,131.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path116" class="brace-dark" />
+       id="path116"
+       class="brace-dark" />
     <path
        d="m 83.13844,131.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path117" class="brace-dark" />
+       id="path117"
+       class="brace-dark" />
     <path
        d="m 103.92305,143.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path131" class="brace-dark" />
+       id="path131"
+       class="brace-dark" />
     <path
        d="m 83.13844,155.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path145" class="brace-dark" />
+       id="path145"
+       class="brace-dark" />
     <path
        d="m 103.92305,167.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path159" class="brace-dark" />
+       id="path159"
+       class="brace-dark" />
     <path
        d="m 103.92305,167.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path160" class="brace-dark" />
+       id="path160"
+       class="brace-dark" />
     <path
        d="m 124.70766,179.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path175" class="brace-dark" />
+       id="path175"
+       class="brace-dark" />
     <path
        d="m 124.70766,179.99999 v 24 l 20.78461,-12 z"
        stroke-width="0"
-       id="path176" class="brace-dark" />
+       id="path176"
+       class="brace-dark" />
     <path
        d="m 145.49227,191.99999 -20.78461,12 20.78461,12 z"
        stroke-width="0"
-       id="path190" class="brace-gray" />
+       id="path190"
+       class="brace-gray" />
   </g>
+  <ellipse
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.00542;stroke-dasharray:none;stroke-opacity:1"
+     id="circle-outline"
+     cx="145.47304"
+     cy="167.99809"
+     rx="168.51199"
+     ry="168.51172"
+     display="inline" />
 </svg>
