@@ -21,10 +21,7 @@
 			"command": "bash",
 			"args": [
 				"${workspaceFolder}${/}bootstrap.sh"
-			],
-			"windows": {
-				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
-			}
+			]
 		},
 		{
 			"label": "Bash: Install bashrc",
@@ -32,10 +29,7 @@
 			"command": "bash",
 			"args": [
 				"${workspaceFolder}${/}bash${/}bashrc-install.sh"
-			],
-			"windows": {
-				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
-			}
+			]
 		},
 		{
 			"label": "Git: Install configuration",
@@ -43,10 +37,7 @@
 			"command": "bash",
 			"args": [
 				"${workspaceFolder}${/}git${/}git-config.sh"
-			],
-			"windows": {
-				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
-			}
+			]
 		},
 		{
 			"label": "Proton: Install Pass CLI",
@@ -54,10 +45,7 @@
 			"command": "bash",
 			"args": [
 				"${workspaceFolder}${/}proton${/}install-proton-pass-cli.sh"
-			],
-			"windows": {
-				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
-			}
+			]
 		}
 	]
 }
