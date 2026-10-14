@@ -1,0 +1,63 @@
+{
+	"version": "2.0.0",
+	"options": {
+		"cwd": "${workspaceFolder}",
+		"env": {
+			"DOTFILES": "${workspaceFolder}"
+		}
+	},
+	"presentation": {
+		"reveal": "always",
+		"panel": "dedicated",
+		"focus": true,
+		"clear": false,
+		"showReuseMessage": true
+	},
+	"problemMatcher": [],
+	"tasks": [
+		{
+			"label": "Dotfiles: Bootstrap",
+			"type": "process",
+			"command": "bash",
+			"args": [
+				"${workspaceFolder}${/}bootstrap.sh"
+			],
+			"windows": {
+				"command": "${input:gitBash}"
+			}
+		},
+		{
+			"label": "Bash: Install bashrc",
+			"type": "process",
+			"command": "bash",
+			"args": [
+				"${workspaceFolder}${/}bash${/}bashrc-install.sh"
+			],
+			"windows": {
+				"command": "${input:gitBash}"
+			}
+		},
+		{
+			"label": "Git: Install configuration",
+			"type": "process",
+			"command": "bash",
+			"args": [
+				"${workspaceFolder}${/}git${/}git-config.sh"
+			],
+			"windows": {
+				"command": "${input:gitBash}"
+			}
+		},
+		{
+			"label": "Proton: Install Pass CLI",
+			"type": "process",
+			"command": "bash",
+			"args": [
+				"${workspaceFolder}${/}proton${/}install-proton-pass-cli.sh"
+			],
+			"windows": {
+				"command": "${input:gitBash}"
+			}
+		},
+	],
+}
