@@ -23,7 +23,7 @@
 				"${workspaceFolder}${/}bootstrap.sh"
 			],
 			"windows": {
-				"command": "${input:gitBash}"
+				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
 			}
 		},
 		{
@@ -34,7 +34,7 @@
 				"${workspaceFolder}${/}bash${/}bashrc-install.sh"
 			],
 			"windows": {
-				"command": "${input:gitBash}"
+				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
 			}
 		},
 		{
@@ -45,7 +45,7 @@
 				"${workspaceFolder}${/}git${/}git-config.sh"
 			],
 			"windows": {
-				"command": "${input:gitBash}"
+				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
 			}
 		},
 		{
@@ -56,8 +56,8 @@
 				"${workspaceFolder}${/}proton${/}install-proton-pass-cli.sh"
 			],
 			"windows": {
-				"command": "${input:gitBash}"
+				"command": "C:\\Program Files\\Git\\bin\\bash.exe"
 			}
-		},
-	],
+		}
+	]
 }
