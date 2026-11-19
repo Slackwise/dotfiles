@@ -4,3 +4,6 @@
 	defaultBranch = master
 [core]
 	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+[alias]
+	add-all = !git add . && git status
+	commit-version = !git commit -m "$(cat VERSION.TXT)" ; git log -1
